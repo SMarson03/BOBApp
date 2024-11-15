@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS Galleries(
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    address VARCHAR(255),
+    image_Url VARCHAR(255),
+    founder VARCHAR(255),
+    location VARCHAR(50),
+    url VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Cafes(
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    address VARCHAR(255),
+    beverage VARCHAR(255),
+    image_Url VARCHAR(255),
+    location VARCHAR(50),
+    url VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS JuiceBars(
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    address VARCHAR(255),
+    beverage VARCHAR(255),
+    image_Url VARCHAR(255),
+    location VARCHAR(50),
+    url VARCHAR(255)
+);
