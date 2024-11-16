@@ -1,5 +1,6 @@
 package com.GreenUnderground.GreenU;
 
+import com.GreenUnderground.GreenU.Bar.Bars;
 import com.GreenUnderground.GreenU.Common.Beverage;
 import com.GreenUnderground.GreenU.Common.Location;
 import com.GreenUnderground.GreenU.Gallery.Galleries;
@@ -73,7 +74,7 @@ public class GreenUApplication {
 			Cafes cafes8 = new Cafes(8, "Brown Butter Craft Bar & Kitchen", "413 Thompkins Ave.", Location.Brooklyn, "www.brownbutternyc.com", Beverage.Cafe, "www.brownbutternyc.com");
 			Cafes cafes9 = new Cafes(9, "St. Michel Cafe", "462 Irving Ave.", Location.Brooklyn, "www.michelcafe.com", Beverage.Cafe, "www.michelcafe.com");
 			Cafes cafes10 = new Cafes(10, "Milk & Pull", "778 Seneca Ave.", Location.Brooklyn, "www.milkandpull.com", Beverage.Cafe, "www.milkandpull.com");
-			Cafes cafes11 = new Cafes(11, "Lakou cafe", "195 Utica Ave.", Location.Brooklyn, "www.lakoucafe.com", Beverage.Cafe, "www.lakoucafe.com");
+			Cafes cafes11 = new Cafes(11, "Lakou Cafe", "195 Utica Ave.", Location.Brooklyn, "www.lakoucafe.com", Beverage.Cafe, "www.lakoucafe.com");
 			Cafes cafes12 = new Cafes(12, "Sweet Sundays Cafe", "2916 Beverley Rd.", Location.Brooklyn, "www.sweetsunday.com", Beverage.Cafe, "www.sweetsunday.com");
 			Cafes cafes13 = new Cafes(13, "Boogie Down Grind", "88 Hunts Point", Location.Bronx, "www.boogiedowngrind.com", Beverage.Cafe, "www.che.com");
 			Cafes cafes14 = new Cafes(14, "Ginjan Cafe", "85 E 125th St.", Location.Manhattan, "www.ilikeitblack", Beverage.Cafe, "www.ilikeitblack");
@@ -111,7 +112,53 @@ public class GreenUApplication {
 			JuiceBars juiceBars10 = new JuiceBars(10, "Les Deux Nutrition Juice", "662 Blake Ave.", Location.Brooklyn, "", Beverage.Juice_Bar, "");
 			JuiceBars juiceBars11 = new JuiceBars(11, "Uptown Juice Bar", "2524 Adam Clayton Powell Jr. Blvd.", Location.Manhattan, "", Beverage.Juice_Bar, "");
 			JuiceBars juiceBars12 = new JuiceBars(12, "Green Garden Health Food", "3543 White Plains Rd.", Location.Bronx, "", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars13 = new JuiceBars(13, "The Bush Doctor Juice Bar", "307 Tompkins Ave.", Location.Brooklyn,"", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars14 = new JuiceBars(14, "Secret Garden Juice Bar & Tea House", "347 Lewis Ave.", Location.Brooklyn,"", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars15 = new JuiceBars(15, "The Nourish Bar", "107-05 Guy R Brewer Blvd", Location.Queens, "", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars16 = new JuiceBars(15, "Mother Earth Juice Bar & Health Food Cafe", "115-42 Sutphin Blvd.", Location.Queens, "", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars17 = new JuiceBars(15, "Veggies Natural Juice Bar", "85 Franklin Ave.", Location.Brooklyn, "", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars18 = new JuiceBars(15, "Bar Got Juice", "204-11 Hollis Ave.", Location.Queens, "", Beverage.Juice_Bar, "");
 
+			List<JuiceBars> juiceBars = List.of(juiceBars1, juiceBars2, juiceBars3, juiceBars4, juiceBars5,
+					juiceBars6, juiceBars7, juiceBars8, juiceBars9, juiceBars10, juiceBars11, juiceBars12,
+					juiceBars13, juiceBars14, juiceBars15, juiceBars16, juiceBars17, juiceBars18);
+
+
+			Bars bars1 = new Bars(1, "Whisk & WHiskey", "289 Fourth Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars2 = new Bars(2, "Ashford & Simpsons Sugar Bar", "254 W. 72nd St.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars3 = new Bars(3, "The Rum Bar", "733 Franklin Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars4 = new Bars(4, "Pearl Lees Washtub", "314 Rogers Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars5 = new Bars(5, "The Bush", "33 Troutman St.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars6 = new Bars(6, "Bar Room @ Dick & Janes", "300 Malcolm X Blvd.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars7 = new Bars(7, "Las' Lap", "74 Orchard St.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars8 = new Bars(8, "Harlem Hops", "2268 Clayton Powell Jr. Blvd.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars9 = new Bars(9, "Bed Vyne Brew", "370 Tompkins Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars10 = new Bars(10, "The Rogers Garden", "708 Rogers Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars11 = new Bars(11, "Bierwax", "556 Vanderbilt Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars12 = new Bars(12, "The Se7en", "667 Washington Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars13 = new Bars(13, "Filthy Diamond", "679 Knickerbocker Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars14 = new Bars(14, "Jimmy's Corner", "140 W 44th St.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars15 = new Bars(15, "The Franklin", "448 Franklin Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars16 = new Bars(16, "Deia", "642 Rogers Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars17 = new Bars(17, "Charm Bar & Restaurant", "448 Dean St.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars18 = new Bars(18, "Luckys Cocktail Lounge", "334 Marcus Garvey Blvd.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars19 = new Bars(19, "The Nighthorse", "66 Greenpoint Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars20 = new Bars(20, "That Bar", "47 5th Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars21 = new Bars(21, "Madelines", "113 Franklin St.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars22 = new Bars(22, "Another Country", "10 E. 16th St.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars23 = new Bars(23, "Essence Bar & Grill", "1662 Atlantic Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars24 = new Bars(24, "IV Purpose", "1489 Fulton St.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars25 = new Bars(25, "Therapy Wine Bar 2.0", "260 Malcolm X Blvd, .", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars26 = new Bars(26, "67 Orange", "83 Saratoga Ave.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars27 = new Bars(27, "Alibi Lounge", "2376 Adam Clayton Powell Jr Blvd.", Location.Manhattan, "", Beverage.Bar, "");
+			Bars bars28 = new Bars(28, "Sweet Brooklyn", "608 Nostrand Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars29 = new Bars(29, "Patricks Place", "2835 Frederick Douglass Blvd.", Location.Brooklyn, "", Beverage.Bar, "");
+			Bars bars30 = new Bars(30, "& Sons Ham Bar", "447 Rogers Ave.", Location.Brooklyn, "", Beverage.Bar, "");
+
+			List<Bars> bars = List.of(bars1, bars2, bars3, bars4, bars5, bars6, bars7,
+					bars8, bars9, bars10, bars11, bars12, bars13, bars14, bars15, bars16,
+					bars17, bars18, bars19, bars20, bars21, bars22, bars23, bars24, bars25,
+					bars26, bars27, bars28, bars29, bars30);
 		};
 
 	}

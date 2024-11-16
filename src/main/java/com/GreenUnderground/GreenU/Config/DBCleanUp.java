@@ -34,6 +34,9 @@ public class DBCleanUp {
                     Statement statement = connection.createStatement();
                     statement.executeUpdate("DROP TABLE IF EXISTS Galleries");
                     statement.executeUpdate("DROP TABLE IF EXISTS Cafes");
+                    statement.executeUpdate("DROP TABLE IF EXISTS JuiceBars");
+                    statement.executeUpdate("DROP TABLE IF EXISTS Bars");
+
 
                     logger.info("Table dropped successfully");
                 } catch (Exception e) {e.printStackTrace();
