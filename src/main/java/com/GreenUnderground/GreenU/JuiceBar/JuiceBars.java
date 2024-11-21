@@ -15,10 +15,7 @@ public class JuiceBars {
     private Location location;
     private String url;
 
-    public JuiceBars() {
-    }
-
-    ;
+    public JuiceBars() {};
 
     public JuiceBars(Integer id, String name, String address, Location location,
                      String image_Url, Beverage beverage, String url) {

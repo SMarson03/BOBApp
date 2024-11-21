@@ -2,10 +2,13 @@ package com.GreenUnderground.GreenU;
 
 import com.GreenUnderground.GreenU.Bar.Bars;
 import com.GreenUnderground.GreenU.Common.Beverage;
+import com.GreenUnderground.GreenU.Common.Category;
+import com.GreenUnderground.GreenU.Common.Cuisine;
 import com.GreenUnderground.GreenU.Common.Location;
 import com.GreenUnderground.GreenU.Gallery.Galleries;
 import com.GreenUnderground.GreenU.Cafe.Cafes;
 import com.GreenUnderground.GreenU.JuiceBar.JuiceBars;
+import com.GreenUnderground.GreenU.Restaurant.Restaurants;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -115,9 +118,9 @@ public class GreenUApplication {
 			JuiceBars juiceBars13 = new JuiceBars(13, "The Bush Doctor Juice Bar", "307 Tompkins Ave.", Location.Brooklyn,"", Beverage.Juice_Bar, "");
 			JuiceBars juiceBars14 = new JuiceBars(14, "Secret Garden Juice Bar & Tea House", "347 Lewis Ave.", Location.Brooklyn,"", Beverage.Juice_Bar, "");
 			JuiceBars juiceBars15 = new JuiceBars(15, "The Nourish Bar", "107-05 Guy R Brewer Blvd", Location.Queens, "", Beverage.Juice_Bar, "");
-			JuiceBars juiceBars16 = new JuiceBars(15, "Mother Earth Juice Bar & Health Food Cafe", "115-42 Sutphin Blvd.", Location.Queens, "", Beverage.Juice_Bar, "");
-			JuiceBars juiceBars17 = new JuiceBars(15, "Veggies Natural Juice Bar", "85 Franklin Ave.", Location.Brooklyn, "", Beverage.Juice_Bar, "");
-			JuiceBars juiceBars18 = new JuiceBars(15, "Bar Got Juice", "204-11 Hollis Ave.", Location.Queens, "", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars16 = new JuiceBars(16, "Mother Earth Juice Bar & Health Food Cafe", "115-42 Sutphin Blvd.", Location.Queens, "", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars17 = new JuiceBars(17, "Veggies Natural Juice Bar", "85 Franklin Ave.", Location.Brooklyn, "", Beverage.Juice_Bar, "");
+			JuiceBars juiceBars18 = new JuiceBars(18, "Bar Got Juice", "204-11 Hollis Ave.", Location.Queens, "", Beverage.Juice_Bar, "");
 
 			List<JuiceBars> juiceBars = List.of(juiceBars1, juiceBars2, juiceBars3, juiceBars4, juiceBars5,
 					juiceBars6, juiceBars7, juiceBars8, juiceBars9, juiceBars10, juiceBars11, juiceBars12,
@@ -159,6 +162,57 @@ public class GreenUApplication {
 					bars8, bars9, bars10, bars11, bars12, bars13, bars14, bars15, bars16,
 					bars17, bars18, bars19, bars20, bars21, bars22, bars23, bars24, bars25,
 					bars26, bars27, bars28, bars29, bars30);
+
+			Restaurants restaurants1 = new Restaurants(1, "Charles Pan-Fried Chicken Flagship", "340 W 145th St.", "https://www.charlespanfriedchicken.com", Cuisine.American, Category.Fast_Casual, Location.Manhattan, "https://www.charlespanfriedchicken.com", "$15pp");
+			Restaurants restaurants2  = new Restaurants(2, "Pig & Butter", "42 Ave. B", "https://www.pigandbutter.com", Cuisine.American, Category.Gastropub, Location.Manhattan,"https://www.pigandbutter.com", "$20pp");
+			Restaurants restaurants3  = new Restaurants(3, "Sylvia's", "328 Malcolm X Blvd.", "https://sylviasrestaurant.com", Cuisine.Soul_Food, Category.Casual_Dining, Location.Manhattan, "https://sylviasrestaurant.com", "$30pp");
+			Restaurants restaurants4  = new Restaurants(4, "Tatiana", "10 Lincoln Center Plaza", "https://www.tatiananyc.com", Cuisine.Afro_Caribbean, Category.Fine_Dining, Location.Manhattan, "https://www.tatiananyc.com","$150pp");
+			Restaurants restaurants5  = new Restaurants(5, "Bunna Cafe", "1084 Flushing Ave.", "https://www.bunnaethiopia.net", Cuisine.Ethiopian, Category.Casual_Dining, Location.Brooklyn, "https://www.bunnaethiopia.net","$20pp");
+			Restaurants restaurants6  = new Restaurants(6,"Cheryls Global Soul", "236 Underhill Avenue", "https://www.cherylsglobalsoul.com",Cuisine.Soul_Food, Category.Casual_Dining, Location.Brooklyn,"https://www.cherylsglobalsoul.com", "$20pp");
+			Restaurants restaurants7  = new Restaurants(7, "The Islands", "671 Washington Ave.", "https://www.theislands.getsauce.com",Cuisine.Afro_Caribbean, Category.Casual_Dining, Location.Brooklyn, "https://www.theislands.getsauce.com", "$20pp");
+			Restaurants restaurants8  = new Restaurants(8, "Kokomo", "65 Kent Avenue", "https://www.kokomonyc.com", Cuisine.Afro_Caribbean, Category.Fine_Dining, Location.Brooklyn, "https://www.kokomonyc.com", "$50pp");
+			Restaurants restaurants9  = new Restaurants(9, "MangoSeed", "755 Flatbush Avenue", "https://www.mangoseedbrooklyn.com", Cuisine.Afro_Caribbean, Category.Casual_Dining, Location.Brooklyn, "https://www.mangoseedbrooklyn.com", "$20pp");
+			Restaurants restaurants10  = new Restaurants(10, "Peaches HotHouse", "415 Tompkins Ave.", "https://www.bcrestaurantgroup.com/location/peaches-hot-house-bed-stuy", Cuisine.Soul_Food, Category.Casual_Dining, Location.Brooklyn, "https://www.bcrestaurantgroup.com/location/peaches-hot-house-bed-stuy", "$20");
+			Restaurants restaurants11  = new Restaurants(11, "Ras Plant Based", "739 Franklin Avenue", "https://www.mangoseedbrooklyn.com", Cuisine.Ethiopian, Category.Fast_Casual, Location.Brooklyn, "https://www.mangoseedbrooklyn.com", "$20pp");
+			Restaurants restaurants12  = new Restaurants(12, "Scarrs Pizza", "22 Orchard St.", "https://www.scarrspizza.com", Cuisine.Pizza, Category.Fast_Casual, Location.Manhattan, "https://www.scarrspizza.com","$10pp");
+			Restaurants restaurants13  = new Restaurants(13, "Fieldtrip", "109 Malcolm X Blvd.", "https://www.fieldtripnyc.com", Cuisine.American, Category.Fast_Casual, Location.Manhattan, "https://www.fieldtripnyc.com", "$10pp");
+			Restaurants restaurants14  = new Restaurants(14, "SoCo BK", "509 Myrtle Ave.", "https://socobklyn.com", Cuisine.Cajun, Category.Casual_Dining, Location.Brooklyn, "https://socobklyn.com", "$50pp");
+			Restaurants restaurants15  = new Restaurants(15, "Sisters", "900 Fulton St.", "https://www.sistersbklyn.com", Cuisine.New_American, Category.Casual_Dining, Location.Brooklyn, "https://www.sistersbklyn.com", "$30pp");
+			Restaurants restaurants16  = new Restaurants(16, "Ghenet", "348 Douglass St.", "https://www.ghenet.com", Cuisine.Ethiopian, Category.Casual_Dining, Location.Brooklyn, "https://www.ghenet.com", "$30pp");
+			Restaurants restaurants17  = new Restaurants(17, "Negril BK", "256 5th Ave.", "https://negrilbk.com", Cuisine.Afro_Caribbean, Category.Casual_Dining, Location.Brooklyn, "https://negrilbk.com", "$30pp");
+			Restaurants restaurants18  = new Restaurants(18, "Vinateria", "2211 Frederick Douglas Blvd.", "https://www.vinaterianyc.com", Cuisine.Italian, Category.Casual_Dining, Location.Manhattan, "https://www.vinaterianyc.com", "$30pp");
+			Restaurants restaurants19  = new Restaurants(19, "Seasoned", "128 2nd Ave.", "https://www.seasonedvegan.com", Cuisine.Vegetarian, Category.Fast_Casual, Location.Manhattan, "https://www.seasonedvegan.com","$10pp");
+			Restaurants restaurants20  = new Restaurants(20, "Queen of Sheba", "650 Tenth Ave.", "https://www.shebanyc.com", Cuisine.Ethiopian, Category.Casual_Dining, Location.Manhattan,"https://www.shebanyc.com", "$20pp");
+			Restaurants restaurants21  = new Restaurants(21, "Brooklyn Chop House", "150 Nassau St.", "https://www.brooklynchophouse.com", Cuisine.Asian, Category.Fine_Dining, Location.Brooklyn, "https://www.brooklynchophouse.com", "$100pp");
+			Restaurants restaurants22  = new Restaurants(22, "Reverence", "2592 Frederick Douglas Blvd.", "https://reverence.nyc", Cuisine.New_American, Category.Fine_Dining, Location.Manhattan,"https://reverence.nyc", "$100pp");
+			Restaurants restaurants23  = new Restaurants(23, "Brooklyn Beso", "370 Lewis Ave.", "https://brooklynbeso.com", Cuisine.Latin, Category.Casual_Dining, Location.Brooklyn, "https://brooklynbeso.com", "$30pp");
+			Restaurants restaurants24  = new Restaurants(24, "Teranga", "1280 5th Ave", "https://itsteranga.com", Cuisine.West_African, Category.Casual_Dining, Location.Manhattan, "https://itsteranga.com" , "$30pp");
+			Restaurants restaurants25  = new Restaurants(25, "Ponty Bistro", "144 West 139th Street", "https://pontybistroharlem.com", Cuisine.West_African_French, Category.Casual_Dining, Location.Manhattan, "https://pontybistroharlem.com", "$30pp");
+			Restaurants restaurants26  = new Restaurants(26, Yop City 2324 Arthur Ave.https://yopcityrestaurantny.com West African NY (CD) $20pp
+			Restaurants restaurants27  = new Restaurants(27, Cafe Rue Dix 1451 Bedford Ave.https://www.ruedixbrooklyn.com/ Senagales BK (CD) $30pp
+			Restaurants restaurants28  = new Restaurants(28, Ramen By Ra 348 Bowery https://www.ramenbyra.com Asian NY  (CD) $20pp
+			Restaurants restaurants29  = new Restaurants(29, Metropolis 251 Fulton St. https://www.metropolisbymarcus.com/ New American NY (FD) $100pp
+			Restaurants restaurants30  = new Restaurants(30, Radio Kwara 291 Greene Ave. https://www.radiokwarabk.com/ West African  BK (FD) $100pp
+			Restaurants restaurants31  = new Restaurants(31, Sushi Oku 22 Orchard St. https://www.sushioku.com Asian NY $100pp
+			Restaurants restaurants32  = new Restaurants(32, S'Aimer 338 W 46th https://www.saimernyc.com/ French Caribbean NY (FD) $50pp
+			Restaurants restaurants33  = new Restaurants(33, File Gumbo Bar 275 Church St. https://filenyc.com/ Cajun NY (FD) $100pp
+			Restaurants restaurants34  = new Restaurants(34, BLVD Bistro 2149 Frederick Douglas Blvd. https://www.boulevardbistrony.com Soul Food NY (CD) $50pp
+			Restaurants restaurants35  = new Restaurants(35, Cornbread Brooklyn 409 Eastern Parkway https://cornbreadsoul.com/brooklyn-ny Soul Food BK (FC) $20pp
+			Restaurants restaurants36  = new Restaurants(36, dùndú 140 E 41st https://eatdundu.com West African NY (FC)
+			Restaurants restaurants37  = new Restaurants(37, Fat Fowl 445 Albee Square W Afro Caribbean BK (FC) $10pp
+			Restaurants restaurants38  = new Restaurants(38, Fyahbun Creative https://www.fyahbuncreative.com Afro Caribbean NY (FC) $10
+			Restaurants restaurants39  = new Restaurants(39, Cadence 111 E 7th St https://www.cadencenewyork.com/ NY Vegetarian, Soul Food (FD) $50pp
+			Restaurants restaurants40  = new Restaurants(40, The Good Good 1694 Park Ave https://www.thegoodgoodnyc.com/ NY Afro Caribbean (FD) $50pp
+			Restaurants restaurants41  = new Restaurants(41, The Crabby Shack 613 Franklin Ave. https://thecrabbyshack.com/ Seafood (FC) $25pp1
+			Restaurants restaurants42  = new Restaurants(42, Stellas 321 9th St. https://stellascaribbean.com/ BK Afro Caribbean (CD) $30pp
+			Restaurants restaurants43  = new Restaurants(43, Black Forest Brooklyn 733 Fulton Street https://www.blackforestbrooklyn.com/BK German (CD) $30pp
+			Restaurants restaurants44  = new Restaurants(44, Sweet Catch 1222 Nostrand Avenue https://www.sweetcatchbk.com/ BK Seafood (CD) $50pp
+			Restaurants restaurants45  = new Restaurants(45, Jasmines Caribbean Cuisine 371 W 46th St. NY https://www.jasminecaribbeancuisine.com/ Afro Caribbean (CD) $50pp
+			Restaurants restaurants46  = new Restaurants(46, Le Chai 1904 Utica Ave BK https://www.lechainyc.com BK Asian (FD) $100pp
+			Restaurants restaurants47  = new Restaurants(47, Aliya 500 Metropolitan Ave. https://www.ihg.com/hotelindigo/hotels/us/en/brooklyn/nycmp/hoteldetail/dining/aliya Caribbean Asian (FD) $50pp
+			Restaurants restaurants48  = new Restaurants(48, Taste of Heaven 251 Jackson St. http://www.tasteofheavenbk.com/ BK Soul Food (FC) $10
+			Restaurants restaurants49  = new Restaurants(49Clover Hill 20 Columbia Pl.https://www.cloverhillbk.com BK New American (FD) $100pp
+			Restaurants restaurants50  = new Restaurants(50Somethin On Myrtle https://www.somethinonmyrtle.com Caribbean Asian (CD) $50pp
 		};
 
 	}
