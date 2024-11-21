@@ -37,3 +37,15 @@ CREATE TABLE IF NOT EXISTS Bars(
     location VARCHAR(50),
     url VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS Restaurants(
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    address VARCHAR(255),
+    image_Url VARCHAR(255),
+    cuisine VARCHAR(255),
+    category VARCHAR(255),
+    location VARCHAR(50),
+    url VARCHAR(255),
+    per_person VARCHAR(255)
+);

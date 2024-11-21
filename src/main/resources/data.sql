@@ -115,3 +115,29 @@ INSERT INTO Bars(id, name, address, location, image_Url, beverage, url) VALUES
 (29, 'Patricks Place', '2835 Frederick Douglass Blvd.', 'Brooklyn', '', 'Bar', ''),
 (30, '& Sons Ham Bar', '447 Rogers Ave.', 'Brooklyn', '', 'Bar', '');
 
+INSERT INTO Restaurants(id, name, address, image_Url, cuisine, category, location, url, per_person) VALUES
+(1, 'Charles Pan-Fried Chicken', "340 W 145th St.", "https://www.charlespanfriedchicken.com", Cuisine.American, Category.Fast_Casual, Location.Manhattan, "https://www.charlespanfriedchicken.com", "$15pp");
+(2, 'Pig & Butter', "42 Ave. B", "https://www.pigandbutter.com", Cuisine.American, Category.Gastropub, Location.Manhattan,"https://www.pigandbutter.com", "$20pp");
+(3, 'Sylvias', "328 Malcolm X Blvd.", "https://sylviasrestaurant.com", Cuisine.Soul_Food, Category.Casual_Dining, Location.Manhattan, "https://sylviasrestaurant.com", "$30pp");
+(4, 'Tatiana', "10 Lincoln Center Plaza", "https://www.tatiananyc.com", Cuisine.Afro_Caribbean, Category.Fine_Dining, Location.Manhattan, "https://www.tatiananyc.com","$150pp");
+(5, 'Bunna Cafe', "1084 Flushing Ave.", "https://www.bunnaethiopia.net", Cuisine.Ethiopian, Category.Casual_Dining, Location.Brooklyn, "https://www.bunnaethiopia.net","$20pp");
+(6, 'Cheryls Global Soul', "236 Underhill Avenue", "https://www.cherylsglobalsoul.com",Cuisine.Soul_Food, Category.Casual_Dining, Location.Brooklyn,"https://www.cherylsglobalsoul.com", "$20pp");
+(7, 'The Islands', "671 Washington Ave.", "https://www.theislands.getsauce.com",Cuisine.Afro_Caribbean, Category.Casual_Dining, Location.Brooklyn, "https://www.theislands.getsauce.com", "$20pp");
+(8, 'Kokomo', "65 Kent Avenue", "https://www.kokomonyc.com", Cuisine.Afro_Caribbean, Category.Fine_Dining, Location.Brooklyn, "https://www.kokomonyc.com", "$50pp");
+(9, 'MangoSeed', "755 Flatbush Avenue", "https://www.mangoseedbrooklyn.com", Cuisine.Afro_Caribbean, Category.Casual_Dining, Location.Brooklyn, "https://www.mangoseedbrooklyn.com", "$20pp");
+(10, 'Peaches HotHouse', "415 Tompkins Ave.", "https://www.bcrestaurantgroup.com/location/peaches-hot-house-bed-stuy", Cuisine.Soul_Food, Category.Casual_Dining, Location.Brooklyn, "https://www.bcrestaurantgroup.com/location/peaches-hot-house-bed-stuy", "$20");
+(11, 'Ras Plant Based', "739 Franklin Avenue", "https://www.mangoseedbrooklyn.com", Cuisine.Ethiopian, Category.Fast_Casual, Location.Brooklyn, "https://www.mangoseedbrooklyn.com", "$20pp");
+(12, 'Scarrs Pizza', "22 Orchard St.", "https://www.scarrspizza.com", Cuisine.Pizza, Category.Fast_Casual, Location.Manhattan, "https://www.scarrspizza.com","$10pp");
+(13, 'Fieldtrip', "109 Malcolm X Blvd.", "https://www.fieldtripnyc.com", Cuisine.American, Category.Fast_Casual, Location.Manhattan, "https://www.fieldtripnyc.com", "$10pp");
+(14, 'SoCo BK', "509 Myrtle Ave.", "https://socobklyn.com", Cuisine.Cajun, Category.Casual_Dining, Location.Brooklyn, "https://socobklyn.com", "$50pp");
+(15, 'Sisters', "900 Fulton St.", "https://www.sistersbklyn.com", Cuisine.New_American, Category.Casual_Dining, Location.Brooklyn, "https://www.sistersbklyn.com", "$30pp");
+(16, 'Ghenet', "348 Douglass St.", "https://www.ghenet.com", Cuisine.Ethiopian, Category.Casual_Dining, Location.Brooklyn, "https://www.ghenet.com", "$30pp");
+(17, 'Negril BK', "256 5th Ave.", "https://negrilbk.com", Cuisine.Afro_Caribbean, Category.Casual_Dining, Location.Brooklyn, "https://negrilbk.com", "$30pp");
+(18, 'Vinateria', "2211 Frederick Douglas Blvd.", "https://www.vinaterianyc.com", Cuisine.Italian, Category.Casual_Dining, Location.Manhattan, "https://www.vinaterianyc.com", "$30pp");
+(19, 'Seasoned', "128 2nd Ave.", "https://www.seasonedvegan.com", Cuisine.Vegetarian, Category.Fast_Casual, Location.Manhattan, "https://www.seasonedvegan.com","$10pp");
+(20, 'Queen of Sheba', "650 Tenth Ave.", "https://www.shebanyc.com", Cuisine.Ethiopian, Category.Casual_Dining, Location.Manhattan,"https://www.shebanyc.com", "$20pp");
+(21, 'Brooklyn Chop House', "150 Nassau St.", "https://www.brooklynchophouse.com", Cuisine.Asian, Category.Fine_Dining, Location.Brooklyn, "https://www.brooklynchophouse.com", "$100pp");
+(22, 'Reverence', "2592 Frederick Douglas Blvd.", "https://reverence.nyc", Cuisine.New_American, Category.Fine_Dining, Location.Manhattan,"https://reverence.nyc", "$100pp");
+(23, 'Brooklyn Beso', "370 Lewis Ave.", "https://brooklynbeso.com", Cuisine.Latin, Category.Casual_Dining, Location.Brooklyn, "https://brooklynbeso.com", "$30pp");
+(24, 'Teranga', "1280 5th Ave", "https://itsteranga.com", Cuisine.West_African, Category.Casual_Dining, Location.Manhattan, "https://itsteranga.com" , "$30pp");
+(25, 'Ponty Bistro', "144 West 139th Street", "https://pontybistroharlem.com", Cuisine.West_African_French, Category.Casual_Dining, Location.Manhattan, "https://pontybistroharlem.com", "$30pp");
