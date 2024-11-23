@@ -49,3 +49,13 @@ CREATE TABLE IF NOT EXISTS Restaurants(
     url VARCHAR(255),
     per_person VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS Therapists(
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    certified VARCHAR(255),
+    image_Url VARCHAR(255),
+    bio VARCHAR(6000),
+    location VARCHAR(255),
+    url VARCHAR(255)
+);
