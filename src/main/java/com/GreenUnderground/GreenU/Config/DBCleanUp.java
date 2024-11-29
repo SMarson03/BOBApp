@@ -38,6 +38,7 @@ public class DBCleanUp {
                     statement.executeUpdate("DROP TABLE IF EXISTS Bars");
                     statement.executeUpdate("DROP TABLE IF EXISTS Restaurants");
                     statement.executeUpdate("DROP TABLE IF EXISTS Therapists");
+                    statement.executeUpdate("DROP TABLE IF EXISTS Lawyers");
 
 
                     logger.info("Table dropped successfully");

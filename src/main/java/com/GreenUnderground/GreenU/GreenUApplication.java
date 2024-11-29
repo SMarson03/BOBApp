@@ -8,6 +8,7 @@ import com.GreenUnderground.GreenU.Common.Location;
 import com.GreenUnderground.GreenU.Gallery.Galleries;
 import com.GreenUnderground.GreenU.Cafe.Cafes;
 import com.GreenUnderground.GreenU.JuiceBar.JuiceBars;
+import com.GreenUnderground.GreenU.Legal.Lawyers;
 import com.GreenUnderground.GreenU.Restaurant.Restaurants;
 import com.GreenUnderground.GreenU.Therapy.Therapists;
 import org.springframework.boot.CommandLineRunner;
@@ -260,6 +261,20 @@ public class GreenUApplication {
 			Therapists therapists29 = new Therapists(29, "Steven P Welch", "Clinical Social Work/Therapist, LCSW-R, ACSW, CCTP", "", "Congratulations, you have found a compassionate and affirming therapist. I will work with you to assist in your understanding of the COVID, cultural, social and spiritual factors impacting your self image and sense of worth. I provide services to individuals, couples and families. I specialize in the following areas: depression, anxiety, LGBTQ issues, addictions, codependency (divorce/separation) and bereavement.", Location.Manhattan, "https://www.newyork-therapy.com");
 			Therapists therapists30 = new Therapists(30, "Jean-Paul Dugue", "Clinical Social Work/Therapist, LCSW", "", "The mind is a powerful tool, incredibly powerful. We can think positive thoughts, we can think realistic thoughts and we can think negative thoughts. Some thoughts are fleeting and others forgotten. Some thoughts are rooted in our early impression of the world around us. We are committed to providing support with negative thought patterns and emotional dysregulation, providing individuals with the tools, knowledge, and the resources to overcome these challenges.", Location.Manhattan, "https://headway.co/providers/jean-paul-dugue");
 
+			List<Therapists> therapists = List.of(therapists1, therapists2, therapists3, therapists4, therapists5,
+					therapists6,therapists7,therapists8, therapists9, therapists10,therapists11, therapists12, therapists13,
+					therapists14, therapists15, therapists16,therapists17,therapists18, therapists19, therapists20,
+					therapists21, therapists22, therapists23, therapists24, therapists25, therapists26,therapists27,
+					therapists28, therapists29, therapists30);
+
+			Lawyers lawyers1 = new Lawyers(1, "Kristin Grant", " ",  "Trademark, Copyright, Patent, Entity Formation",  Location.Manhattan, "https://grant.legal/attorneys/kristin-grant");
+			Lawyers lawyers2 = new Lawyers(2,"Tanya Hobson-Williams", " ", "Elder Law, Guardianship, Litigation", Location.Manhattan, "https://nyguardian.com/new-york-elder-care-attorneys/tanya-hobson-williams-esq");
+			Lawyers lawyers3 = new Lawyers(3, "Shakera Thompson", " ", "Trademark, Copyright, Trade Secrets" ,Location. Manhattan, "https://tkalawfirm.com/about");
+			Lawyers lawyers4 = new Lawyers(4, "Laurie E. Morrison", "", "Discrimination, Harassment, Retaliation, Unpaid Wages & Wrongful Termination", Location.Manhattan, "https://lemorrisonlaw.com/about");
+			Lawyers lawyers5 = new Lawyers(5, "Michel Law", "", "Immigration, Estate Planning, Real Estate,Civil Litigation, Family Law", Location.Queens, "michel-law.com");
+			Lawyers lawyers6 = new Lawyers(6, "Bianca Olliver", "", "Real Estate", Location.Queens, "olliverlaw.com");
+
+				List<Lawyers> lawyers = List.of(lawyers1, lawyers2, lawyers3, lawyers4, lawyers5, lawyers6);
 		};
 
 	}
