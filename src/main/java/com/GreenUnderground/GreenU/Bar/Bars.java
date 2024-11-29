@@ -2,9 +2,11 @@ package com.GreenUnderground.GreenU.Bar;
 
 import com.GreenUnderground.GreenU.Common.Beverage;
 import com.GreenUnderground.GreenU.Common.Location;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
+@Entity
 public class Bars {
     private Integer id;
     private String name;
