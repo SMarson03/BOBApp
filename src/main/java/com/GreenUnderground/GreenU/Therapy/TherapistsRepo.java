@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface TherapistsRepo extends JpaRepository<Therapists, Integer> {
     List<Therapists> findByLocation(String location);
-    List<Restaurants> findByName(String name);
+    List<Therapists> findByName(String name);
 }

@@ -1,20 +1,28 @@
 package com.GreenUnderground.GreenU.Restaurant;
 
-import com.GreenUnderground.GreenU.Common.Beverage;
 import com.GreenUnderground.GreenU.Common.Category;
 import com.GreenUnderground.GreenU.Common.Cuisine;
 import com.GreenUnderground.GreenU.Common.Location;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
+@Table(name = "restaurants")
 public class Restaurants {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String address;
     private String image_Url;
     @Enumerated(EnumType.STRING)
     private Cuisine cuisine;
+    @Enumerated(EnumType.STRING)
     private Category category;
+    @Enumerated(EnumType.STRING)
     private Location location;
     private String url;
     private String per_person;

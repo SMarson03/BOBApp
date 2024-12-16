@@ -1,6 +1,7 @@
 package com.GreenUnderground.GreenU.Cafe;
 
-import com.GreenUnderground.GreenU.Bar.Bars;
+import com.GreenUnderground.GreenU.Common.Location;
+import com.GreenUnderground.GreenU.Restaurant.Restaurants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

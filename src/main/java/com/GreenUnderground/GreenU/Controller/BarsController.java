@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
 @RestController
-@RequestMapping("/NoirX")
+@RequestMapping ("/NoirX")
 public class BarsController {
     private final BarsRepo barsRepo;
 
@@ -42,7 +41,7 @@ public class BarsController {
         barsRepo.save(bars);
     }
 
-    //Delete an art event
+    //Delete
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/bars/{id}")
     void deleteBars(@PathVariable Integer id) {
