@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@font-face {
+  font-family: 'Beckan';
+  src: url('./Fonts/Beckan.otf');
+}
+
+.header {
+  font-family: 'Beckan', sans-serif;
+  text-shadow: 5px 5px 6px black;
+ }
+
+ .subheader {
+  font-family: 'Beckan', sans-serif;
+  text-shadow: 5px 5px 6px black;
+ }
+
+ul {
+  font-family: 'Beckan', sans-serif;
+  text-shadow: 5px 5px 6px black;
+  font-size: 20px; 
+}
+
+li:hover{
+  transform: scale(1.1); /* Slightly increase the size */
+  transition: transform 0.1s ease; /* Smooth transition */
+}
+
+.line {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 10px 0;
+}
+
+.about {
+  font-family: 'Beckan', sans-serif;
+  text-shadow: 5px 5px 6px black;
+  font-size: 25px;
+}
+
+.gallery-description {
+  font-family: 'Beckan', sans-serif;
+  text-shadow: 7px 7px 8px black;
+ }
