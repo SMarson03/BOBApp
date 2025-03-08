@@ -59,18 +59,16 @@ public class GreenUApplication {
 			Galleries galleries22 = new Galleries(22, "June Kelly Gallery", "166 Mercer St. #3C", "www.junekellygallery.com", "June Kelly", Brooklyn, "www.junekellygallery.com");
 			Galleries galleries23 = new Galleries(23, "The Compound", "185 Van Dyke St.", "www.compound7.series", "Free Richardson", Location.Manhattan, "www.compound7.series");
 			Galleries galleries24 = new Galleries(24, "Cierra Britton Gallery", "220b Plymouth St.", "www.cierrabritton.com", "Cierra Britton", Brooklyn, "www.cierrabritton.com");
-			Galleries galleries25 = new Galleries(25, "Black Wall Street Gallery", "14 Wooster St.", "www.bwsgallery.com", "Ricco Wright", Location.Manhattan, "");
-			Galleries galleries26 = new Galleries(26, "Tanya Weddemire Gallery", "254 36th Street, STE C257", "www.tanyaweddemiregallery.org", "Tanya Weddemire", Location.Manhattan, "www.tanyaweddemiregallery.org");
-			Galleries galleries27 = new Galleries(27, "Calabar Gallery", "306 W 38th St.", "www.calabargallery.com", "Atim Annette Oton", Location.Manhattan, "www.calabargallery.com");
-			Galleries galleries28 = new Galleries(28, "Bill Hodges Gallery", "521 W 20th St., #10E", "www.billhodgesgallery.com", "Bill Hodges", Location.Manhattan, "www.billhodgesgallery.com");
-			Galleries galleries29 = new Galleries(29, "Curtiss Jacobs Gallery", "2075 Adam Clayton Powell Jr Blvd", "www.curtissjacobsgallery.com", "Curtiss Jacobs", Location.Manhattan, "www.curtissjacobsgallery.com");
-			Galleries galleries30 = new Galleries(30, "Kente Royal Gallery", " 2373 Adam Clayton Powell Jr Blvd", "www.kenteroyalgallery.com", " Phyllis & Dodji Gbedemah", Location.Manhattan, "www.kenteroyalgallery.com");
+			Galleries galleries25 = new Galleries(25, "Tanya Weddemire Gallery", "254 36th Street, STE C257", "www.tanyaweddemiregallery.org", "Tanya Weddemire", Location.Manhattan, "www.tanyaweddemiregallery.org");
+			Galleries galleries26 = new Galleries(26, "Bill Hodges Gallery", "521 W 20th St., #10E", "www.billhodgesgallery.com", "Bill Hodges", Location.Manhattan, "www.billhodgesgallery.com");
+			Galleries galleries27 = new Galleries(27, "Curtiss Jacobs Gallery", "2075 Adam Clayton Powell Jr Blvd", "www.curtissjacobsgallery.com", "Curtiss Jacobs", Location.Manhattan, "www.curtissjacobsgallery.com");
+			Galleries galleries28 = new Galleries(28, "Kente Royal Gallery", " 2373 Adam Clayton Powell Jr Blvd", "www.kenteroyalgallery.com", " Phyllis & Dodji Gbedemah", Location.Manhattan, "www.kenteroyalgallery.com");
 
 
 			List<Galleries> galleries = List.of(galleries1, galleries2, galleries3, galleries4, galleries5, galleries6,
 					galleries7, galleries8, galleries9, galleries10, galleries11, galleries12, galleries13, galleries14,
 					galleries15, galleries16, galleries17, galleries18, galleries19, galleries20, galleries21, galleries21,
-					galleries22, galleries23, galleries24, galleries25, galleries26, galleries27, galleries28, galleries29, galleries30);
+					galleries22, galleries23, galleries24, galleries25, galleries26, galleries27, galleries28);
 
 			Cafes cafes1 = new Cafes(1, "Che", "302 Malcolm X Blvd.", Location.Manhattan, "www.che.com", Beverage.Cafe, "www.che.com");
 			Cafes cafes2 = new Cafes(2, "I Like It Black", "409 W 125th St.", Location.Manhattan, "www.ilikeitblack", Beverage.Cafe, "www.ilikeitblack");
