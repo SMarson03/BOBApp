@@ -28,8 +28,7 @@ function Contact() {
     return(
     <>
         <div
-          className="bg-cover bg-center h-screen overflow-auto"
-          style={{backgroundImage: `url(${backgroundImage})`}}>
+          className="bg-cover bg-gray-900 h-screen overflow-auto">
           <Navbar/>
           <div className="header"><h1 className='ml-6 mt-4 text-white text-center bold font-bold text-9xl'>NoireX</h1></div>
           <div className="subheader"><h2 className='ml-6 text-orange-600 text-center bold font-bold text-2xl'>A Black Owned Directory</h2></div>
@@ -43,7 +42,7 @@ function Contact() {
             type="text" 
             placeholder="Your Name" 
             required
-            className="w-80 h-10 mt-16 bg-black bg-opacity-80 border border-2 border-black flex p-4 justify-end flex-col"
+            className="w-80 h-10 mt-10 bg-black bg-opacity-80 border border-4 rounded-2xl rounded-tl border-black flex p-4 justify-end flex-col"
             />
         </div>
 
@@ -53,7 +52,7 @@ function Contact() {
             type="email" 
             placeholder="Your Email" 
             required
-            className="w-80 h-10 mt-6 bg-black bg-opacity-80 border border-2 border-black flex p-4 justify-end flex-col"
+            className="w-80 h-10 mt-6 bg-black bg-opacity-80 border border-4 rounded-2xl rounded-tl border-black flex p-4 justify-end flex-col"
           />
         </div>
 
@@ -64,11 +63,11 @@ function Contact() {
             name="message" 
             placeholder="Your Message" 
             required 
-            className="w-80 h-60 mt-6 bg-black bg-opacity-80 border border-2 border-black flex p-5 justify-end flex-col"
+            className="w-80 h-60 mt-6 bg-black bg-opacity-80 border border-4 rounded-2xl rounded-tl border-black flex p-5 justify-end flex-col"
           ></textarea>
         </div>
         <div className="contact-form flex items-center justify-center">
-        <button type="submit" className="w-14 h-8 mt-6 bg-black bg-opacity-80 border border-2 border-black items-center 
+        <button type="submit" className="w-14 h-8 mt-6 bg-black bg-opacity-80 border border-4 rounded-2xl rounded-tl border-black items-center 
         flex justify-center flex-col text-sm text-white">SUBMIT</button></div>
       </form>
             </div>

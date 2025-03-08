@@ -7,15 +7,14 @@ function About() {
     return(
     <>
         <div
-          className="bg-cover bg-center h-screen overflow-auto"
-          style={{backgroundImage: `url(${backgroundImage})`}}>
+          className="bg-cover bg-orange-600 h-screen overflow-auto">
           <Navbar/>
           <div className="header"><h1 className='ml-6 mt-4 text-white text-center bold font-bold text-9xl'>NoireX</h1></div>
-          <div className="subheader"><h2 className='ml-6 text-orange-600 text-center bold font-bold text-2xl'>A Black Owned Directory</h2></div>
+          <div className="subheader"><h2 className='ml-6 text-amber-200 text-center bold font-bold text-2xl'>A Black Owned Directory</h2></div>
           
           <div className='flex items-center justify-center'>
-          <div className= "about text-white">
-          <div className="mt-20 mb-20 w-[700px] h-[800px] bg-black bg-opacity-80 border border-2 border-black flex p-5 justify-center flex-col">
+          <div className= "about text-amber-200">
+          <div className="mt-10 mb-20 w-[700px] h-[800px] bg-red-800 bg-opacity-80 border border-4 rounded-3xl rounded-tl border-black flex p-5 justify-center flex-col">
 
            <p class="indent-8 mb-4">Welcome to NoireX! We’re a community-driven platform dedicated to supporting and showcasing Black-owned businesses. 
            Our mission is rooted in the belief that when we uplift each other, we all rise. We’re here to make it easier for you 
