@@ -12,7 +12,7 @@ import { useState } from "react";
             onClick={() => setOpen((pv) => !pv)}
             className="flex items-center"
           >
-            <span>Drinks</span>
+            <span className="menu">Drinks</span>
             <motion.span >
              
             </motion.span>

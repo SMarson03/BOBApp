@@ -16,7 +16,7 @@
 
  .subheader {
   font-family: 'Beckan', sans-serif;
-  text-shadow: 5px 5px 6px black;
+  text-shadow: 10px 10px 12px black;
  }
 
 ul {
@@ -44,5 +44,11 @@ li:hover{
 
 .gallery-description {
   font-family: 'Beckan', sans-serif;
-  text-shadow: 7px 7px 8px black;
+  
  }
+
+ .menu {
+  font-family: 'Beckan', sans-serif;
+  text-shadow: 5px 5px 6px black;
+  font-size: 20px;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '../Images/NoirBackground6.jpg';
+import backgroundImage from '../Images/Bronze.jpg';
 import Navbar from '../Navbar';
 
 function Contact() {

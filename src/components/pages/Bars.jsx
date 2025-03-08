@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
-import backgroundImage from '../Images/Bars.jpg';
+import backgroundImage from '../Images/Blue.jpg';
 import Navbar from '../Navbar';
 
 function Bars(){

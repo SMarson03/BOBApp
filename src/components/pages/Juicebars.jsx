@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
-import backgroundImage from '../Images/Juicebar.jpg';
+import backgroundImage from '../Images/Emerald.jpg';
 import Navbar from '../Navbar';
 
 function Juicebars(){

@@ -1,9 +1,9 @@
 import React from 'react';
-import backgroundImage from '../Images/NoirBackground6.jpg';
+import backgroundImage from '../Images/Black.jpg';
 import Image1 from '../Images/Food.jpg'
 import Image2 from '../Images/Art.jpg'
 import Image3 from '../Images/NoirTherapy2.jpg'
-import Image4 from '../Images/Legal.jpg'
+import Image4 from '../Images/Law2.jpg'
 import Image5 from '../Images/Drinks.jpg'
 import Navbar from '../Navbar';
 
@@ -13,11 +13,10 @@ function Home() {
     return (
        <>
         <div
-          className="bg-cover bg-[35%_45%] h-auto min-h-screen overflow-x-auto overflow-auto"
-          style={{backgroundImage: `url(${backgroundImage})`}}>
+          className="bg-cover bg-yellow-400 h-auto min-h-screen overflow-x-auto overflow-auto">
           <Navbar/>
           <div className="header"><h1 className='ml-6 mt-4 text-white text-center bold font-bold text-9xl'>NoireX</h1></div>
-          <div className="subheader"><h2 className='ml-6 text-orange-600 text-center bold font-bold text-2xl'>A Black Owned Directory</h2></div>
+          <div className="subheader"><h2 className='ml-6 text-gray-900 text-center text-2xl'>A Black Owned Directory</h2></div>
           
  
           <div className="flex flex-col pt-20 space-y-8 mb-20">
