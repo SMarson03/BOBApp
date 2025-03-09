@@ -123,11 +123,10 @@ public class GreenUApplication {
 			JuiceBars juiceBars15 = new JuiceBars(15, "The Nourish Bar", "107-05 Guy R Brewer Blvd", Location.Queens, "", Beverage.Juice_Bar, "");
 			JuiceBars juiceBars16 = new JuiceBars(16, "Mother Earth Juice Bar & Health Food Cafe", "115-42 Sutphin Blvd.", Location.Queens, "", Beverage.Juice_Bar, "");
 			JuiceBars juiceBars17 = new JuiceBars(17, "Veggies Natural Juice Bar", "85 Franklin Ave.", Brooklyn, "", Beverage.Juice_Bar, "");
-			JuiceBars juiceBars18 = new JuiceBars(18, "Bar Got Juice", "204-11 Hollis Ave.", Location.Queens, "", Beverage.Juice_Bar, "");
 
 			List<JuiceBars> juiceBars = List.of(juiceBars1, juiceBars2, juiceBars3, juiceBars4, juiceBars5,
 					juiceBars6, juiceBars7, juiceBars8, juiceBars9, juiceBars10, juiceBars11, juiceBars12,
-					juiceBars13, juiceBars14, juiceBars15, juiceBars16, juiceBars17, juiceBars18);
+					juiceBars13, juiceBars14, juiceBars15, juiceBars16, juiceBars17);
 
 
 			Bars bars1 = new Bars(1, "Whisk & WHiskey", "289 Fourth Ave.", Brooklyn, "", Beverage.Bar, "");
