@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-
+/* 
 @font-face {
   font-family: 'Beckan';
   src: url('./Fonts/Beckan.otf');
@@ -11,36 +11,33 @@
 
 .header {
   font-family: 'Beckan', sans-serif;
-  text-shadow: 10px 10px 12px black;
+ 
  }
 
  .subheader {
   font-family: 'Beckan', sans-serif;
-  text-shadow: 1px 1px 2px black;;
+  
   
  }
 
 ul {
   font-family: 'Beckan', sans-serif;
-  text-shadow: 10px 10px 12px black;
-  font-size: 20px; 
+  font-size: 30px; 
 }
 
 li:hover{
-  transform: scale(1.1); /* Slightly increase the size */
-  transition: transform 0.1s ease; /* Smooth transition */
-}
+  transform: scale(1.1); 
+  transition: transform 0.1s ease; 
 
 .line {
   border: none;
-  border-top: 2px solid #000;
+  border-top: 2px solid white;
   margin: 10px 0;
 }
 
 .about {
   font-family: 'Beckan', sans-serif;
-  text-shadow: 1px 1px 2px black;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .gallery-description {
@@ -50,6 +47,6 @@ li:hover{
 
  .menu {
   font-family: 'Beckan', sans-serif;
-  text-shadow: 5px 5px 6px black;
-  font-size: 20px;
-}
+  font-size: 30px;
+} */
+

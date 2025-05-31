@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Home from './components/pages/Home';
 import NoirArt from './components/pages/NoirArt';
 import NoirDrinks from './components/pages/NoirDrinks';
 import NoirEats from './components/pages/NoirEats';
@@ -12,6 +11,8 @@ import Contact from './components/pages/Contact';
 import Juicebars from './components/pages/Juicebars';
 import Bars from './components/pages/Bars';
 import Cafes from './components/pages/Cafes';
+import Home from './components/pages/Home';
+
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
           <Route path='/Therapy' element={<NoirTherapy/>}/>
           <Route path='/About' element={<About/>}/>
           <Route path='/Contact' element={<Contact/>}/>
-        </Routes> 
+          </Routes> 
     </>
      );
 }

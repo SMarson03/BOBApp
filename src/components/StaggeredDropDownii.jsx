@@ -22,10 +22,10 @@ import { useState } from "react";
             initial={wrapperVariants.closed}
             variants={wrapperVariants}
             style={{ originY: "top", translateX: "-50%" }}
-            className="flex flex-col gap-2  rounded-lg bg-black bg-opacity-80 text-white shadow-xl absolute top-[120%] left-[50%] w-24 overflow-hidden"
+            className="flex flex-col gap-3 rounded-2xl rounded-tl bg-black bg-opacity-80  absolute top-[120%] left-[50%] overflow-hidden "
           >
             {/* Drink options */}
-            <Option setOpen={setOpen} text="Fast Casual" />
+           <Option setOpen={setOpen} text="Fast Casual" />
             <Option setOpen={setOpen}  text="Casual Dining" />
             <Option setOpen={setOpen}  text="Fine Dining" />
             </motion.ul>
@@ -39,7 +39,7 @@ import { useState } from "react";
       <motion.li
         variants={itemVariants}
         onClick={() => setOpen(false)} // Close the dropdown when an option is clicked
-        className="flex items-center gap-2 w-full p-2 text-xs font-medium whitespace-nowrap rounded-md hover:bg-black text-white hover:text-orange-600 transition-colors cursor-pointer"
+        className="flex items-center gap-2 w-full p-2 text-lg  whitespace-nowrap rounded-md hover:bg-amber-200 text-white hover:text-black transition-colors cursor-pointer"
       >
         <motion.span variants={actionIconVariants}>
           

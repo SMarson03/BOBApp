@@ -1,100 +1,55 @@
 import React from 'react';
-import backgroundImage from '../Images/Black.jpg';
-import Image1 from '../Images/Food.jpg'
-import Image2 from '../Images/Art.jpg'
-import Image3 from '../Images/NoirTherapy2.jpg'
-import Image4 from '../Images/Law2.jpg'
-import Image5 from '../Images/Drinks.jpg'
-import Navbar from '../Navbar';
+import { Link } from 'react-router-dom';
 
 
-
-function Home() {
+function Home(){
     return (
-       <>
-        <div
-          className="bg-cover bg-yellow-400 h-auto min-h-screen overflow-x-auto overflow-auto">
-          <Navbar/>
-          <div className="header"><h1 className='ml-6 mt-4 text-white text-center bold font-bold text-9xl'>NoireX</h1></div>
-          <div className="subheader"><h2 className='ml-6 text-gray-900 text-center text-2xl'>A Black Owned Directory</h2></div>
-          
- 
-          <div className="flex flex-col pt-20 space-y-8 mb-20">
-        <div className="flex space-x-10 justify-center">
-        <a href='/Eats'><div className='flex m-0 border border-2 border-white transition-all duration-300 ease-in-out hover:bg-black hover:scale-105'>
-         <div className="w-[200px] h-[320px] bg-black bg-opacity-80 flex p-5 justify-end flex-col">
-          <div className='text-white font-bold text-2xl'>EATS</div>
-          <div className='text-white text-xs'>NYC-5-BOROS</div>
-          <div className='mt-1'>
-          <div className='text-white text-sm'>BLACK OWNED</div>
-          <div className='mt-1'>
-          <div className='text-white font-bold text-xs'>RESTAURANTS</div><div className='text-white text-xs'>FAST CASUAL | CASUAL DINING | FINE DINING </div>
-          <div className='text-white font-bold text-xs'>
-        </div>
-        </div></div>  
-        </div><img src={Image1} alt="Food" width="340px" height="200px"/></div></a>
-
-        <a href='/Drinks'><div className='flex m-0 border border-2 border-white transition-all duration-300 ease-in-out hover:bg-black hover:scale-105'>
-         <div className="w-[200px] h-[320px] bg-black bg-opacity-80 flex p-5 justify-end flex-col">  
-          <div className='text-white font-bold text-2xl'>DRINKS</div>
-          <div className='text-white text-xs'>NYC-5-BOROS</div>
-          <div className='mt-1'>
-          <div className='text-white text-sm'>BLACK OWNED</div>
-          <div className='mt-1'>
-          
-          <div className='text-white font-bold text-xs'>
-          <div>BARS</div>
-          <div>CAFE</div>
-          <div>JUICE BARS</div></div>
-          </div></div>                
-        </div><img src={Image5} alt="Drinks" width="340px" height="200px"/></div></a>
+        <>
+      <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
+      <div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-red-50 overflow-hidden">
+        
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl font-bold text-black leading-none tracking-tight">
+            <div>NOIR </div>
+            <div>INDEX</div>
+            <div>A BLACK</div>
+            <div>OWNED GUIDE</div>
+          </div>
         </div>
 
-        <div className="flex justify-center">
-        <a href='/Arts'><div className='flex m-0 border border-2 border-white transition-all duration-300 ease-in-out hover:bg-black hover:scale-105'>
-        <div className="w-[200px] h-[320px] bg-black bg-opacity-80 flex p-5 justify-end flex-col">
-        <div className='text-white font-bold text-2xl'>ARTS</div>
-          <div className='text-white text-xs'>NYC-5-BOROS</div>
-          <div className='mt-1'>
-          <div className='text-white text-sm'>BLACK OWNED</div>
-          <div className='mt-1'>
-          <div className='text-white font-bold text-xs'>GALLERIES</div>
-          <div className='text-white font-bold text-xs'>GRANTS · OPEN CALLS</div><div className='text-amber-100 text-xs'>| COMING SOON |</div>
-          </div></div>
-          </div><img src={Image2} alt="Art" width="340px" height="200px"/></div></a>
-         </div>
-
-         <div className="flex space-x-10 justify-center">
-         <a href='/Therapy'><div className='flex m-0 border border-2 border-white transition-all duration-300 ease-in-out hover:bg-black hover:scale-105'>
-         <div className="w-[200px] h-[320px] bg-black bg-opacity-80 flex p-5 justify-end flex-col">
-         <div className='text-white font-bold text-2xl'>THERAPY</div>
-          <div className='text-white text-sm text-xs'>NYC-5-BOROS</div>
-          <div className='mt-1'>
-          <div className='text-white text-sm text-sm'>BLACK OWNED</div>
-          <div className='mt-1'>
-          <div className='text-white font-bold text-xs'>THERAPISTS</div>
-          <div className='text-amber-100 text-xs'>FAMILY | COUNSELOR | PSYCHOLOGIST </div>
-          </div></div>
-          </div><img src={Image3} alt="Art" width="340px" height="200px"/></div></a>
-
-          <a href='/Law'><div className='flex m-0 border border-2 border-white transition-all duration-300 ease-in-out hover:bg-black hover:scale-105'>
-         <div className="w-[200px] h-[320px] bg-black bg-opacity-80 flex p-5 justify-end flex-col">  
-         <div className='text-white font-bold text-2xl'>LAW</div>
-        <div className='text-white text-xs'>NYC-5-BOROS</div>
-          <div className='mt-1'>
-          <div className='text-white text-sm'>BLACK OWNED</div>
-          <div className='mt-1'>
-          <div className='text-white font-bold text-xs'>LAWYERS</div>
-          <div className='text-amber-100 text-xs'>REAL ESTATE | IMMIGRATION | TRADEMARK </div>
-          </div></div>
-          </div><img src={Image4} alt="Art" width="340px" height="200px"/></div></a>
-        </div></div>
+        
+        {/* Header */}
+        <div className="relative z-20 p-6 flex justify-between items-start">
+          <div className="text-lg font-bold">NOIREX</div>
+          <div className="flex gap-6 text-sm">
+            <Link to="/Eats">Eats</Link>
+            <Link to="/Drinks">Drinks</Link>
+            <a href="#">Art</a>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <a href="#">Contact</a>
+            <a href="#">About Us</a>
+          </div>
         </div>
-             
-          
+
+        {/* Right Info Panel */}
+        <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
+        <div className="text-2xl font-semibold">025</div>
+          <div className="text-2xl font-semibold">NYC EDITION</div>
+          <div>
+            <div>Brooklyn</div>
+            <div>Bronx</div>
+            <div>Manhattan</div>
+            <div>Queens</div>
+            <div>Staten Island</div>
+          </div>
+        </div>
+      </div>
+    </div>
     </>
+  );
+};
 
-      );
-}
+  
 
-export default Home;
+  export default Home;
