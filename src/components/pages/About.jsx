@@ -1,36 +1,42 @@
 import React from 'react';
-import backgroundImage from '../Images/Bronze.jpg';
-import Navbar from '../Navbar';
+import { Link } from 'react-router-dom';
 
 
 function About() {
     return(
     <>
-        <div
-          className="bg-cover bg-orange-600 h-screen overflow-auto">
-          <Navbar/>
-          <div className="header"><h1 className='ml-6 mt-4 text-white text-center bold font-bold text-9xl'>NoireX</h1></div>
-          <div className="subheader"><h2 className='ml-6 text-amber-200 text-center bold font-bold text-2xl'>A Black Owned Directory</h2></div>
-          
-          <div className='flex items-center justify-center'>
-          <div className= "about text-amber-200">
-          <div className="mt-10 mb-20 w-[700px] h-[800px] bg-red-800 bg-opacity-80 border border-4 rounded-3xl rounded-tl border-black flex p-5 justify-center flex-col">
-
-           <p class="indent-8 mb-4">Welcome to NoireX! We’re a community-driven platform dedicated to supporting and showcasing Black-owned businesses. 
-           Our mission is rooted in the belief that when we uplift each other, we all rise. We’re here to make it easier for you 
-           to discover and support incredible  entrepreneurs, while fostering economic equity and growth.</p>
-           
-           <p class="indent-8 mb-4">Understanding the lack of resources in finding a black doctor, lawyer, financial advisor, etc. in one space has allowed 
-           for expansion into more than just where to eat for dinner. We want to see Black-owned businesses thrive, not just in one 
-           neighborhood, but across cities, states, and beyond. That’s why we’re passionate about expanding our platform to more 
-           cities in the future, connecting even more people that are making an impact in their communities.</p>
-           
-           <p class="indent-8 mb-4">We believe in the power of collaboration and community. By choosing to support one business, service, product, you’re 
-           helping create a more equitable economy, where everyone has the chance to succeed and grow. Thank you for being a part of 
-           this movement—we’re so excited to grow with you.</p>
-           </div></div>
-           </div>
+        
+        <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
+           <div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-red-50 overflow-hidden">
+            <div className= "absolute inset-0 overflow-y-auto max-h-[80vh]">
+              <div className="relative z-20 p-6 flex justify-between items-start">
+          <div className="text-lg font-bold">NOIREX</div>
+          <div className="flex gap-6 text-sm">
+            <Link to="/Home">Home</Link>
+            <Link to="/Eats">Eats</Link>
+            <Link to="/Drinks">Drinks</Link>
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <Link to="/About">About Us</Link>
           </div>
+          </div>
+           <div className="absolute inset-0 ">
+          <div className="absolute top-1/2 bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-bold text-black 
+          leading-none tracking-tight">
+             <div>Welcome to NoireX! We’re a community-driven platform dedicated to supporting and showcasing Black-owned businesses.</div>
+           <div>Our mission is rooted in the belief that when we uplift each other, we all rise.</div>
+       
+           <div>We believe in the power of collaboration and community. By choosing to support one business, service, product, you’re 
+           helping create a more equitable economy, where everyone has the chance to succeed and grow.</div>
+           <div>Thank you for being a part of this movement we’re so excited to grow with you.</div>
+           </div>
+           </div>
+            </div>
+            </div>
+        </div>
+          
+
         </>
     )
 }

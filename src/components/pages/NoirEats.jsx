@@ -20,7 +20,7 @@ function NoirEats() {
         style={{ backgroundImage: `url(${Image3})` }}
       ></div>
       <div className="relative z-10 px-4 py-2 transition-colors group-hover:text-white">
-      <Link to="/Bars">FAST</Link>
+      <Link to="/Fast">FAST</Link>
       </div>
     </div>
 
@@ -31,7 +31,7 @@ function NoirEats() {
         style={{ backgroundImage: `url(${Image1})` }}
       ></div>
       <div className="relative z-10 px-4 py-2 transition-colors group-hover:text-white">
-      <Link to="/Cafes">CASUAL</Link>
+      <Link to="/Casual">CASUAL</Link>
       </div>
     </div>
 
@@ -42,7 +42,7 @@ function NoirEats() {
         style={{ backgroundImage: `url(${Image2})` }}
       ></div>
       <div className="relative z-10 px-4  transition-colors group-hover:text-white whitespace-nowrap">
-      <Link to="/Juicebars">FINE DINING</Link>
+      <Link to="/Fine">FINE DINING</Link>
       </div>
     </div>
     </div>

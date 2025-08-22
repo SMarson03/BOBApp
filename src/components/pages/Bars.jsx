@@ -34,6 +34,7 @@ function Bars(){
                     <Link to="/Home">Home</Link>
                     <a href="#">Eats</a>
                     <Link to="/Drinks">Drinks</Link>
+                    <Link to="/Arts">Arts</Link>
                     <Link to="/Law">Law</Link>
                     <Link to="/Therapy">Therapy</Link>
                     <a href="#">Contact</a>
@@ -73,42 +74,19 @@ function Bars(){
                 </div>
                 </div>
                 </div>
-            {/* <div
-              className="bg-cover bg-black h-screen overflow-auto">
-              <Navbar/>
-              <div className="header"><h1 className='ml-6 mt-4 text-white text-center bold font-bold text-9xl'>NoireX Bars</h1></div>
-              <div className="subheader"><h2 className='ml-6 text-orange-600 text-center bold font-bold text-2xl'>A Black Owned Directory</h2>
-              </div>
-
-              <div className='container-events '>
-      <div class="grid grid-cols-3 gap-5 p-5">
-        {mydata.map((item, index) => {
-          return (
-            <>
-             
-             <div key={index} >
-             <div className="flex flex-col items-center m-5 p-2.5 border-4 rounded-3xl rounded-tl border-white w-[400px] h-[320px] bg-gray-900 bg-opacity-80">
-  <img src={item.image_Url} alt="item" className="w-full h-full object-contain" />
-</div>
-             <div className='gallery-description'><div className='text-xl text-white'>
-              <h3 style={{display: 'flex', justifyContent:'center', margin: 'auto'}}>{item.name}</h3>
-              <p style={{display: 'flex', justifyContent:'center', margin: 'auto'}}>{item.address}</p>
-              <p style={{display: 'flex', justifyContent:'center', margin: 'auto'}}>{item.location}</p></div></div> 
-              <button className="m-auto w-14 h-8 mt-6 bg-orange-600 bg-opacity-80 border border-4 rounded-3xl rounded-tl border-white items-center 
-        flex justify-center text-sm text-white  "><a href={item.url} target="_blank">Visit</a></button>
             
-                
-                         
-                  </div>
-            
-            </>
-          );
-         })} 
-          
-         </div>
-         </div>   
+          <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
+        <div className="text-2xl font-semibold">025</div>
+          <div className="text-2xl font-semibold">NYC EDITION</div>
+          <div>
+            <div>Brooklyn</div>
+            <div>Bronx</div>
+            <div>Manhattan</div>
+            <div>Queens</div>
+            <div>Staten Island</div>
+          </div>
         </div>
-         */}
+     
         </>
         
       );

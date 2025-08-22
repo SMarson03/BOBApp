@@ -3,32 +3,26 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 
-const locations = ['Brooklyn', 'Bronx', 'Manhattan', 'Queens', 'Staten Island'];
+function Casual(){
+    const [mydata, setMyData] = useState([]);
+  
 
-function Cafes() {
-  const [mydata, setMyData] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('http://localhost:8080/NoirX/cafes');
-        const data = await response.json();
-        setMyData(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+    useEffect(() => {
+     
+        async function fetchData(){
+        try {
+          const response = await fetch('http://localhost:8080/NoirX/casual');
+          const data = await response.json();
+          setMyData(data);
+        } catch (error) {
+          console.error(error);
       }
-    }
+     }
+      fetchData();
+    }, []);
+   console.log(mydata);
 
-    fetchData();
-  }, []);
-
-  const filteredData = selectedLocation
-    ? mydata.filter((item) => item.location === selectedLocation)
-    : mydata;
-
-   
-        return(
+    return(
         <>
 
          <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
@@ -38,8 +32,9 @@ function Cafes() {
                   <div className="text-lg font-bold">NOIREX</div>
                   <div className="flex gap-6 text-sm">
                     <Link to="/Home">Home</Link>
-                    <a href="#">Eats</a>
+                    <Link to="/Eats">Eats</Link>
                     <Link to="/Drinks">Drinks</Link>
+                    <Link to="/Arts">Arts</Link>
                     <Link to="/Law">Law</Link>
                     <Link to="/Therapy">Therapy</Link>
                     <a href="#">Contact</a>
@@ -79,39 +74,19 @@ function Cafes() {
                 </div>
                 </div>
                 </div>
-           
-          {/* Location Filter */}
-        <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
-          <div className="text-2xl font-semibold">025</div>
+            
+          <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
+        <div className="text-2xl font-semibold">025</div>
           <div className="text-2xl font-semibold">NYC EDITION</div>
-          <div className="space-y-1">
-            {locations.map((loc) => (
-              <div
-                key={loc}
-                onClick={() => setSelectedLocation(loc)}
-                className={`cursor-pointer hover:underline ${
-                  selectedLocation === loc ? 'font-bold text-white' : ''
-                }`}
-              >
-                {loc}
-              </div>
-            ))}
+          <div>
+            <div>Brooklyn</div>
+            <div>Bronx</div>
+            <div>Manhattan</div>
+            <div>Queens</div>
+            <div>Staten Island</div>
           </div>
         </div>
-
-        {/* Filtered Results */}
-        <div className="overflow-y-auto p-4 rounded-lg custom-scrollbar absolute bottom-64 right-4 text-sm text-right bg-black bg-opacity-90 space-y-2 z-30 w-36 max-h-[22vh]">
-          {filteredData.length > 0 ? (
-            filteredData.map((item, index) => (
-              <div key={index} className="mb-4 justify-center border-b pb-2">
-                <h2 className="text-lg font-semibold text-white">{item.name}</h2>
-                <p className="text-sm text-yellow-500">{item.location}</p>
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-white">No results found.</p>
-          )}
-        </div>
+     
         </>
         
       );
@@ -119,4 +94,4 @@ function Cafes() {
 
 
         
-        export default Cafes;
+        export default Casual;

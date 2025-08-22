@@ -33,6 +33,7 @@ function NoirLaw() {
                         <Link to="/Home">Home</Link>
                         <a href="#">Eats</a>
                         <Link to="/Drinks">Drinks</Link>
+                        <Link to="/Arts">Arts</Link>
                         <Link to="/Therapy">Therapy</Link>
                         <a href="#">Contact</a>
                         <a href="#">About Us</a>

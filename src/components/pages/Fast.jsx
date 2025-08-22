@@ -2,17 +2,16 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-
 const locations = ['Brooklyn', 'Bronx', 'Manhattan', 'Queens', 'Staten Island'];
 
-function Cafes() {
+function Fast() {
   const [mydata, setMyData] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:8080/NoirX/cafes');
+        const response = await fetch('http://localhost:8080/NoirX/fast');
         const data = await response.json();
         setMyData(data);
       } catch (error) {
@@ -27,8 +26,8 @@ function Cafes() {
     ? mydata.filter((item) => item.location === selectedLocation)
     : mydata;
 
-   
-        return(
+
+    return(
         <>
 
          <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
@@ -38,8 +37,9 @@ function Cafes() {
                   <div className="text-lg font-bold">NOIREX</div>
                   <div className="flex gap-6 text-sm">
                     <Link to="/Home">Home</Link>
-                    <a href="#">Eats</a>
+                    <Link to="/Eats">Eats</Link>
                     <Link to="/Drinks">Drinks</Link>
+                    <Link to="/Arts">Arts</Link>
                     <Link to="/Law">Law</Link>
                     <Link to="/Therapy">Therapy</Link>
                     <a href="#">Contact</a>
@@ -79,8 +79,8 @@ function Cafes() {
                 </div>
                 </div>
                 </div>
-           
-          {/* Location Filter */}
+            
+         {/* Location Filter */}
         <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
           <div className="text-2xl font-semibold">025</div>
           <div className="text-2xl font-semibold">NYC EDITION</div>
@@ -119,4 +119,4 @@ function Cafes() {
 
 
         
-        export default Cafes;
+        export default Fast;

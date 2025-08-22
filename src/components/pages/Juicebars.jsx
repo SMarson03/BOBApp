@@ -34,6 +34,7 @@ function Juicebars(){
                  <Link to="/Home">Home</Link>
                 <a href="#">Eats</a>
                 <Link to="/Drinks">Drinks</Link>
+                <Link to="/Arts">Arts</Link>
                 <Link to="/Law">Law</Link>
                 <Link to="/Therapy">Therapy</Link>
                 <a href="#">Contact</a>
@@ -73,6 +74,18 @@ function Juicebars(){
             </div>
             </div>
             </div>
+            <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
+        <div className="text-2xl font-semibold">025</div>
+          <div className="text-2xl font-semibold">NYC EDITION</div>
+          <div>
+            <div>Brooklyn</div>
+            <div>Bronx</div>
+            <div>Manhattan</div>
+            <div>Queens</div>
+            <div>Staten Island</div>
+          </div>
+        </div>
+     
         </>
         
       );
