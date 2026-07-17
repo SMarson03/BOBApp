@@ -1,5 +1,13 @@
 package com.GreenUnderground.GreenU.Common;
 
 public enum Category {
-    Fine_Dining, Casual_Dining, Fast_Casual, Gastropub
-}
+        Bar,
+        Restaurant,
+        Art_Gallery,
+        Cafe,
+        Juice_Bar,
+        Finance,
+        Legal,
+        Therapy
+
+    }

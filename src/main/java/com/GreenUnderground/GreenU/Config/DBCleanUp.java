@@ -39,6 +39,9 @@ public class DBCleanUp {
                 statement.executeUpdate("DROP TABLE IF EXISTS Restaurants");
                 statement.executeUpdate("DROP TABLE IF EXISTS Therapists");
                 statement.executeUpdate("DROP TABLE IF EXISTS Lawyers");
+                statement.executeUpdate("DROP TABLE IF EXISTS Fast");
+                statement.executeUpdate("DROP TABLE IF EXISTS Fine");
+                statement.executeUpdate("DROP TABLE IF EXISTS Casual");
 
 
                 logger.info("Table dropped successfully");
