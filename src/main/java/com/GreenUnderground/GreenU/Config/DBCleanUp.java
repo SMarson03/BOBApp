@@ -12,40 +12,45 @@ import java.sql.Statement;
 
 @Configuration
 public class DBCleanUp {
+
     @Autowired
     private DataSource dataSource;
 
     @Bean
-    public DatabaseCleanup databaseCleanup(){ return new DatabaseCleanup(dataSource);}
-    public static class DatabaseCleanup{
+    public DatabaseCleanup databaseCleanup() {
+        return new DatabaseCleanup(dataSource);
+    }
 
-        private DataSource dataSource;
 
-        private final Logger logger = org.slf4j.LoggerFactory.getLogger(DatabaseCleanup.class);
-        public DatabaseCleanup(DataSource dataSource){
+    public static class DatabaseCleanup {
 
+        private final DataSource dataSource;
+
+        private final Logger logger =
+                org.slf4j.LoggerFactory.getLogger(DatabaseCleanup.class);
+
+
+        public DatabaseCleanup(DataSource dataSource) {
             this.dataSource = dataSource;
         }
 
+
         @PreDestroy
-        public void dropDatabaseTable(){
-            try(
-                    Connection connection = dataSource.getConnection()){
-                Statement statement = connection.createStatement();
-                statement.executeUpdate("DROP TABLE IF EXISTS Galleries");
-                statement.executeUpdate("DROP TABLE IF EXISTS Cafes");
-                statement.executeUpdate("DROP TABLE IF EXISTS JuiceBars");
-                statement.executeUpdate("DROP TABLE IF EXISTS Bars");
-                statement.executeUpdate("DROP TABLE IF EXISTS Restaurants");
-                statement.executeUpdate("DROP TABLE IF EXISTS Therapists");
-                statement.executeUpdate("DROP TABLE IF EXISTS Lawyers");
-                statement.executeUpdate("DROP TABLE IF EXISTS Fast");
-                statement.executeUpdate("DROP TABLE IF EXISTS Fine");
-                statement.executeUpdate("DROP TABLE IF EXISTS Casual");
+        public void dropDatabaseTable() {
 
+            try (
+                    Connection connection = dataSource.getConnection();
+                    Statement statement = connection.createStatement()
+            ) {
 
-                logger.info("Table dropped successfully");
-            } catch (Exception e) {e.printStackTrace();
+                statement.executeUpdate(
+                        "DROP TABLE IF EXISTS places"
+                );
+
+                logger.info("Database cleanup completed successfully");
+
+            } catch (Exception e) {
+                logger.error("Database cleanup failed", e);
             }
         }
     }

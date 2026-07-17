@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static com.GreenUnderground.GreenU.Common.PlaceStatus.APPROVED;
+
 @RestController
 @RequestMapping("/NoirX")
 public class PlaceController {
-
 
     private final PlaceRepo placeRepo;
 
@@ -22,8 +23,7 @@ public class PlaceController {
 
     @GetMapping("/places")
     public List<Place> getAllPlaces() {
-        List<Place> places = placeRepo.findAll();
-        return places;
+        return placeRepo.findByStatus(APPROVED);
     }
 
 
@@ -32,10 +32,20 @@ public class PlaceController {
         Optional<Place> place = placeRepo.findById(id);
 
         if (place.isEmpty()) {
-            throw new RuntimeException();
+            throw new RuntimeException("Place not found");
         }
 
         return place.get();
+    }
+
+
+    @PostMapping("/places")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Place createPlace(@RequestBody Place place) {
+
+        place.setStatus("PENDING");
+
+        return placeRepo.save(place);
     }
 
 
@@ -51,4 +61,5 @@ public class PlaceController {
     public void deletePlace(@PathVariable Integer id) {
         placeRepo.deleteById(id);
     }
-    }
+}
+
