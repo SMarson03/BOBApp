@@ -6,6 +6,8 @@ public enum Category {
         Art_Gallery,
         Cafe,
         Juice_Bar,
+        Wine_Bar,
+        Wellness,
         Finance,
         Legal,
         Therapy
