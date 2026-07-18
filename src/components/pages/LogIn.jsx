@@ -1,40 +1,127 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function LogIn(){
 
+const navigate = useNavigate();
+
+
+const [error, setError] = useState("");
+
+
 const [formData,setFormData] = useState({
+
     email:"",
     password:""
+
 });
+
 
 
 function handleChange(e){
 
 setFormData({
+
     ...formData,
+
     [e.target.name]:e.target.value
+
 });
 
 }
 
 
 
-function handleSubmit(e){
+
+async function handleSubmit(e){
 
 e.preventDefault();
 
-console.log("Login attempt:", formData);
+setError("");
 
-// Future:
-// POST /NoirX/login
+
+try{
+
+
+const response = await fetch(
+
+    "http://localhost:8080/NoirX/login",
+
+    {
+
+        method:"POST",
+
+        headers:{
+
+            "Content-Type":"application/json"
+
+        },
+
+        body:JSON.stringify(formData)
+
+    }
+
+);
+
+
+
+if(!response.ok){
+
+    throw new Error(
+        "Invalid email or password"
+    );
 
 }
 
 
 
+const user = await response.json();
+
+
+
+localStorage.setItem(
+
+    "user",
+
+    JSON.stringify(user)
+
+);
+
+
+
+
+if(user.role === "ADMIN"){
+
+    navigate("/Admin");
+
+}
+
+else{
+
+    navigate("/Home");
+
+}
+
+
+
+}
+
+catch(error){
+
+    setError(error.message);
+
+}
+
+
+}
+
+
+
+
+
 return(
+
 <>
 
 
@@ -59,6 +146,7 @@ overflow-hidden
 ">
 
 
+
 {/* HEADER */}
 
 <div className="
@@ -72,19 +160,30 @@ items-start
 
 
 <div className="text-lg font-bold">
+
 NOIREX
+
 </div>
+
 
 
 <div className="flex gap-6 text-sm">
 
+
 <Link to="/Home">
+
 Home
+
 </Link>
 
+
+
 <Link to="/SignUp">
+
 Sign Up
+
 </Link>
+
 
 </div>
 
@@ -97,11 +196,13 @@ Sign Up
 
 {/* LOGIN CARD */}
 
+
 <div className="
 flex
 justify-center
 mt-10
 ">
+
 
 
 <div className="
@@ -111,6 +212,7 @@ border-black
 p-8
 bg-amber-50
 ">
+
 
 
 <h1 className="
@@ -127,13 +229,21 @@ LOGIN
 
 
 
+
 <form
+
 onSubmit={handleSubmit}
+
 className="space-y-5"
+
 >
 
 
+
+
+
 <div>
+
 
 <label className="
 block
@@ -145,6 +255,7 @@ mb-2
 Email
 
 </label>
+
 
 
 <input
@@ -169,13 +280,17 @@ bg-white
 
 />
 
+
 </div>
 
 
 
 
 
+
+
 <div>
+
 
 <label className="
 block
@@ -187,6 +302,7 @@ mb-2
 Password
 
 </label>
+
 
 
 <input
@@ -211,7 +327,28 @@ bg-white
 
 />
 
+
 </div>
+
+
+
+
+
+{error && (
+
+<p className="
+text-red-600
+font-bold
+text-sm
+">
+
+{error}
+
+</p>
+
+)}
+
+
 
 
 
@@ -242,7 +379,11 @@ SIGN IN
 
 
 
+
 </form>
+
+
+
 
 
 
@@ -254,12 +395,16 @@ text-sm
 ">
 
 
-<Link 
+
+<Link
+
 to="/ForgotPassword"
+
 className="
 text-yellow-700
 hover:underline
 "
+
 >
 
 Forgot Password?
@@ -268,11 +413,17 @@ Forgot Password?
 
 
 
+
+
 <p className="mt-4">
+
 
 Don't have an account?
 
+
 {" "}
+
+
 
 <Link
 
@@ -286,7 +437,9 @@ hover:underline
 
 >
 
+
 Create Account
+
 
 </Link>
 
@@ -294,19 +447,27 @@ Create Account
 </p>
 
 
+
+
+</div>
+
+
+
+
 </div>
 
 
 </div>
 
 
-</div>
+
 
 
 
 
 
 {/* RIGHT INFO PANEL */}
+
 
 <div className="
 absolute 
@@ -319,6 +480,7 @@ z-20
 ">
 
 
+
 <div className="
 text-2xl 
 font-semibold
@@ -327,6 +489,7 @@ font-semibold
 025
 
 </div>
+
 
 
 <div className="
@@ -339,16 +502,20 @@ NYC EDITION
 </div>
 
 
+
+
 <div>
 
 <div>Brooklyn</div>
+
 <div>Bronx</div>
+
 <div>Manhattan</div>
+
 <div>Queens</div>
+
 <div>Staten Island</div>
 
-</div>
-
 
 </div>
 
@@ -356,14 +523,23 @@ NYC EDITION
 
 </div>
 
+
+
+
+
 </div>
+
+</div>
+
 
 
 </>
 
 );
 
+
 }
+
 
 
 export default LogIn;

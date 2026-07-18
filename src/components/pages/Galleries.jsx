@@ -187,13 +187,13 @@ NOIREX
 
 
 <div className="flex gap-6 text-sm">
-
-<Link to="/Home">Home</Link>
-<Link to="/Eats">Eats</Link>
-<Link to="/Drinks">Drinks</Link>
-<Link to="/Law">Law</Link>
-<Link to="/Therapy">Therapy</Link>
-
+                <Link to="/Home">Home</Link>
+                <Link to="/Eats">Eats</Link>
+                <Link to="/Drinks">Drinks</Link>
+                <Link to="/Law">Law</Link>
+                <Link to="/Therapy">Therapy</Link>
+                <Link to="/Contact">Contact</Link>
+                <Link to="/About">About Us</Link>
 </div>
 
 

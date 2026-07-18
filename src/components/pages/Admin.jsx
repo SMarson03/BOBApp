@@ -6,15 +6,16 @@ import Filters from "../admin/Filters";
 import SearchBar from "../admin/SearchBar";
 import EditPlaceModal from "../admin/EditPlaceModal";
 import ConfirmDelete from "../admin/ConfirmDelete";
+import Logout from "../auth/Logout";
+import DashboardStats from "../admin/DashboardStats";
 
 const locations = [
   "Brooklyn",
   "Bronx",
   "Manhattan",
   "Queens",
-  "Staten Island"
+  "Staten Island",
 ];
-
 
 const categories = [
   "Restaurant",
@@ -24,38 +25,26 @@ const categories = [
   "Art_Gallery",
   "Finance",
   "Legal",
-  "Therapy"
+  "Therapy",
 ];
 
 function Admin() {
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const [places, setPlaces] = useState([]);
-
   const [searchTerm, setSearchTerm] = useState("");
-
   const [selectedCategory, setSelectedCategory] = useState("");
-
   const [selectedLocation, setSelectedLocation] = useState("");
-
   const [editingPlace, setEditingPlace] = useState(null);
-
   const [deletePlace, setDeletePlace] = useState(null);
 
-
-
   useEffect(() => {
-
     loadPlaces();
-
   }, []);
 
-
-
-
-  async function loadPlaces(){
-
-    try{
-
+  async function loadPlaces() {
+    try {
       const response = await fetch(
         "http://localhost:8080/NoirX/places"
       );
@@ -64,310 +53,186 @@ function Admin() {
 
       setPlaces(data);
 
-    }
-
-    catch(error){
-
+    } catch (error) {
       console.error(error);
-
     }
-
   }
 
-
-
-
-
-  const filteredPlaces = places.filter(place=>{
+  const filteredPlaces = places.filter((place) => {
 
     const matchesSearch =
-
       place.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-
       place.address?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-
       place.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-
       place.submittedBy?.toLowerCase().includes(searchTerm.toLowerCase());
 
-
-
     const matchesCategory =
-
       selectedCategory
         ? place.category === selectedCategory
         : true;
 
-
-
     const matchesLocation =
-
       selectedLocation
         ? place.location === selectedLocation
         : true;
 
-
-
     return (
-
       matchesSearch &&
       matchesCategory &&
       matchesLocation
-
     );
 
   });
 
+  async function handleDelete(id) {
 
-
-
-
-  async function handleDelete(id){
-
-    try{
+    try {
 
       const response = await fetch(
-
         `http://localhost:8080/NoirX/places/${id}`,
-
         {
-
-          method:"DELETE"
-
+          method: "DELETE",
         }
-
       );
 
-
-
-      if(response.ok){
-
+      if (response.ok) {
         setDeletePlace(null);
-
         loadPlaces();
-
       }
 
-    }
-
-    catch(error){
-
+    } catch (error) {
       console.error(error);
-
     }
 
   }
 
+  return (
+    <>
 
+      <div className="min-h-screen bg-yellow-600 flex justify-center items-center p-4">
 
+        <div className="relative w-[90vw] max-w-7xl bg-amber-50 shadow-xl overflow-hidden rounded-lg">
 
-  return(
+          {/* HEADER */}
 
-<>
+          <div className="flex justify-between items-center p-6 border-b border-black">
 
-<div className="min-h-screen bg-yellow-600 flex justify-center items-center p-4">
+            <div>
 
-<div className="relative min-h-screen w-[90vw] max-w-6xl bg-amber-50 shadow-xl overflow-hidden">
+              <h1 className="text-3xl font-bold">
+                NOIREX ADMIN
+              </h1>
 
+              <p className="text-sm">
+                Welcome, <strong>{user?.name}</strong>
+              </p>
 
+              <p className="text-sm">
+                {places.length} Businesses
+              </p>
 
+            </div>
 
-{/* HEADER */}
+            <div className="flex items-center gap-6 text-sm">
 
-<div className="flex justify-between p-6">
+              <Link to="/Home">
+                Home
+              </Link>
 
-<div>
+              <Link to="/Submit">
+                Submit
+              </Link>
 
-<h1 className="text-2xl font-bold">
+              <Logout />
 
-NOIREX ADMIN
+            </div>
 
-</h1>
+          </div>
 
-<p className="text-sm">
+          {/* SEARCH */}
 
-{places.length} Businesses
+          <div className="flex gap-6 px-6 pt-4">
 
-</p>
+  {/* LEFT COLUMN */}
+  <div className="flex-1 flex flex-col">
 
-</div>
+    <DashboardStats
+      places={places}
+      categories={categories}
+      locations={locations}
+    />
 
+    <div
+      className="
+      mt-4
+      grid
+      grid-cols-2
+      gap-4
+      overflow-y-auto
+      max-h-[60vh]
+      "
+    >
+      {filteredPlaces.map(place => (
+        <BusinessCard
+          key={place.id}
+          place={place}
+          onEdit={() => setEditingPlace(place)}
+          onDelete={() => setDeletePlace(place)}
+          refresh={loadPlaces}
+        />
+      ))}
+    </div>
 
+  </div>
 
-<div className="flex gap-6 text-sm">
+  {/* RIGHT COLUMN */}
+  <div className="w-52 border-l border-black pl-4">
 
-<Link to="/Home">Home</Link>
+    <Filters
+      locations={locations}
+      categories={categories}
+      selectedLocation={selectedLocation}
+      setSelectedLocation={setSelectedLocation}
+      selectedCategory={selectedCategory}
+      setSelectedCategory={setSelectedCategory}
+    />
 
-<Link to="/Submit">Submit</Link>
-
-</div>
-
-</div>
-
-
-{/* SEARCH */}
-<div className="px-6 pt-2">
-
-<SearchBar
-  searchTerm={searchTerm}
-  setSearchTerm={setSearchTerm}
-/>
-
-</div>
-
-
-
-{/* CONTENT AREA */}
-
-<div className="
-flex
-gap-6
-px-6
-pt-4
-">
-
-
-{/* BUSINESS GRID */}
-
-<div
-className="
-flex-1
-grid
-grid-cols-2
-gap-4
-overflow-y-auto
-max-h-[70vh]
-pr-2
-"
->
-
-{filteredPlaces.map(place => (
-
-<BusinessCard
-
-key={place.id}
-
-place={place}
-
-onEdit={() => setEditingPlace(place)}
-
-onDelete={() => setDeletePlace(place)}
-
-refresh={loadPlaces}
-
-/>
-
-))}
+  </div>
 
 </div>
 
+          </div>
 
+        </div>
 
+  
 
+      {editingPlace && (
 
-{/* FILTER PANEL */}
+        <EditPlaceModal
+          isOpen={true}
+          place={editingPlace}
+          onClose={() => setEditingPlace(null)}
+          onSave={() => {
+            setEditingPlace(null);
+            loadPlaces();
+          }}
+        />
 
-<div
-className="
-w-48
-border-l
-border-black
-pl-4
-text-sm
-"
->
+      )}
 
+      {deletePlace && (
 
-<h2 className="text-xl font-bold mb-4">
-FILTERS
-</h2>
+        <ConfirmDelete
+          place={deletePlace}
+          onCancel={() => setDeletePlace(null)}
+          onConfirm={() => handleDelete(deletePlace.id)}
+        />
 
+      )}
 
-<Filters
-
-locations={locations}
-
-categories={categories}
-
-selectedLocation={selectedLocation}
-
-setSelectedLocation={setSelectedLocation}
-
-selectedCategory={selectedCategory}
-
-setSelectedCategory={setSelectedCategory}
-
-/>
-
-
-</div>
-
-
-</div>
-<div className="grid grid-cols-3 gap-6 p-6 overflow-y-auto max-h-[72vh]">
-
-{filteredPlaces.map(place=>(
-
-<BusinessCard
-
-key={place.id}
-
-place={place}
-
-onEdit={()=>setEditingPlace(place)}
-
-onDelete={()=>setDeletePlace(place)}
-
-refresh={loadPlaces}
-
-/>
-
-))}
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-{editingPlace && (
-
-<EditPlaceModal
-  isOpen={true}
-  place={editingPlace}
-  onClose={()=>setEditingPlace(null)}
-  onSave={()=>{
-    setEditingPlace(null);
-    loadPlaces();
-  }}
-/>
-
-)}
-
-
-
-
-{deletePlace && (
-
-<ConfirmDelete
-
-place={deletePlace}
-
-onCancel={()=>setDeletePlace(null)}
-
-onConfirm={()=>handleDelete(deletePlace.id)}
-
-/>
-
-)}
-
-</>
-
-);
+    </>
+  );
 
 }
 

@@ -23,6 +23,8 @@ import Contact from "./components/pages/Contact";
 
 //Admin
 import Admin from "./components/pages/Admin";
+import AuthGuard from "./components/auth/AuthGuard";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
 
@@ -98,7 +100,30 @@ function App() {
       element={<Submit/>}/>
 
           {/* Admin */}
-      <Route path="/Admin" element={<Admin/>}/>
+     <Route
+
+path="/Admin"
+
+element={
+
+<ProtectedRoute adminOnly={true}>
+
+<Admin/>
+
+</ProtectedRoute>
+
+}
+
+/>
+
+      <Route
+path="/Admin"
+element={
+<AuthGuard adminOnly={true}>
+    <Admin/>
+</AuthGuard>
+}
+/>
 
 
     </Routes>
