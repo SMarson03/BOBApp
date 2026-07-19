@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const locations = [
   "Brooklyn",
   "Bronx",
@@ -13,135 +12,68 @@ const locations = [
 
 function Law() {
 
-
-  const [myData,setMyData] = useState([]);
-  const [selectedLocation,setSelectedLocation] = useState(null);
-
+  const [lawyers, setLawyers] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
 
-  useEffect(()=>{
 
-    async function fetchData(){
+  useEffect(() => {
 
-      try{
+    fetch("https://bobapp-e93h.onrender.com/NoirX/places")
+      .then((res) => res.json())
+      .then((data) => {
 
-        const response = await fetch(
-          "https://bobapp-e93h.onrender.com/NoirX/places"
+        const filtered = data.filter(
+          (item) => item.category === "Legal"
         );
 
-        const data = await response.json();
+        setLawyers(filtered);
 
+      })
+      .catch((err) =>
+        console.error("Error fetching legal:", err)
+      );
 
-        setMyData(
-          data.filter(
-            item => item.category === "Legal"
-          )
-        );
-
-
-      }catch(error){
-
-        console.error(
-          "Error fetching legal:",
-          error
-        );
-
-      }
-
-    }
-
-
-    fetchData();
-
-  },[]);
-
+  }, []);
 
 
 
   const filteredData = selectedLocation
-    ? myData.filter(
-        item => item.location === selectedLocation
+    ? lawyers.filter(
+        (item) => item.location === selectedLocation
       )
-    : myData;
+    : lawyers;
 
 
 
+  function buildMapsUrl(item) {
+
+    const destination =
+      item.lat && item.lng
+        ? `${item.lat},${item.lng}`
+        : item.address || item.name;
 
 
-
-  function buildMapsUrl(place,origin){
-
-    const params = new URLSearchParams({
-
-      destination:
-        place.address || place.name || "",
-
-      travelmode:"driving"
-
-    });
-
-
-    params.set(
-      "origin",
-      origin
-      ? `${origin.lat},${origin.lng}`
-      : "Current Location"
-    );
-
-
-    return (
-      "https://www.google.com/maps/dir/?" +
-      params.toString()
-    );
+    return `https://www.google.com/maps/dir/?api=1&${new URLSearchParams(
+      {
+        destination,
+        origin: "Current Location",
+        travelmode: "driving",
+      }
+    )}`;
 
   }
 
 
 
+  function openDirections(item) {
 
-
-  function openDirections(place){
-
-    if(navigator.geolocation){
-
-      navigator.geolocation.getCurrentPosition(
-
-        position=>{
-
-          window.open(
-            buildMapsUrl(place,{
-              lat:position.coords.latitude,
-              lng:position.coords.longitude
-            }),
-            "_blank"
-          );
-
-        },
-
-        ()=>{
-
-          window.open(
-            buildMapsUrl(place),
-            "_blank"
-          );
-
-        }
-
-      );
-
-    }else{
-
-      window.open(
-        buildMapsUrl(place),
-        "_blank"
-      );
-
-    }
+    window.open(
+      buildMapsUrl(item),
+      "_blank"
+    );
 
   }
-
-
-
 
 
 
@@ -157,8 +89,8 @@ function Law() {
     ">
 
 
+
       <div className="
-        relative
         w-full
         max-w-7xl
         bg-amber-50
@@ -174,16 +106,13 @@ function Law() {
           flex
           justify-between
           items-start
-          gap-5
+          gap-4
           p-4
           sm:p-5
         ">
 
 
-          <div className="
-            text-xl
-            font-bold
-          ">
+          <div className="text-xl font-bold">
             NOIREX
           </div>
 
@@ -196,7 +125,6 @@ function Law() {
             whitespace-nowrap
             overflow-x-auto
           ">
-
 
             <Link to="/Home">
               Home
@@ -223,7 +151,7 @@ function Law() {
             </Link>
 
             <Link to="/About">
-              About
+              About Us
             </Link>
 
 
@@ -237,131 +165,280 @@ function Law() {
 
 
 
+        {/* TITLE + FILTER */}
+
+
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+        ">
+
+
+          <h1 className="
+            text-5xl
+            sm:text-6xl
+            lg:text-8xl
+            font-bold
+            leading-none
+          ">
+
+            LAW
+
+          </h1>
+
+
+
+
+          <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              025
+            </div>
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              NYC EDITION
+            </div>
+
+
+
+            <button
+
+              onClick={() =>
+                setSelectedLocation(null)
+              }
+
+              className={
+                selectedLocation === null
+                  ? "font-bold"
+                  : ""
+              }
+
+            >
+
+              All
+
+            </button>
+
+
+
+
+            {locations.map((location)=>(
+
+
+              <div
+
+                key={location}
+
+                onClick={() =>
+                  setSelectedLocation(location)
+                }
+
+                className={`
+                  cursor-pointer
+                  hover:underline
+                  ${
+                    selectedLocation === location
+                    ? "font-bold"
+                    : ""
+                  }
+                `}
+
+              >
+
+                {location}
+
+              </div>
+
+
+            ))}
+
+
+          </aside>
+
+
+        </section>
+
+
+
+
+
+
 
         {/* CARDS */}
 
+
         <main className="
+          px-5
+          pb-8
           grid
           grid-cols-1
           sm:grid-cols-2
           lg:grid-cols-3
-          gap-5
-          p-5
+          gap-6
         ">
 
 
-          {filteredData.map(item=>(
+          {filteredData.length > 0 ? (
+
+            filteredData.map((item)=>(
 
 
-            <div
+              <article
 
-              key={item.id}
+                key={item.id}
 
-              className="cursor-pointer"
+                className="cursor-pointer"
 
-              onClick={()=>openDirections(item)}
-
-            >
-
-
-
-              <div className="
-                flex
-                justify-center
-                items-center
-                border-2
-                border-black
-                h-44
-                p-3
-              ">
-
-
-                <img
-
-                  src={item.imageUrl}
-
-                  alt={item.name}
-
-                  className="
-                    w-full
-                    h-full
-                    object-contain
-                  "
-
-                />
-
-
-              </div>
-
-
-
-
-
-              <div className="
-                mt-3
-                text-sm
-                font-bold
-              ">
-
-
-                <p>
-                  {item.name}
-                </p>
-
-
-                <p>
-                  {item.address}
-                </p>
-
-
-                <p>
-                  {item.location}
-                </p>
-
-
-              </div>
-
-
-
-
-
-              <button
-
-                className="
-                  mt-4
-                  w-16
-                  h-8
-                  border-2
-                  border-black
-                  bg-amber-50
-                  text-sm
-                "
-
-                onClick={(e)=>e.stopPropagation()}
+                onClick={() =>
+                  openDirections(item)
+                }
 
               >
 
-                <a
-
-                  href={item.website}
-
-                  target="_blank"
-
-                  rel="noopener noreferrer"
-
-                >
-                  Visit
-                </a>
 
 
-              </button>
+                <div className="
+                  h-48
+                  border-2
+                  border-black
+                  bg-white
+                  p-3
+                  flex
+                  justify-center
+                  items-center
+                ">
+
+
+                  <img
+
+                    src={item.imageUrl}
+
+                    alt={item.name}
+
+                    className="
+                      w-full
+                      h-full
+                      object-contain
+                    "
+
+                  />
+
+
+                </div>
 
 
 
-            </div>
 
 
-          ))}
+
+                <div className="mt-3">
+
+
+                  <h2 className="
+                    text-lg
+                    font-bold
+                  ">
+
+                    {item.name}
+
+                  </h2>
+
+
+
+                  <p className="text-sm">
+                    {item.address}
+                  </p>
+
+
+
+                  <p className="text-sm">
+                    {item.location}
+                  </p>
+
+
+
+                  <p className="text-sm">
+                    {item.category}
+                  </p>
+
+
+
+
+                  <button
+
+                    onClick={(e)=>
+                      e.stopPropagation()
+                    }
+
+                    className="
+                      mt-3
+                      px-4
+                      py-1
+                      border-2
+                      border-black
+                      text-sm
+                      hover:bg-black
+                      hover:text-white
+                    "
+
+                  >
+
+                    <a
+
+                      href={item.website}
+
+                      target="_blank"
+
+                      rel="noopener noreferrer"
+
+                    >
+
+                      Visit
+
+                    </a>
+
+
+                  </button>
+
+
+                </div>
+
+
+
+              </article>
+
+
+            ))
+
+
+          ) : (
+
+
+            <p>
+              No legal services found.
+            </p>
+
+
+          )}
 
 
 
@@ -371,174 +448,6 @@ function Law() {
 
 
       </div>
-
-
-
-
-
-
-      {/* LOCATION PANEL */}
-
-
-      <aside className="
-        absolute
-        top-24
-        right-4
-        text-right
-        text-sm
-        space-y-2
-      ">
-
-
-        <div className="
-          text-xl
-          font-semibold
-        ">
-          025
-        </div>
-
-
-
-        <div className="
-          text-xl
-          font-semibold
-        ">
-          NYC EDITION
-        </div>
-
-
-
-
-        <div className="space-y-1">
-
-
-          <div
-
-            className="
-              cursor-pointer
-              hover:underline
-            "
-
-            onClick={()=>setSelectedLocation(null)}
-
-          >
-            All
-          </div>
-
-
-
-
-          {locations.map(location=>(
-
-
-            <div
-
-              key={location}
-
-              onClick={()=>setSelectedLocation(location)}
-
-              className={`
-                cursor-pointer
-                hover:underline
-                ${
-                  selectedLocation === location
-                  ? "font-bold"
-                  : ""
-                }
-              `}
-
-            >
-
-              {location}
-
-            </div>
-
-
-          ))}
-
-
-
-        </div>
-
-
-      </aside>
-
-
-
-
-
-
-      {/* RESULT PANEL */}
-
-      <aside className="
-        fixed
-        bottom-5
-        right-5
-        w-40
-        max-h-52
-        overflow-y-auto
-        bg-black
-        text-right
-        p-3
-        text-white
-        text-sm
-      ">
-
-
-        {filteredData.length ? (
-
-          filteredData.map(item=>(
-
-
-            <div
-
-              key={item.id}
-
-              onClick={()=>openDirections(item)}
-
-              className="
-                border-b
-                pb-2
-                mb-2
-                cursor-pointer
-              "
-
-            >
-
-              <h2 className="
-                font-semibold
-              ">
-
-                {item.name}
-
-              </h2>
-
-
-              <p className="
-                text-yellow-500
-              ">
-
-                {item.location}
-
-              </p>
-
-
-            </div>
-
-
-          ))
-
-
-        ) : (
-
-          <p>
-            No legal services found.
-          </p>
-
-        )}
-
-
-      </aside>
 
 
     </div>
