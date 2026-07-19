@@ -1,169 +1,106 @@
-/* =========================
-   GLOBAL APP LAYOUT
-========================= */
+/* Prevent horizontal scrolling */
+* {
+  box-sizing: border-box;
+}
 
-.app {
+html,
+body {
   width: 100%;
-  min-height: 100vh;
   overflow-x: hidden;
 }
 
+#root {
+  width: 100%;
+}
+
+
+/* Main app wrapper */
+.app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* Images never overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Main content */
 .container {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 20px;
 }
 
 
-/* =========================
-   NAVIGATION
-========================= */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 24px;
-}
-
-
-/* =========================
-   CARDS / GALLERIES / ITEMS
-========================= */
-
+/* Cards / API loaded items */
 .card-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.card {
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  gap: 20px;
 }
 
 
-/* =========================
-   LARGE DESKTOP
-   1200px +
-========================= */
-
-@media (min-width: 1200px) {
+/* Tablet */
+@media (max-width: 900px) {
 
   .container {
-    padding: 32px;
-  }
-
-  .card-container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-}
-
-
-/* =========================
-   LAPTOP / SMALL DESKTOP
-   900px - 1199px
-========================= */
-
-@media (max-width: 1199px) {
-
-  .card-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-}
-
-
-/* =========================
-   TABLET / IPAD
-   600px - 899px
-========================= */
-
-@media (max-width: 899px) {
-
-  .container {
-    padding: 20px;
+    padding: 15px;
   }
 
   .card-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-
-  .navbar {
-    padding: 16px;
-  }
-
-  .nav-links {
-    gap: 15px;
   }
 
 }
 
 
-/* =========================
-   PHONE / IPHONE
-   0 - 599px
-========================= */
-
-@media (max-width: 599px) {
+/* Phone */
+@media (max-width: 600px) {
 
   .container {
-    padding: 12px;
-  }
-
-
-  .navbar {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
-
-
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+    padding: 10px;
   }
 
 
   .card-container {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 15px;
   }
 
 
-  .card {
-    width: 100%;
+  /* Stack horizontal sections */
+  .row {
+    display: flex;
+    flex-direction: column;
   }
 
 
+  /* Remove desktop spacing */
+  .section {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 10px;
+  }
+
+
+  /* Smaller headings */
   h1 {
     font-size: 28px;
   }
-
 
   h2 {
     font-size: 22px;
   }
 
 
-  p {
-    font-size: 16px;
+  /* Buttons fit phone */
+  button {
+    max-width: 100%;
   }
 
 }
