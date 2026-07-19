@@ -33,22 +33,40 @@ public class WebCorsConfig {
 
         CorsConfiguration config = new CorsConfiguration();
 
+        // Frontend origins allowed to call this API
         config.setAllowedOrigins(List.of(
-                "https://noirexbeta.vercel.app"
+                "https://noirexbeta.vercel.app",
+                "http://localhost:5173"
         ));
 
+        // Allowed HTTP methods
         config.setAllowedMethods(List.of(
                 "GET",
                 "POST",
                 "PUT",
+                "PATCH",
                 "DELETE",
                 "OPTIONS"
         ));
 
-        config.setAllowedHeaders(List.of("*"));
+        // Allowed request headers
+        config.setAllowedHeaders(List.of(
+                "Origin",
+                "Content-Type",
+                "Accept",
+                "Authorization",
+                "X-Requested-With"
+        ));
 
+        // Headers frontend is allowed to read
+        config.setExposedHeaders(List.of(
+                "Authorization"
+        ));
+
+        // Required if using cookies/session authentication
         config.setAllowCredentials(true);
 
+        // Register CORS configuration for every endpoint
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
