@@ -175,9 +175,32 @@ return (
 <div className="relative z-20 p-6 flex justify-between items-start">
 
 
-<div className="text-lg font-bold">
+<div className="flex flex-col">
 
-NOIREX
+  <div className="text-lg font-bold">
+    NOIREX
+  </div>
+
+  <div className="text-sm">
+    Welcome, <strong>{JSON.parse(localStorage.getItem("user"))?.name || "Guest"}</strong>
+  </div>
+
+  {localStorage.getItem("user") && (
+    <button
+      onClick={() => {
+        localStorage.removeItem("user");
+        window.location.href = "/Home";
+      }}
+      className="
+      text-left
+      text-sm
+      text-red-700
+      hover:underline
+      "
+    >
+      Logout
+    </button>
+  )}
 
 </div>
 
