@@ -1,0 +1,169 @@
+/* =========================
+   GLOBAL APP LAYOUT
+========================= */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+
+/* =========================
+   CARDS / GALLERIES / ITEMS
+========================= */
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.card {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/* =========================
+   LARGE DESKTOP
+   1200px +
+========================= */
+
+@media (min-width: 1200px) {
+
+  .container {
+    padding: 32px;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+}
+
+
+/* =========================
+   LAPTOP / SMALL DESKTOP
+   900px - 1199px
+========================= */
+
+@media (max-width: 1199px) {
+
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+/* =========================
+   TABLET / IPAD
+   600px - 899px
+========================= */
+
+@media (max-width: 899px) {
+
+  .container {
+    padding: 20px;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .navbar {
+    padding: 16px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+}
+
+
+/* =========================
+   PHONE / IPHONE
+   0 - 599px
+========================= */
+
+@media (max-width: 599px) {
+
+  .container {
+    padding: 12px;
+  }
+
+
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+
+  .card-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+
+  .card {
+    width: 100%;
+  }
+
+
+  h1 {
+    font-size: 28px;
+  }
+
+
+  h2 {
+    font-size: 22px;
+  }
+
+
+  p {
+    font-size: 16px;
+  }
+
+}
