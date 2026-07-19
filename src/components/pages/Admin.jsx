@@ -30,509 +30,520 @@ const categories = [
 ];
 
 
-function Admin(){
 
-const user = JSON.parse(localStorage.getItem("user"));
+function Admin() {
 
-const [places,setPlaces] = useState([]);
-const [searchTerm,setSearchTerm] = useState("");
-const [selectedCategory,setSelectedCategory] = useState("");
-const [selectedLocation,setSelectedLocation] = useState("");
-const [editingPlace,setEditingPlace] = useState(null);
-const [deletePlace,setDeletePlace] = useState(null);
 
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
 
 
-useEffect(()=>{
-  loadPlaces();
-},[]);
+  const [places,setPlaces] = useState([]);
+  const [searchTerm,setSearchTerm] = useState("");
+  const [selectedCategory,setSelectedCategory] = useState("");
+  const [selectedLocation,setSelectedLocation] = useState("");
+  const [editingPlace,setEditingPlace] = useState(null);
+  const [deletePlace,setDeletePlace] = useState(null);
 
 
 
-async function loadPlaces(){
+  useEffect(()=>{
 
-try{
+    loadPlaces();
 
-const res = await fetch(
-"https://bobapp-e93h.onrender.com/NoirX/places"
-);
+  },[]);
 
-const data = await res.json();
 
-setPlaces(data);
 
 
-}catch(err){
+  async function loadPlaces(){
 
-console.error(err);
+    try{
 
-}
+      const response = await fetch(
+        "https://bobapp-e93h.onrender.com/NoirX/places"
+      );
 
-}
+      const data = await response.json();
 
+      setPlaces(data);
 
+    }catch(error){
 
+      console.error(
+        "Loading error:",
+        error
+      );
 
+    }
 
-const filteredPlaces = places.filter(place=>{
+  }
 
-const search = searchTerm.toLowerCase();
 
 
-return (
 
-(
-!search ||
-place.name?.toLowerCase().includes(search) ||
-place.address?.toLowerCase().includes(search)
-)
 
-&&
+  const filteredPlaces = places.filter(place=>{
 
-(
-!selectedCategory ||
-place.category === selectedCategory
-)
 
-&&
+    const search =
+      searchTerm.toLowerCase();
 
-(
-!selectedLocation ||
-place.location === selectedLocation
-)
 
-);
 
+    const matchesSearch =
+      place.name?.toLowerCase().includes(search) ||
+      place.address?.toLowerCase().includes(search) ||
+      place.description?.toLowerCase().includes(search) ||
+      place.submittedBy?.toLowerCase().includes(search);
 
-});
 
 
+    const matchesCategory =
+      selectedCategory
+      ? place.category === selectedCategory
+      : true;
 
 
 
+    const matchesLocation =
+      selectedLocation
+      ? place.location === selectedLocation
+      : true;
 
-async function handleDelete(id){
 
-await fetch(
-`https://bobapp-e93h.onrender.com/NoirX/places/${id}`,
-{
-method:"DELETE"
-}
-);
 
+    return (
+      matchesSearch &&
+      matchesCategory &&
+      matchesLocation
+    );
 
-setDeletePlace(null);
+  });
 
-loadPlaces();
 
-}
 
 
 
 
+  async function handleDelete(id){
 
+    try{
 
+      const response = await fetch(
 
-return (
+        `https://bobapp-e93h.onrender.com/NoirX/places/${id}`,
 
-<div className="
-min-h-screen
-bg-yellow-600
-flex
-justify-center
-p-3
-sm:p-6
-">
+        {
+          method:"DELETE"
+        }
 
+      );
 
-<div className="
-w-full
-max-w-7xl
-bg-amber-50
-shadow-xl
-">
 
+      if(response.ok){
 
+        setDeletePlace(null);
 
+        loadPlaces();
 
+      }
 
-{/* HEADER */}
 
-<header className="
-flex
-flex-col
-sm:flex-row
-justify-between
-gap-5
-p-5
-">
+    }catch(error){
 
+      console.error(error);
 
-<div>
+    }
 
-<h1 className="
-text-5xl
-sm:text-7xl
-font-bold
-">
+  }
 
-ADMIN
 
-</h1>
 
 
-<p className="text-sm mt-3">
-Welcome,
-{" "}
-<strong>
-{user?.name}
-</strong>
-</p>
 
 
-<p className="text-sm">
-{places.length} Businesses
-</p>
+  return (
 
+    <div className="
+      min-h-screen
+      bg-yellow-600
+      flex
+      justify-center
+      p-3
+      sm:p-6
+    ">
 
-</div>
 
 
+      <div className="
+        w-full
+        max-w-7xl
+        bg-amber-50
+        shadow-xl
+        overflow-hidden
+      ">
 
 
-<nav className="
-flex
-flex-wrap
-gap-4
-text-sm
-">
 
 
-<Link to="/Home">
-Home
-</Link>
 
+        {/* HEADER */}
 
-<Link to="/Submit">
-Submit
-</Link>
 
+        <header className="
+          flex
+          justify-between
+          items-start
+          gap-4
+          p-4
+          sm:p-5
+        ">
 
-<Logout />
 
+          <div className="text-xl font-bold">
 
-</nav>
+            NOIREX
 
+          </div>
 
 
-</header>
 
 
+          <nav className="
+            flex
+            gap-4
+            text-sm
+            whitespace-nowrap
+            overflow-x-auto
+          ">
 
 
+            <Link to="/Home">
+              Home
+            </Link>
 
 
+            <Link to="/Submit">
+              Submit
+            </Link>
 
 
-{/* STATS */}
+            <Logout />
 
-<section className="
-px-5
-pb-5
-">
 
+          </nav>
 
-<div className="
-w-full
-overflow-hidden
-">
 
+        </header>
 
-<DashboardStats
 
-places={places}
 
-categories={categories}
 
-locations={locations}
 
-/>
 
 
-</div>
+        {/* TITLE + ADMIN FILTERS */}
 
 
-</section>
 
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+          gap-6
+        ">
 
 
 
 
+          <div>
 
 
+            <h1 className="
+              text-5xl
+              sm:text-6xl
+              lg:text-8xl
+              font-bold
+              leading-none
+            ">
 
-{/* MOBILE FILTERS */}
+              ADMIN
 
-<section className="
-block
-lg:hidden
-px-5
-pb-5
-">
+            </h1>
 
 
-<div className="
-border-2
-border-black
-p-4
-">
 
+            <p className="text-sm mt-4">
 
-<h2 className="
-font-bold
-mb-3
-">
+              Welcome,{" "}
 
-FILTERS
+              <strong>
+                {user?.name}
+              </strong>
 
-</h2>
+            </p>
 
 
 
-<Filters
+            <p className="text-sm">
 
-locations={locations}
+              {places.length} Businesses
 
-categories={categories}
+            </p>
 
-selectedLocation={selectedLocation}
 
-setSelectedLocation={setSelectedLocation}
 
-selectedCategory={selectedCategory}
+          </div>
 
-setSelectedCategory={setSelectedCategory}
 
-/>
 
 
-</div>
 
 
-</section>
+          <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+          ">
 
 
 
+            <div className="
+              text-sm
+              sm:text-xl
+              font-semibold
+            ">
 
+              FILTERS
 
+            </div>
 
 
 
-{/* SEARCH */}
+            <Filters
 
-<section className="
-px-5
-">
+              locations={locations}
 
+              categories={categories}
 
-<input
+              selectedLocation={selectedLocation}
 
-value={searchTerm}
+              setSelectedLocation={setSelectedLocation}
 
-onChange={(e)=>
-setSearchTerm(e.target.value)
-}
+              selectedCategory={selectedCategory}
 
-placeholder="Search businesses..."
+              setSelectedCategory={setSelectedCategory}
 
-className="
-w-full
-border-2
-border-black
-bg-amber-50
-p-3
-"
+            />
 
 
-/>
+          </aside>
 
 
-</section>
 
 
+        </section>
 
 
 
 
 
-{/* CONTENT */}
 
-<section className="
-grid
-grid-cols-1
-lg:grid-cols-[1fr_220px]
-gap-6
-p-5
-">
 
 
+        {/* STATS */}
 
 
 
-{/* CARDS */}
+        <section className="
+          px-5
+          pb-5
+        ">
 
-<div className="
-grid
-grid-cols-1
-sm:grid-cols-2
-xl:grid-cols-3
-gap-6
-">
 
 
-{
-filteredPlaces.map(place=>(
+          <DashboardStats
 
+            places={places}
 
-<BusinessCard
+            categories={categories}
 
-key={place.id}
+            locations={locations}
 
-place={place}
+          />
 
-onEdit={()=>
-setEditingPlace(place)
-}
 
-onDelete={()=>
-setDeletePlace(place)
-}
 
-refresh={loadPlaces}
+        </section>
 
-/>
 
 
-))
-}
 
 
-</div>
 
 
 
 
+        {/* SEARCH + BUSINESS GRID */}
 
 
 
-{/* DESKTOP FILTER */}
+        <main className="
+          px-5
+          pb-10
+        ">
 
-<aside className="
-hidden
-lg:block
-border-l-2
-border-black
-pl-5
-">
 
 
-<h2 className="
-font-bold
-mb-4
-">
+          <input
 
-FILTERS
+            placeholder="Search businesses..."
 
-</h2>
+            value={searchTerm}
 
+            onChange={(e)=>
+              setSearchTerm(e.target.value)
+            }
 
+            className="
+              w-full
+              mb-6
+              p-3
+              border-2
+              border-black
+              bg-amber-50
+            "
 
-<Filters
+          />
 
-locations={locations}
 
-categories={categories}
 
-selectedLocation={selectedLocation}
 
-setSelectedLocation={setSelectedLocation}
 
-selectedCategory={selectedCategory}
 
-setSelectedCategory={setSelectedCategory}
+          <div className="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            gap-6
+          ">
 
-/>
 
+            {filteredPlaces.length ? (
 
-</aside>
 
+              filteredPlaces.map(place=>(
 
 
+                <BusinessCard
 
+                  key={place.id}
 
-</section>
+                  place={place}
 
+                  onEdit={()=>
+                    setEditingPlace(place)
+                  }
 
+                  onDelete={()=>
+                    setDeletePlace(place)
+                  }
 
+                  refresh={loadPlaces}
 
+                />
 
-</div>
 
+              ))
 
 
+            ) : (
 
 
+              <p>
+                No businesses found.
+              </p>
 
-{editingPlace && (
 
-<EditPlaceModal
+            )}
 
-isOpen={true}
 
-place={editingPlace}
 
-onClose={()=>
-setEditingPlace(null)
-}
+          </div>
 
-onSave={()=>{
 
-setEditingPlace(null);
 
-loadPlaces();
+        </main>
 
-}}
 
-/>
 
-)}
 
+      </div>
 
 
 
-{deletePlace && (
 
-<ConfirmDelete
 
-place={deletePlace}
 
-onCancel={()=>
-setDeletePlace(null)
-}
 
-onConfirm={()=>
-handleDelete(deletePlace.id)
-}
+      {editingPlace && (
 
-/>
+        <EditPlaceModal
 
-)}
+          isOpen={true}
 
+          place={editingPlace}
 
+          onClose={()=>
+            setEditingPlace(null)
+          }
 
-</div>
+          onSave={()=>{
 
-);
+            setEditingPlace(null);
+
+            loadPlaces();
+
+          }}
+
+        />
+
+      )}
+
+
+
+
+
+
+      {deletePlace && (
+
+        <ConfirmDelete
+
+          place={deletePlace}
+
+          onCancel={()=>
+            setDeletePlace(null)
+          }
+
+          onConfirm={()=>
+            handleDelete(deletePlace.id)
+          }
+
+        />
+
+      )}
+
+
+
+    </div>
+
+  );
 
 }
 
