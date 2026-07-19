@@ -10,21 +10,20 @@ function Home() {
     fetch("https://bobapp-e93h.onrender.com/NoirX/places")
       .then((res) => res.json())
       .then((data) => setMyData(data))
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
   const user = JSON.parse(localStorage.getItem("user"));
 
   return (
-    <div className="bg-yellow-600 flex justify-center p-3 sm:p-6">
-      <div className="relative w-full max-w-7xl bg-amber-50 overflow-hidden shadow-xl">
+    <div className="min-h-screen bg-yellow-600 flex justify-center p-3 sm:p-6">
+      <div className="relative min-h-screen w-full max-w-7xl bg-amber-50 overflow-hidden shadow-xl">
 
-        <header className="flex justify-between items-start gap-4 p-4 sm:p-5">
-
+        {/* Header */}
+        <header className="relative z-20 flex justify-between items-start gap-6 p-5">
+          
           <div className="flex flex-col shrink-0">
-            <h1 className="text-xl font-bold">
-              NOIREX
-            </h1>
+            <h1 className="text-xl font-bold">NOIREX</h1>
 
             <p className="text-sm">
               Welcome, <strong>{user?.name || "Guest"}</strong>
@@ -35,7 +34,6 @@ function Home() {
                 <Link to="/Login" className="text-sm hover:underline">
                   Login
                 </Link>
-
                 <Link to="/SignUp" className="text-sm hover:underline">
                   Sign Up
                 </Link>
@@ -45,13 +43,12 @@ function Home() {
                 <Link to="/Submit" className="text-sm hover:underline">
                   Submit a Business
                 </Link>
-
                 <button
+                  className="text-left text-sm text-red-700 hover:underline"
                   onClick={() => {
                     localStorage.removeItem("user");
                     window.location.href = "/Home";
                   }}
-                  className="text-left text-sm text-red-700 hover:underline"
                 >
                   Logout
                 </button>
@@ -59,13 +56,7 @@ function Home() {
             )}
           </div>
 
-          <nav className="
-            flex
-            gap-4
-            text-sm
-            whitespace-nowrap
-            overflow-x-auto
-          ">
+          <nav className="flex gap-5 text-sm whitespace-nowrap overflow-x-auto pt-2">
             <Link to="/Eats">Eats</Link>
             <Link to="/Drinks">Drinks</Link>
             <Link to="/Arts">Art</Link>
@@ -78,19 +69,13 @@ function Home() {
         </header>
 
 
-        <main className="flex justify-center pt-4 pb-8 sm:pt-8">
-
-          <div className="
-            flex
-            items-start
-            gap-3
-            sm:gap-8
-            px-4
-          ">
+        {/* Cover */}
+        <main className="flex justify-center items-start pt-14 sm:pt-20">
+          <div className="flex items-start gap-5 sm:gap-8 px-6">
 
             <div className="
               text-center
-              text-4xl
+              text-5xl
               sm:text-6xl
               lg:text-8xl
               font-bold
@@ -109,13 +94,13 @@ function Home() {
               text-xs
               sm:text-sm
               space-y-1
-              pt-1
+              pt-2
             ">
-              <div className="font-semibold text-sm sm:text-xl">
+              <div className="text-base sm:text-xl font-semibold">
                 025
               </div>
 
-              <div className="font-semibold text-sm sm:text-xl">
+              <div className="text-base sm:text-xl font-semibold">
                 NYC EDITION
               </div>
 
@@ -127,7 +112,6 @@ function Home() {
             </aside>
 
           </div>
-
         </main>
 
       </div>
