@@ -128,7 +128,7 @@ function About() {
             leading-none
           ">
 
-            ABOUT
+            ABOUT US
 
           </h1>
 
