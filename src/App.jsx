@@ -35,7 +35,7 @@ function App() {
       {/* User */}
       <Route 
         path="/SignUp" 
-        element={<Signup />} 
+        element={<SignUp />} 
       />
 
       <Route 
