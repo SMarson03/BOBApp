@@ -35,7 +35,8 @@ public class WebCorsConfig {
 
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://noirexbeta.vercel.app"
+                "https://noirexbeta.vercel.app," +
+                        "https://*.vercel.app"
         ));
 
         config.setAllowedMethods(List.of(
