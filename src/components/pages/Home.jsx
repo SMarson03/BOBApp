@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('https://bobapp-e93h.onrender.com/NoirX/restaurants');
+        const response = await fetch('https://bobapp-e93h.onrender.com/NoirX/places');
         const data = await response.json();
         setMyData(data);
       } catch (error) {
