@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // Core Pages
 import Home from "./components/pages/Home";
@@ -32,6 +32,18 @@ function App() {
 
     <Routes>
 
+
+      {/* Main */}
+<Route
+  path="/"
+  element={<Navigate to="/Home" replace />}
+/>
+
+      <Route 
+        path="/Home" 
+        element={<Home />} 
+      />
+
       {/* User */}
       <Route 
         path="/SignUp" 
@@ -41,13 +53,6 @@ function App() {
       <Route 
         path="/LogIn" 
         element={<LogIn />} 
-      />
-
-
-      {/* Main */}
-      <Route 
-        path="/Home" 
-        element={<Home />} 
       />
 
 
