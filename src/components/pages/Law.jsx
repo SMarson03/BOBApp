@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 const locations = [
   "Brooklyn",
   "Bronx",
   "Manhattan",
   "Queens",
-  "Staten_Island",
+  "Staten Island",
 ];
+
 
 function Law() {
 
-  const [mydata, setMyData] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const [myData,setMyData] = useState([]);
+  const [selectedLocation,setSelectedLocation] = useState(null);
 
 
-  useEffect(() => {
 
-    async function fetchData() {
+  useEffect(()=>{
 
-      try {
+    async function fetchData(){
+
+      try{
 
         const response = await fetch(
           "https://bobapp-e93h.onrender.com/NoirX/places"
@@ -28,17 +32,19 @@ function Law() {
         const data = await response.json();
 
 
-        const lawyers = data.filter(
-          (item) => item.category === "Legal"
+        setMyData(
+          data.filter(
+            item => item.category === "Legal"
+          )
         );
 
 
-        setMyData(lawyers);
+      }catch(error){
 
-
-      } catch (error) {
-
-        console.error("Error fetching legal:", error);
+        console.error(
+          "Error fetching legal:",
+          error
+        );
 
       }
 
@@ -47,79 +53,75 @@ function Law() {
 
     fetchData();
 
-  }, []);
+  },[]);
+
 
 
 
   const filteredData = selectedLocation
-    ? mydata.filter(
-        (item) => item.location === selectedLocation
+    ? myData.filter(
+        item => item.location === selectedLocation
       )
-    : mydata;
+    : myData;
 
 
 
-  function buildMapsUrl(dest, origin) {
-
-    const base =
-      "https://www.google.com/maps/dir/?api=1";
 
 
-    const destination =
-      dest.address || dest.name || "";
 
+  function buildMapsUrl(place,origin){
 
     const params = new URLSearchParams({
-      destination,
-      travelmode: "driving",
+
+      destination:
+        place.address || place.name || "",
+
+      travelmode:"driving"
+
     });
 
 
-    if (origin?.lat && origin?.lng) {
-
-      params.set(
-        "origin",
-        `${origin.lat},${origin.lng}`
-      );
-
-    } else {
-
-      params.set(
-        "origin",
-        "Current Location"
-      );
-
-    }
+    params.set(
+      "origin",
+      origin
+      ? `${origin.lat},${origin.lng}`
+      : "Current Location"
+    );
 
 
-    return `${base}&${params.toString()}`;
+    return (
+      "https://www.google.com/maps/dir/?" +
+      params.toString()
+    );
 
   }
 
 
 
-  function openDirections(dest) {
 
-    if (navigator.geolocation) {
+
+  function openDirections(place){
+
+    if(navigator.geolocation){
 
       navigator.geolocation.getCurrentPosition(
 
-        (pos) => {
+        position=>{
 
           window.open(
-            buildMapsUrl(dest, {
-              lat: pos.coords.latitude,
-              lng: pos.coords.longitude,
+            buildMapsUrl(place,{
+              lat:position.coords.latitude,
+              lng:position.coords.longitude
             }),
             "_blank"
           );
 
         },
 
-        () => {
+        ()=>{
 
           window.open(
-            buildMapsUrl(dest),
+            buildMapsUrl(place),
             "_blank"
           );
 
@@ -127,10 +129,10 @@ function Law() {
 
       );
 
-    } else {
+    }else{
 
       window.open(
-        buildMapsUrl(dest),
+        buildMapsUrl(place),
         "_blank"
       );
 
@@ -140,105 +142,232 @@ function Law() {
 
 
 
+
+
+
   return (
 
-    <>
-
-      <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
-
-        <div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-red-50 overflow-hidden">
-
-
-          <div className="absolute inset-0 overflow-y-auto max-h-[80vh]">
-
-
-            <div className="relative z-20 p-6 flex justify-between items-start">
+    <div className="
+      min-h-screen
+      bg-yellow-600
+      flex
+      justify-center
+      p-3
+      sm:p-6
+    ">
 
 
-              <div className="text-lg font-bold">
-                NOIREX
-              </div>
-
-
-              <div className="flex gap-6 text-sm">
-                <Link to="/Home">Home</Link>
-                <Link to="/Eats">Eats</Link>
-                <Link to="/Drinks">Drinks</Link>
-                <Link to="/Arts">Arts</Link>
-                <Link to="/Therapy">Therapy</Link>
-                <Link to="/Contact">Contact</Link>
-                <Link to="/About">About Us</Link>
-
-              </div>
-
-
-            </div>
+      <div className="
+        relative
+        w-full
+        max-w-7xl
+        bg-amber-50
+        shadow-xl
+        overflow-hidden
+      ">
 
 
 
-            <div className="grid grid-cols-3 gap-5 p-5">
+        {/* HEADER */}
+
+        <header className="
+          flex
+          justify-between
+          items-start
+          gap-5
+          p-4
+          sm:p-5
+        ">
 
 
-              {filteredData.map((item) => (
-
-                <div
-                  key={item.id}
-                  onClick={() => openDirections(item)}
-                >
-
-
-                  <div className="flex flex-col items-center m-5 p-2.5 border-2 border-black h-[160px]">
-
-                    <img
-                      src={item.imageUrl}
-                      alt={item.name}
-                      className="w-full h-full object-contain"
-                    />
-
-                  </div>
-
-
-
-                  <div className="px-8 text-md font-bold">
-
-                    <p>{item.name}</p>
-
-                    <p>{item.address}</p>
-
-                    <p>{item.location}</p>
-
-                  </div>
-
-
-
-                  <button
-                    className="m-8 w-16 h-8 bg-amber-50 border-2 border-black flex justify-center items-center text-sm"
-                    onClick={(e)=>e.stopPropagation()}
-                  >
-
-                    <a
-                      href={item.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Visit
-                    </a>
-
-                  </button>
-
-
-                </div>
-
-              ))}
-
-
-            </div>
-
-
+          <div className="
+            text-xl
+            font-bold
+          ">
+            NOIREX
           </div>
 
 
-        </div>
+
+          <nav className="
+            flex
+            gap-4
+            text-sm
+            whitespace-nowrap
+            overflow-x-auto
+          ">
+
+
+            <Link to="/Home">
+              Home
+            </Link>
+
+            <Link to="/Eats">
+              Eats
+            </Link>
+
+            <Link to="/Drinks">
+              Drinks
+            </Link>
+
+            <Link to="/Arts">
+              Art
+            </Link>
+
+            <Link to="/Therapy">
+              Therapy
+            </Link>
+
+            <Link to="/Contact">
+              Contact
+            </Link>
+
+            <Link to="/About">
+              About
+            </Link>
+
+
+          </nav>
+
+
+        </header>
+
+
+
+
+
+
+
+        {/* CARDS */}
+
+        <main className="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-5
+          p-5
+        ">
+
+
+          {filteredData.map(item=>(
+
+
+            <div
+
+              key={item.id}
+
+              className="cursor-pointer"
+
+              onClick={()=>openDirections(item)}
+
+            >
+
+
+
+              <div className="
+                flex
+                justify-center
+                items-center
+                border-2
+                border-black
+                h-44
+                p-3
+              ">
+
+
+                <img
+
+                  src={item.imageUrl}
+
+                  alt={item.name}
+
+                  className="
+                    w-full
+                    h-full
+                    object-contain
+                  "
+
+                />
+
+
+              </div>
+
+
+
+
+
+              <div className="
+                mt-3
+                text-sm
+                font-bold
+              ">
+
+
+                <p>
+                  {item.name}
+                </p>
+
+
+                <p>
+                  {item.address}
+                </p>
+
+
+                <p>
+                  {item.location}
+                </p>
+
+
+              </div>
+
+
+
+
+
+              <button
+
+                className="
+                  mt-4
+                  w-16
+                  h-8
+                  border-2
+                  border-black
+                  bg-amber-50
+                  text-sm
+                "
+
+                onClick={(e)=>e.stopPropagation()}
+
+              >
+
+                <a
+
+                  href={item.website}
+
+                  target="_blank"
+
+                  rel="noopener noreferrer"
+
+                >
+                  Visit
+                </a>
+
+
+              </button>
+
+
+
+            </div>
+
+
+          ))}
+
+
+
+        </main>
+
+
 
 
       </div>
@@ -246,19 +375,37 @@ function Law() {
 
 
 
-      {/* Location Filter */}
-
-      <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
 
 
-        <div className="text-2xl font-semibold">
+      {/* LOCATION PANEL */}
+
+
+      <aside className="
+        absolute
+        top-24
+        right-4
+        text-right
+        text-sm
+        space-y-2
+      ">
+
+
+        <div className="
+          text-xl
+          font-semibold
+        ">
           025
         </div>
 
 
-        <div className="text-2xl font-semibold">
+
+        <div className="
+          text-xl
+          font-semibold
+        ">
           NYC EDITION
         </div>
+
 
 
 
@@ -266,83 +413,135 @@ function Law() {
 
 
           <div
-            className="cursor-pointer hover:underline"
-            onClick={() => setSelectedLocation(null)}
+
+            className="
+              cursor-pointer
+              hover:underline
+            "
+
+            onClick={()=>setSelectedLocation(null)}
+
           >
             All
           </div>
 
 
 
-          {locations.map((loc)=>(
+
+          {locations.map(location=>(
+
 
             <div
-              key={loc}
-              onClick={() => setSelectedLocation(loc)}
-              className={`cursor-pointer hover:underline ${
-                selectedLocation === loc
-                ? "font-bold text-white"
-                : ""
-              }`}
+
+              key={location}
+
+              onClick={()=>setSelectedLocation(location)}
+
+              className={`
+                cursor-pointer
+                hover:underline
+                ${
+                  selectedLocation === location
+                  ? "font-bold"
+                  : ""
+                }
+              `}
+
             >
 
-              {loc.replace("_"," ")}
+              {location}
 
             </div>
 
+
           ))}
+
 
 
         </div>
 
 
-      </div>
+      </aside>
 
 
 
 
-      {/* Results */}
-
-      <div className="overflow-y-auto p-4 rounded-lg custom-scrollbar absolute bottom-64 right-4 text-sm text-right bg-black bg-opacity-90 space-y-2 z-30 w-36 max-h-[22vh]">
 
 
-        {filteredData.length > 0 ? (
+      {/* RESULT PANEL */}
 
-          filteredData.map((item)=>(
+      <aside className="
+        fixed
+        bottom-5
+        right-5
+        w-40
+        max-h-52
+        overflow-y-auto
+        bg-black
+        text-right
+        p-3
+        text-white
+        text-sm
+      ">
+
+
+        {filteredData.length ? (
+
+          filteredData.map(item=>(
+
 
             <div
+
               key={item.id}
-              className="mb-4 border-b pb-2 cursor-pointer"
-              onClick={() => openDirections(item)}
+
+              onClick={()=>openDirections(item)}
+
+              className="
+                border-b
+                pb-2
+                mb-2
+                cursor-pointer
+              "
+
             >
 
-              <h2 className="text-lg font-semibold text-white">
+              <h2 className="
+                font-semibold
+              ">
+
                 {item.name}
+
               </h2>
 
 
-              <p className="text-sm text-yellow-500">
+              <p className="
+                text-yellow-500
+              ">
+
                 {item.location}
+
               </p>
 
 
             </div>
 
+
           ))
+
 
         ) : (
 
-          <p className="text-white">
+          <p>
             No legal services found.
           </p>
 
         )}
 
 
-      </div>
+      </aside>
 
 
-    </>
+    </div>
 
   );
 
