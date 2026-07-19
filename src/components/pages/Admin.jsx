@@ -30,7 +30,6 @@ const categories = [
 ];
 
 
-
 function Admin() {
 
 
@@ -40,10 +39,15 @@ function Admin() {
 
 
   const [places,setPlaces] = useState([]);
+
   const [searchTerm,setSearchTerm] = useState("");
+
   const [selectedCategory,setSelectedCategory] = useState("");
+
   const [selectedLocation,setSelectedLocation] = useState("");
+
   const [editingPlace,setEditingPlace] = useState(null);
+
   const [deletePlace,setDeletePlace] = useState(null);
 
 
@@ -56,30 +60,28 @@ function Admin() {
 
 
 
-
   async function loadPlaces(){
 
     try{
 
-      const response = await fetch(
+      const res = await fetch(
         "https://bobapp-e93h.onrender.com/NoirX/places"
       );
 
-      const data = await response.json();
+      const data = await res.json();
 
       setPlaces(data);
 
-    }catch(error){
+    }catch(err){
 
       console.error(
-        "Loading error:",
-        error
+        "Admin fetch error:",
+        err
       );
 
     }
 
   }
-
 
 
 
@@ -91,13 +93,10 @@ function Admin() {
       searchTerm.toLowerCase();
 
 
-
     const matchesSearch =
       place.name?.toLowerCase().includes(search) ||
       place.address?.toLowerCase().includes(search) ||
-      place.description?.toLowerCase().includes(search) ||
-      place.submittedBy?.toLowerCase().includes(search);
-
+      place.description?.toLowerCase().includes(search);
 
 
     const matchesCategory =
@@ -106,12 +105,10 @@ function Admin() {
       : true;
 
 
-
     const matchesLocation =
       selectedLocation
       ? place.location === selectedLocation
       : true;
-
 
 
     return (
@@ -120,8 +117,8 @@ function Admin() {
       matchesLocation
     );
 
-  });
 
+  });
 
 
 
@@ -131,29 +128,22 @@ function Admin() {
 
     try{
 
-      const response = await fetch(
-
+      await fetch(
         `https://bobapp-e93h.onrender.com/NoirX/places/${id}`,
-
         {
           method:"DELETE"
         }
-
       );
 
 
-      if(response.ok){
+      setDeletePlace(null);
 
-        setDeletePlace(null);
-
-        loadPlaces();
-
-      }
+      loadPlaces();
 
 
-    }catch(error){
+    }catch(err){
 
-      console.error(error);
+      console.error(err);
 
     }
 
@@ -176,7 +166,6 @@ function Admin() {
     ">
 
 
-
       <div className="
         w-full
         max-w-7xl
@@ -187,26 +176,48 @@ function Admin() {
 
 
 
-
-
         {/* HEADER */}
-
 
         <header className="
           flex
           justify-between
           items-start
-          gap-4
-          p-4
-          sm:p-5
+          p-5
+          gap-5
         ">
 
 
-          <div className="text-xl font-bold">
+          <div>
 
-            NOIREX
+
+            <h1 className="
+              text-5xl
+              sm:text-6xl
+              lg:text-7xl
+              font-bold
+            ">
+
+              ADMIN
+
+            </h1>
+
+
+            <p className="text-sm mt-3">
+              Welcome,
+              {" "}
+              <strong>
+                {user?.name}
+              </strong>
+            </p>
+
+
+            <p className="text-sm">
+              {places.length} Businesses
+            </p>
+
 
           </div>
+
 
 
 
@@ -216,7 +227,6 @@ function Admin() {
             gap-4
             text-sm
             whitespace-nowrap
-            overflow-x-auto
           ">
 
 
@@ -236,6 +246,7 @@ function Admin() {
           </nav>
 
 
+
         </header>
 
 
@@ -244,58 +255,118 @@ function Admin() {
 
 
 
-        {/* TITLE + ADMIN FILTERS */}
-
+        {/* DASHBOARD TITLE */}
 
 
         <section className="
           flex
           justify-between
-          items-start
           px-5
-          pt-4
-          pb-6
+          pb-5
+          gap-5
+        ">
+
+
+          <div className="flex-1">
+
+            <DashboardStats
+              places={places}
+              categories={categories}
+              locations={locations}
+            />
+
+          </div>
+
+
+        </section>
+
+
+
+
+
+
+
+        {/* MAIN AREA */}
+
+
+        <section className="
+          px-5
+          pb-10
+          grid
+          grid-cols-1
+          lg:grid-cols-[1fr_220px]
           gap-6
         ">
 
 
 
 
+
+          {/* BUSINESS AREA */}
+
+
           <div>
 
 
-            <h1 className="
-              text-5xl
-              sm:text-6xl
-              lg:text-8xl
-              font-bold
-              leading-none
+            <input
+
+              value={searchTerm}
+
+              onChange={(e)=>
+                setSearchTerm(e.target.value)
+              }
+
+              placeholder="Search businesses..."
+
+              className="
+                w-full
+                border-2
+                border-black
+                bg-amber-50
+                p-3
+                mb-6
+              "
+
+            />
+
+
+
+
+
+            <div className="
+              grid
+              grid-cols-1
+              sm:grid-cols-2
+              gap-6
             ">
 
-              ADMIN
 
-            </h1>
-
+              {filteredPlaces.map(place=>(
 
 
-            <p className="text-sm mt-4">
+                <BusinessCard
 
-              Welcome,{" "}
+                  key={place.id}
 
-              <strong>
-                {user?.name}
-              </strong>
+                  place={place}
 
-            </p>
+                  onEdit={()=>
+                    setEditingPlace(place)
+                  }
+
+                  onDelete={()=>
+                    setDeletePlace(place)
+                  }
+
+                  refresh={loadPlaces}
+
+                />
 
 
+              ))}
 
-            <p className="text-sm">
 
-              {places.length} Businesses
-
-            </p>
-
+            </div>
 
 
           </div>
@@ -305,23 +376,26 @@ function Admin() {
 
 
 
+
+          {/* FILTER SIDE */}
+
+
           <aside className="
-            text-right
-            text-xs
-            sm:text-sm
+            border-l-2
+            border-black
+            pl-5
           ">
 
 
-
-            <div className="
-              text-sm
-              sm:text-xl
-              font-semibold
+            <h2 className="
+              text-xl
+              font-bold
+              mb-4
             ">
 
               FILTERS
 
-            </div>
+            </h2>
 
 
 
@@ -353,139 +427,7 @@ function Admin() {
 
 
 
-
-
-
-        {/* STATS */}
-
-
-
-        <section className="
-          px-5
-          pb-5
-        ">
-
-
-
-          <DashboardStats
-
-            places={places}
-
-            categories={categories}
-
-            locations={locations}
-
-          />
-
-
-
-        </section>
-
-
-
-
-
-
-
-
-
-        {/* SEARCH + BUSINESS GRID */}
-
-
-
-        <main className="
-          px-5
-          pb-10
-        ">
-
-
-
-          <input
-
-            placeholder="Search businesses..."
-
-            value={searchTerm}
-
-            onChange={(e)=>
-              setSearchTerm(e.target.value)
-            }
-
-            className="
-              w-full
-              mb-6
-              p-3
-              border-2
-              border-black
-              bg-amber-50
-            "
-
-          />
-
-
-
-
-
-
-          <div className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-3
-            gap-6
-          ">
-
-
-            {filteredPlaces.length ? (
-
-
-              filteredPlaces.map(place=>(
-
-
-                <BusinessCard
-
-                  key={place.id}
-
-                  place={place}
-
-                  onEdit={()=>
-                    setEditingPlace(place)
-                  }
-
-                  onDelete={()=>
-                    setDeletePlace(place)
-                  }
-
-                  refresh={loadPlaces}
-
-                />
-
-
-              ))
-
-
-            ) : (
-
-
-              <p>
-                No businesses found.
-              </p>
-
-
-            )}
-
-
-
-          </div>
-
-
-
-        </main>
-
-
-
-
       </div>
-
 
 
 
