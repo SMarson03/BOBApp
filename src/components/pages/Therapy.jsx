@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const locations = [
   "Brooklyn",
   "Bronx",
@@ -10,158 +9,40 @@ const locations = [
   "Staten Island",
 ];
 
-
 function Therapy() {
+  const [myData, setMyData] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
-
-  const [myData,setMyData] = useState([]);
-  const [selectedLocation,setSelectedLocation] = useState(null);
-
-
-
-  useEffect(()=>{
-
-    async function fetchData(){
-
-      try{
-
-        const response = await fetch(
-          "https://bobapp-e93h.onrender.com/NoirX/places"
-        );
-
-        const data = await response.json();
-
-
+  useEffect(() => {
+    fetch("https://bobapp-e93h.onrender.com/NoirX/places")
+      .then(res => res.json())
+      .then(data =>
         setMyData(
-          data.filter(
-            item => item.category === "Therapy"
-          )
-        );
-
-
-      }catch(error){
-
-        console.error(
-          "Error fetching therapy:",
-          error
-        );
-
-      }
-
-    }
-
-
-    fetchData();
-
-  },[]);
-
-
-
+          data.filter(item => item.category === "Therapy")
+        )
+      )
+      .catch(err => console.error("Error fetching therapy:", err));
+  }, []);
 
   const filteredData = selectedLocation
-    ? myData.filter(
-        item => item.location === selectedLocation
-      )
+    ? myData.filter(item => item.location === selectedLocation)
     : myData;
 
 
-
-
-
-
-
-  function buildMapsUrl(place,origin){
-
-
-    const params = new URLSearchParams({
-
-      destination:
-        place.address || place.name || "",
-
-      travelmode:"driving"
-
-    });
-
-
-    params.set(
-      "origin",
-      origin
-      ? `${origin.lat},${origin.lng}`
-      : "Current Location"
+  function openDirections(item) {
+    const destination = encodeURIComponent(
+      item.address || item.name
     );
 
-
-    return (
-      "https://www.google.com/maps/dir/?" +
-      params.toString()
+    window.open(
+      `https://www.google.com/maps/dir/?api=1&destination=${destination}`,
+      "_blank"
     );
-
   }
-
-
-
-
-
-
-  function openDirections(place){
-
-
-    if(navigator.geolocation){
-
-      navigator.geolocation.getCurrentPosition(
-
-        position=>{
-
-          window.open(
-            buildMapsUrl(place,{
-              lat:position.coords.latitude,
-              lng:position.coords.longitude
-            }),
-            "_blank"
-          );
-
-        },
-
-        ()=>{
-
-          window.open(
-            buildMapsUrl(place),
-            "_blank"
-          );
-
-        }
-
-      );
-
-    }else{
-
-      window.open(
-        buildMapsUrl(place),
-        "_blank"
-      );
-
-    }
-
-  }
-
-
-
-
-
 
 
   return (
-
-    <div className="
-      min-h-screen
-      bg-yellow-600
-      flex
-      justify-center
-      p-3
-      sm:p-6
-    ">
-
-
+    <div className="min-h-screen bg-yellow-600 flex justify-center p-3 sm:p-6">
 
       <div className="
         relative
@@ -171,7 +52,6 @@ function Therapy() {
         shadow-xl
         overflow-hidden
       ">
-
 
 
         {/* HEADER */}
@@ -185,18 +65,9 @@ function Therapy() {
           sm:p-5
         ">
 
-
-          <div className="
-            text-xl
-            font-bold
-          ">
-
+          <div className="text-xl font-bold">
             NOIREX
-
           </div>
-
-
-
 
 
           <nav className="
@@ -207,56 +78,21 @@ function Therapy() {
             overflow-x-auto
           ">
 
-
-            <Link to="/Home">
-              Home
-            </Link>
-
-
-            <Link to="/Eats">
-              Eats
-            </Link>
-
-
-            <Link to="/Drinks">
-              Drinks
-            </Link>
-
-
-            <Link to="/Arts">
-              Art
-            </Link>
-
-
-            <Link to="/Law">
-              Law
-            </Link>
-
-
-            <Link to="/Contact">
-              Contact
-            </Link>
-
-
-            <Link to="/About">
-              About
-            </Link>
-
+            <Link to="/Home">Home</Link>
+            <Link to="/Eats">Eats</Link>
+            <Link to="/Drinks">Drinks</Link>
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Contact">Contact</Link>
+            <Link to="/About">About</Link>
 
           </nav>
-
 
         </header>
 
 
 
-
-
-
-
-
-        {/* THERAPY LIST */}
-
+        {/* CARDS */}
 
         <main className="
           grid
@@ -267,21 +103,13 @@ function Therapy() {
           p-5
         ">
 
-
-
-          {filteredData.map(item=>(
-
+          {filteredData.map(item => (
 
             <div
-
               key={item.id}
-
+              onClick={() => openDirections(item)}
               className="cursor-pointer"
-
-              onClick={()=>openDirections(item)}
-
             >
-
 
 
               <div className="
@@ -294,28 +122,17 @@ function Therapy() {
                 items-center
               ">
 
-
-
                 <img
-
                   src={item.imageUrl}
-
                   alt={item.name}
-
                   className="
                     w-full
                     h-full
                     object-contain
                   "
-
                 />
 
-
               </div>
-
-
-
-
 
 
               <div className="
@@ -324,32 +141,14 @@ function Therapy() {
                 font-bold
               ">
 
-
-                <p>
-                  {item.name}
-                </p>
-
-
-                <p>
-                  {item.address}
-                </p>
-
-
-                <p>
-                  {item.location}
-                </p>
-
+                <p>{item.name}</p>
+                <p>{item.address}</p>
+                <p>{item.location}</p>
 
               </div>
 
 
-
-
-
-
-
               <button
-
                 className="
                   mt-4
                   w-16
@@ -359,54 +158,32 @@ function Therapy() {
                   bg-amber-50
                   text-sm
                 "
-
                 onClick={(e)=>e.stopPropagation()}
-
               >
 
                 <a
-
                   href={item.website}
-
                   target="_blank"
-
                   rel="noopener noreferrer"
-
                 >
-
                   Visit
-
                 </a>
-
 
               </button>
 
 
             </div>
 
-
           ))}
 
-
-
         </main>
-
-
 
 
       </div>
 
 
 
-
-
-
-
-
-
       {/* LOCATION PANEL */}
-
-
 
       <aside className="
         absolute
@@ -416,96 +193,53 @@ function Therapy() {
         text-sm
       ">
 
-
-        <div className="
-          text-xl
-          font-semibold
-        ">
-
+        <div className="text-xl font-semibold">
           025
-
         </div>
 
-
-
-        <div className="
-          text-xl
-          font-semibold
-        ">
-
+        <div className="text-xl font-semibold">
           NYC EDITION
-
         </div>
 
 
-
-
-        <div className="space-y-1 mt-2">
-
+        <div className="mt-2 space-y-1">
 
           <div
-
-            onClick={()=>setSelectedLocation(null)}
-
-            className="
-              cursor-pointer
-              hover:underline
-            "
-
+            onClick={() => setSelectedLocation(null)}
+            className="cursor-pointer hover:underline"
           >
-
             All
-
           </div>
 
 
-
-
-          {locations.map(location=>(
-
+          {locations.map(location => (
 
             <div
-
               key={location}
-
-              onClick={()=>setSelectedLocation(location)}
-
+              onClick={() => setSelectedLocation(location)}
               className={`
                 cursor-pointer
                 hover:underline
                 ${
                   selectedLocation === location
-                  ? "font-bold"
-                  : ""
+                    ? "font-bold"
+                    : ""
                 }
               `}
-
             >
-
               {location}
-
             </div>
-
 
           ))}
 
-
         </div>
-
 
       </aside>
 
 
 
 
-
-
-
-
-
-      {/* RESULTS PANEL */}
-
-
+      {/* RESULTS */}
 
       <aside className="
         fixed
@@ -522,72 +256,45 @@ function Therapy() {
       ">
 
 
-
         {filteredData.length ? (
 
-          filteredData.map(item=>(
-
+          filteredData.map(item => (
 
             <div
-
               key={item.id}
-
-              onClick={()=>openDirections(item)}
-
+              onClick={() => openDirections(item)}
               className="
                 border-b
                 pb-2
                 mb-2
                 cursor-pointer
               "
-
             >
 
-
               <h2 className="font-semibold">
-
                 {item.name}
-
               </h2>
 
-
-
-              <p className="
-                text-yellow-500
-              ">
-
+              <p className="text-yellow-500">
                 {item.location}
-
               </p>
-
 
             </div>
 
-
           ))
-
 
         ) : (
 
-
-          <p>
-            No therapists found.
-          </p>
-
+          <p>No therapists found.</p>
 
         )}
-
 
 
       </aside>
 
 
-
     </div>
-
   );
-
 }
-
 
 export default Therapy;
