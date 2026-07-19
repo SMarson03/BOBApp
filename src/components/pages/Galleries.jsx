@@ -1,449 +1,430 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const locations = [
   "Brooklyn",
   "Bronx",
   "Manhattan",
   "Queens",
-  "Staten_Island",
+  "Staten Island",
 ];
 
 
 function Galleries() {
 
-  const [mydata, setMyData] = useState([]);
+  const [galleries, setGalleries] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
-
 
 
   useEffect(() => {
 
-    async function fetchData(){
+    fetch("https://bobapp-e93h.onrender.com/NoirX/places")
+      .then((res) => res.json())
+      .then((data) => {
 
-      try {
-
-        const response = await fetch(
-          "https://bobapp-e93h.onrender.com/NoirX/places"
-        );
-
-        const data = await response.json();
-
-
-        const galleries = data.filter(
+        const filtered = data.filter(
           (item) => item.category === "Art_Gallery"
         );
 
+        setGalleries(filtered);
 
-        setMyData(galleries);
-
-
-      } catch(error){
-
-        console.error(
-          "Error fetching galleries:",
-          error
-        );
-
-      }
-
-    }
-
-
-    fetchData();
+      })
+      .catch((err) =>
+        console.error("Error fetching galleries:", err)
+      );
 
   }, []);
 
 
 
-
   const filteredData = selectedLocation
-    ? mydata.filter(
+    ? galleries.filter(
         (item) => item.location === selectedLocation
       )
-    : mydata;
+    : galleries;
 
 
 
 
-  // Google Maps
-
-  function buildMapsUrl(dest, origin){
-
-    const base =
-      "https://www.google.com/maps/dir/?api=1";
-
+  function buildMapsUrl(item) {
 
     const destination =
-      dest.address || dest.name || "";
+      item.address || item.name;
 
 
-    const params = new URLSearchParams({
+    return `https://www.google.com/maps/dir/?api=1&${new URLSearchParams(
+      {
+        destination,
+        origin: "Current Location",
+        travelmode: "driving",
+      }
+    )}`;
 
-      destination,
-
-      travelmode:"driving"
-
-    });
-
-
-
-    if(origin?.lat && origin?.lng){
-
-      params.set(
-        "origin",
-        `${origin.lat},${origin.lng}`
-      );
-
-    } else {
-
-      params.set(
-        "origin",
-        "Current Location"
-      );
-
-    }
+  }
 
 
-    return `${base}&${params.toString()}`;
+
+  function openDirections(item) {
+
+    window.open(
+      buildMapsUrl(item),
+      "_blank"
+    );
 
   }
 
 
 
 
-  function openDirections(dest){
+  return (
 
-    if(navigator.geolocation){
+    <div className="
+      bg-yellow-600
+      flex
+      justify-center
+      p-3
+      sm:p-6
+      min-h-screen
+    ">
 
-      navigator.geolocation.getCurrentPosition(
 
-        (pos)=>{
+      <div className="
+        w-full
+        max-w-7xl
+        bg-amber-50
+        shadow-xl
+        overflow-hidden
+      ">
 
-          window.open(
 
-            buildMapsUrl(dest,{
-              lat:pos.coords.latitude,
-              lng:pos.coords.longitude
-            }),
 
-            "_blank"
+        {/* Header */}
 
-          );
+        <header className="
+          flex
+          justify-between
+          items-start
+          gap-4
+          p-4
+          sm:p-5
+        ">
 
-        },
 
+          <div className="text-xl font-bold">
+            NOIREX
+          </div>
 
-        ()=>{
 
-          window.open(
-            buildMapsUrl(dest),
-            "_blank"
-          );
 
-        }
+          <nav className="
+            flex
+            gap-4
+            text-sm
+            whitespace-nowrap
+            overflow-x-auto
+          ">
 
-      );
+            <Link to="/Home">
+              Home
+            </Link>
 
+            <Link to="/Eats">
+              Eats
+            </Link>
 
-    } else {
+            <Link to="/Drinks">
+              Drinks
+            </Link>
 
-      window.open(
-        buildMapsUrl(dest),
-        "_blank"
-      );
+            <Link to="/Law">
+              Law
+            </Link>
 
-    }
+            <Link to="/Therapy">
+              Therapy
+            </Link>
 
-  }
+            <Link to="/Contact">
+              Contact
+            </Link>
 
+            <Link to="/About">
+              About Us
+            </Link>
 
+          </nav>
 
+        </header>
 
 
-return (
 
-<>
 
 
-<div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
+        {/* Title + Filter */}
 
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+        ">
 
-<div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-red-50 overflow-hidden">
 
 
-<div className="absolute inset-0 overflow-y-auto max-h-[80vh]">
+          <h1 className="
+            text-5xl
+            sm:text-6xl
+            lg:text-8xl
+            font-bold
+            leading-none
+          ">
+            ART
+          </h1>
 
 
-{/* Header */}
 
-<div className="relative z-20 p-6 flex justify-between items-start">
 
 
-<div className="text-lg font-bold">
-NOIREX
-</div>
+          <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
 
 
-<div className="flex gap-6 text-sm">
-                <Link to="/Home">Home</Link>
-                <Link to="/Eats">Eats</Link>
-                <Link to="/Drinks">Drinks</Link>
-                <Link to="/Law">Law</Link>
-                <Link to="/Therapy">Therapy</Link>
-                <Link to="/Contact">Contact</Link>
-                <Link to="/About">About Us</Link>
-</div>
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              025
+            </div>
 
 
-</div>
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              NYC EDITION
+            </div>
 
 
 
 
-{/* Gallery Cards */}
+            <button
+              onClick={() => setSelectedLocation(null)}
+              className={
+                selectedLocation === null
+                ? "font-bold"
+                : ""
+              }
+            >
+              All
+            </button>
 
-<div className="container-events">
 
 
-<div className="grid grid-cols-3 gap-5 p-5">
+            {locations.map((location)=>(
 
+              <div
 
-{filteredData.map((item)=>(
+                key={location}
 
+                onClick={() =>
+                  setSelectedLocation(location)
+                }
 
-<div
-key={item.id}
-onClick={()=>openDirections(item)}
-className="cursor-pointer"
->
+                className={`
+                  cursor-pointer
+                  hover:underline
+                  ${
+                    selectedLocation === location
+                    ? "font-bold"
+                    : ""
+                  }
+                `}
+              >
 
+                {location}
 
+              </div>
 
-<div className="flex flex-col items-center m-5 p-2.5 border-2 border-black h-[160px]">
+            ))}
 
 
-<img
 
-src={item.imageUrl}
+          </aside>
 
-alt={item.name}
 
-className="w-full h-full object-contain"
+        </section>
 
-/>
 
 
-</div>
 
 
 
+        {/* Gallery Grid */}
 
-<div className="px-8">
+        <main className="
+          px-5
+          pb-8
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-6
+        ">
 
-<div className="text-md font-bold">
 
 
-<p>{item.name}</p>
+          {filteredData.length > 0 ? (
 
-<p>{item.address}</p>
+            filteredData.map((item)=>(
 
-<p>{item.location}</p>
 
+              <article
 
-</div>
+                key={item.id}
 
+                className="cursor-pointer"
 
-</div>
+                onClick={() =>
+                  openDirections(item)
+                }
 
+              >
 
 
 
-<button
+                <div className="
+                  h-48
+                  border-2
+                  border-black
+                  bg-white
+                  p-3
+                  flex
+                  justify-center
+                  items-center
+                ">
 
-className="m-8 w-16 h-8 bg-amber-50 border-2 border-black flex justify-center items-center text-sm"
 
-onClick={(e)=>e.stopPropagation()}
 
->
+                  <img
 
+                    src={item.imageUrl}
 
-<a
+                    alt={item.name}
 
-href={item.website}
+                    className="
+                      w-full
+                      h-full
+                      object-contain
+                    "
 
-target="_blank"
+                  />
 
-rel="noopener noreferrer"
 
->
+                </div>
 
-Visit
 
-</a>
 
 
-</button>
 
+                <div className="mt-3">
 
 
+                  <h2 className="
+                    text-lg
+                    font-bold
+                  ">
 
-</div>
+                    {item.name}
 
+                  </h2>
 
-))}
 
 
-</div>
+                  <p className="text-sm">
+                    {item.address}
+                  </p>
 
 
-</div>
+                  <p className="text-sm">
+                    {item.location}
+                  </p>
 
 
-</div>
 
 
-</div>
+                  <button
 
+                    onClick={(e)=>
+                      e.stopPropagation()
+                    }
 
-</div>
+                    className="
+                      mt-3
+                      px-4
+                      py-1
+                      border-2
+                      border-black
+                      text-sm
+                      hover:bg-black
+                      hover:text-white
+                    "
 
+                  >
 
+                    <a
 
+                      href={item.website}
 
+                      target="_blank"
 
+                      rel="noopener noreferrer"
 
-{/* Location Filter */}
+                    >
+                      Visit
+                    </a>
 
 
-<div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
+                  </button>
 
 
-<div className="text-2xl font-semibold">
-025
-</div>
 
+                </div>
 
-<div className="text-2xl font-semibold">
-NYC EDITION
-</div>
 
 
+              </article>
 
 
-<div className="space-y-1">
+            ))
 
 
-<div
+          ) : (
 
-className="cursor-pointer hover:underline"
+            <p>
+              No galleries found.
+            </p>
 
-onClick={()=>setSelectedLocation(null)}
+          )}
 
->
 
-All
 
-</div>
+        </main>
 
 
+      </div>
 
-{locations.map((loc)=>(
 
+    </div>
 
-<div
-
-key={loc}
-
-onClick={()=>setSelectedLocation(loc)}
-
-className="cursor-pointer hover:underline"
-
->
-
-{loc.replace("_"," ")}
-
-</div>
-
-
-))}
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-{/* Results Panel */}
-
-
-<div className="overflow-y-auto p-4 rounded-lg custom-scrollbar absolute bottom-64 right-4 text-sm text-right bg-black bg-opacity-90 space-y-2 z-30 w-36 max-h-[22vh]">
-
-
-{filteredData.length > 0 ? (
-
-
-filteredData.map((item)=>(
-
-
-<div
-
-key={item.id}
-
-className="mb-4 border-b pb-2 cursor-pointer"
-
-onClick={()=>openDirections(item)}
-
->
-
-
-<h2 className="text-lg font-semibold text-white">
-
-{item.name}
-
-</h2>
-
-
-<p className="text-sm text-yellow-500">
-
-{item.location}
-
-</p>
-
-
-</div>
-
-
-))
-
-
-):(
-
-
-<p className="text-white">
-
-No galleries found.
-
-</p>
-
-
-)}
-
-
-
-</div>
-
-
-
-</>
-
-);
+  );
 
 }
 
