@@ -10,42 +10,78 @@ const locations = [
 ];
 
 function Therapy() {
-  const [myData, setMyData] = useState([]);
+  const [therapists, setTherapists] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
     fetch("https://bobapp-e93h.onrender.com/NoirX/places")
-      .then(res => res.json())
-      .then(data =>
-        setMyData(
-          data.filter(item => item.category === "Therapy")
-        )
-      )
-      .catch(err => console.error("Error fetching therapy:", err));
+      .then((res) => res.json())
+      .then((data) => {
+        const filtered = data.filter(
+          (item) => item.category === "Therapy"
+        );
+
+        setTherapists(filtered);
+      })
+      .catch((err) =>
+        console.error("Error fetching therapy:", err)
+      );
+
   }, []);
 
+
   const filteredData = selectedLocation
-    ? myData.filter(item => item.location === selectedLocation)
-    : myData;
+    ? therapists.filter(
+        (item) => item.location === selectedLocation
+      )
+    : therapists;
 
 
-  function openDirections(item) {
-    const destination = encodeURIComponent(
-      item.address || item.name
-    );
 
-    window.open(
-      `https://www.google.com/maps/dir/?api=1&destination=${destination}`,
-      "_blank"
-    );
+  function buildMapsUrl(item) {
+
+    const destination =
+      item.lat && item.lng
+        ? `${item.lat},${item.lng}`
+        : item.address || item.name;
+
+
+    return `https://www.google.com/maps/dir/?api=1&${new URLSearchParams(
+      {
+        destination,
+        origin: "Current Location",
+        travelmode: "driving",
+      }
+    )}`;
+
   }
 
 
+
+  function openDirections(item) {
+
+    window.open(
+      buildMapsUrl(item),
+      "_blank"
+    );
+
+  }
+
+
+
   return (
-    <div className="min-h-screen bg-yellow-600 flex justify-center p-3 sm:p-6">
+
+    <div className="
+      bg-yellow-600
+      flex
+      justify-center
+      p-3
+      sm:p-6
+      min-h-screen
+    ">
+
 
       <div className="
-        relative
         w-full
         max-w-7xl
         bg-amber-50
@@ -54,20 +90,22 @@ function Therapy() {
       ">
 
 
-        {/* HEADER */}
+        {/* Header */}
 
         <header className="
           flex
           justify-between
           items-start
-          gap-5
+          gap-4
           p-4
           sm:p-5
         ">
 
+
           <div className="text-xl font-bold">
             NOIREX
           </div>
+
 
 
           <nav className="
@@ -78,13 +116,33 @@ function Therapy() {
             overflow-x-auto
           ">
 
-            <Link to="/Home">Home</Link>
-            <Link to="/Eats">Eats</Link>
-            <Link to="/Drinks">Drinks</Link>
-            <Link to="/Arts">Art</Link>
-            <Link to="/Law">Law</Link>
-            <Link to="/Contact">Contact</Link>
-            <Link to="/About">About</Link>
+            <Link to="/Home">
+              Home
+            </Link>
+
+            <Link to="/Eats">
+              Eats
+            </Link>
+
+            <Link to="/Drinks">
+              Drinks
+            </Link>
+
+            <Link to="/Arts">
+              Art
+            </Link>
+
+            <Link to="/Law">
+              Law
+            </Link>
+
+            <Link to="/Contact">
+              Contact
+            </Link>
+
+            <Link to="/About">
+              About Us
+            </Link>
 
           </nav>
 
@@ -92,89 +150,239 @@ function Therapy() {
 
 
 
-        {/* CARDS */}
+
+
+        {/* Title + Location */}
+
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+        ">
+
+
+          <h1 className="
+            text-5xl
+            sm:text-6xl
+            lg:text-8xl
+            font-bold
+            leading-none
+          ">
+
+            THERAPY
+
+          </h1>
+
+
+
+
+          <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              025
+            </div>
+
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              NYC EDITION
+            </div>
+
+
+
+
+            <button
+              onClick={() => setSelectedLocation(null)}
+              className={
+                selectedLocation === null
+                  ? "font-bold"
+                  : ""
+              }
+            >
+              All
+            </button>
+
+
+
+
+            {locations.map((location) => (
+
+              <div
+                key={location}
+                onClick={() =>
+                  setSelectedLocation(location)
+                }
+                className={`
+                  cursor-pointer
+                  hover:underline
+                  ${
+                    selectedLocation === location
+                      ? "font-bold"
+                      : ""
+                  }
+                `}
+              >
+
+                {location}
+
+              </div>
+
+            ))}
+
+
+          </aside>
+
+
+        </section>
+
+
+
+
+
+
+        {/* Cards */}
 
         <main className="
+          px-5
+          pb-8
           grid
           grid-cols-1
           sm:grid-cols-2
           lg:grid-cols-3
-          gap-5
-          p-5
+          gap-6
         ">
 
-          {filteredData.map(item => (
 
-            <div
-              key={item.id}
-              onClick={() => openDirections(item)}
-              className="cursor-pointer"
-            >
+          {filteredData.length > 0 ? (
 
+            filteredData.map((item) => (
 
-              <div className="
-                border-2
-                border-black
-                h-44
-                p-3
-                flex
-                justify-center
-                items-center
-              ">
-
-                <img
-                  src={item.imageUrl}
-                  alt={item.name}
-                  className="
-                    w-full
-                    h-full
-                    object-contain
-                  "
-                />
-
-              </div>
-
-
-              <div className="
-                mt-3
-                text-sm
-                font-bold
-              ">
-
-                <p>{item.name}</p>
-                <p>{item.address}</p>
-                <p>{item.location}</p>
-
-              </div>
-
-
-              <button
-                className="
-                  mt-4
-                  w-16
-                  h-8
-                  border-2
-                  border-black
-                  bg-amber-50
-                  text-sm
-                "
-                onClick={(e)=>e.stopPropagation()}
+              <article
+                key={item.id}
+                className="cursor-pointer"
+                onClick={() => openDirections(item)}
               >
 
-                <a
-                  href={item.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit
-                </a>
 
-              </button>
+                <div className="
+                  h-48
+                  border-2
+                  border-black
+                  bg-white
+                  p-3
+                  flex
+                  justify-center
+                  items-center
+                ">
 
 
-            </div>
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="
+                      w-full
+                      h-full
+                      object-contain
+                    "
+                  />
 
-          ))}
+
+                </div>
+
+
+
+
+                <div className="mt-3">
+
+
+                  <h2 className="
+                    text-lg
+                    font-bold
+                  ">
+                    {item.name}
+                  </h2>
+
+
+
+                  <p className="text-sm">
+                    {item.address}
+                  </p>
+
+
+
+                  <p className="text-sm">
+                    {item.location}
+                  </p>
+
+
+
+                  <p className="text-sm">
+                    {item.category}
+                  </p>
+
+
+
+
+                  <button
+                    onClick={(e) =>
+                      e.stopPropagation()
+                    }
+                    className="
+                      mt-3
+                      px-4
+                      py-1
+                      border-2
+                      border-black
+                      text-sm
+                      hover:bg-black
+                      hover:text-white
+                    "
+                  >
+
+                    <a
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visit
+                    </a>
+
+                  </button>
+
+
+                </div>
+
+
+              </article>
+
+            ))
+
+
+          ) : (
+
+            <p>
+              No therapists found.
+            </p>
+
+          )}
+
 
         </main>
 
@@ -182,119 +390,10 @@ function Therapy() {
       </div>
 
 
-
-      {/* LOCATION PANEL */}
-
-      <aside className="
-        absolute
-        top-24
-        right-4
-        text-right
-        text-sm
-      ">
-
-        <div className="text-xl font-semibold">
-          025
-        </div>
-
-        <div className="text-xl font-semibold">
-          NYC EDITION
-        </div>
-
-
-        <div className="mt-2 space-y-1">
-
-          <div
-            onClick={() => setSelectedLocation(null)}
-            className="cursor-pointer hover:underline"
-          >
-            All
-          </div>
-
-
-          {locations.map(location => (
-
-            <div
-              key={location}
-              onClick={() => setSelectedLocation(location)}
-              className={`
-                cursor-pointer
-                hover:underline
-                ${
-                  selectedLocation === location
-                    ? "font-bold"
-                    : ""
-                }
-              `}
-            >
-              {location}
-            </div>
-
-          ))}
-
-        </div>
-
-      </aside>
-
-
-
-
-      {/* RESULTS */}
-
-      <aside className="
-        fixed
-        bottom-5
-        right-5
-        w-40
-        max-h-52
-        overflow-y-auto
-        bg-black
-        text-white
-        p-3
-        text-right
-        text-sm
-      ">
-
-
-        {filteredData.length ? (
-
-          filteredData.map(item => (
-
-            <div
-              key={item.id}
-              onClick={() => openDirections(item)}
-              className="
-                border-b
-                pb-2
-                mb-2
-                cursor-pointer
-              "
-            >
-
-              <h2 className="font-semibold">
-                {item.name}
-              </h2>
-
-              <p className="text-yellow-500">
-                {item.location}
-              </p>
-
-            </div>
-
-          ))
-
-        ) : (
-
-          <p>No therapists found.</p>
-
-        )}
-
-
-      </aside>
-
-
     </div>
+
   );
+
 }
 
 export default Therapy;
