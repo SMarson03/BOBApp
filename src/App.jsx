@@ -121,14 +121,14 @@ element={
 
 />
 
-      <Route
+      {/* <Route
 path="/Admin"
 element={
 <AuthGuard adminOnly={true}>
     <Admin/>
 </AuthGuard>
 }
-/>
+/> */}
 
 
     </Routes>
