@@ -16,7 +16,7 @@ function Restaurants() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:8080/NoirX/places");
+        const response = await fetch("https://bobapp-e93h.onrender.com/NoirX/places");
         const data = await response.json();
 
         // Only show restaurants

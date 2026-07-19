@@ -106,7 +106,7 @@ const submissionData = {
 
 
 const response = await fetch(
-"http://localhost:8080/NoirX/places",
+"https://bobapp-e93h.onrender.com/NoirX/places",
 {
 method:"POST",
 headers:{

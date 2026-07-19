@@ -69,7 +69,7 @@ function EditPlaceModal({
     e.preventDefault();
 
     const response = await fetch(
-      `http://localhost:8080/NoirX/places/${place.id}`,
+      `https://bobapp-e93h.onrender.com/NoirX/places/${place.id}`,
       {
         method: "PUT",
         headers: {

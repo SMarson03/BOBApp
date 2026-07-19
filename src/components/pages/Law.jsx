@@ -22,7 +22,7 @@ function Law() {
       try {
 
         const response = await fetch(
-          "http://localhost:8080/NoirX/places"
+          "https://bobapp-e93h.onrender.com/NoirX/places"
         );
 
         const data = await response.json();

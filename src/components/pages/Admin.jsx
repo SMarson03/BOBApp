@@ -47,7 +47,7 @@ function Admin() {
   async function loadPlaces() {
     try {
       const response = await fetch(
-        "http://localhost:8080/NoirX/places"
+        "https://bobapp-e93h.onrender.com/NoirX/places"
       );
 
       const data = await response.json();
@@ -90,7 +90,7 @@ function Admin() {
     try {
 
       const response = await fetch(
-        `http://localhost:8080/NoirX/places/${id}`,
+        `https://bobapp-e93h.onrender.com/NoirX/places/${id}`,
         {
           method: "DELETE",
         }

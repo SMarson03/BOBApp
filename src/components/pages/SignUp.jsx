@@ -54,7 +54,7 @@ function Signup() {
 
       const response = await fetch(
 
-        "http://localhost:8080/NoirX/signup",
+        "https://bobapp-e93h.onrender.com/NoirX/signup",
 
         {
 
