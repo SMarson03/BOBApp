@@ -14,7 +14,7 @@ import Therapy from "./components/pages/Therapy";
 
 // User
 import LogIn from "./components/pages/LogIn";
-import Signup from "./components/pages/Signup";
+import SignUp from "./components/pages/SignUp";
 import Submit from "./components/pages/Submit";
 
 // Info
