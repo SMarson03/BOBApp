@@ -7,7 +7,7 @@ const locations = [
   "Bronx",
   "Manhattan",
   "Queens",
-  "Staten_Island"
+  "Staten Island"
 ];
 
 
@@ -25,584 +25,528 @@ const categories = [
 ];
 
 
-// Restaurant cuisine options
 const cuisines = [
-   "American",
-   "Afro_Caribbean",
-   "Asian",
-   "Bakery",
-   "Cajun",
-   "Caribbean_Asian",
-   "French_Caribbean",
-   "German",
-   "Ethiopian",
-   "Italian",
-   "Latin",
-   "New_American",
-   "Pizza",
-   "Seafood",
-   "Senegalese",
-   "Soul_Food",
-   "Vegetarian",
-   "Vegetarian_Soul_Food",
-   "West_African",
-   "West_African_French"
-  ];
+  "American",
+  "Afro_Caribbean",
+  "Asian",
+  "Bakery",
+  "Cajun",
+  "Caribbean_Asian",
+  "French_Caribbean",
+  "German",
+  "Ethiopian",
+  "Italian",
+  "Latin",
+  "New_American",
+  "Pizza",
+  "Seafood",
+  "Senegalese",
+  "Soul_Food",
+  "Vegetarian",
+  "Vegetarian_Soul_Food",
+  "West_African",
+  "West_African_French"
+];
 
 
 function Submit() {
 
 
-const emptyForm = {
+  const emptyForm = {
+    name:"",
+    address:"",
+    image_Url:"",
+    description:"",
+    website:"",
+    instagram:"",
+    submittedBy:"",
+    category:"",
+    location:"",
+    cuisine:""
+  };
 
-name:"",
-address:"",
-image_Url:"",
-description:"",
-website:"",
-instagram:"",
-submittedBy:"",
-category:"",
-location:"",
-cuisine:""
 
-};
+  const [formData,setFormData] = useState(emptyForm);
 
 
-const [formData, setFormData] = useState(emptyForm);
+  function handleChange(e){
 
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
 
+  }
 
-function handleChange(e){
 
-setFormData({
 
-...formData,
+  async function handleSubmit(e){
 
-[e.target.name]: e.target.value
+    e.preventDefault();
 
-});
 
-}
+    try {
 
+      const submissionData = {
+        ...formData,
+        cuisine:
+          formData.category === "Restaurant"
+          ? formData.cuisine
+          : null
+      };
 
 
+      const response = await fetch(
+        "https://bobapp-e93h.onrender.com/NoirX/places",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify(submissionData)
+        }
+      );
 
-async function handleSubmit(e){
 
-e.preventDefault();
+      const result = await response.text();
 
 
-try {
+      if(response.ok){
 
+        alert("Submission received!");
+        setFormData(emptyForm);
 
-const submissionData = {
-  ...formData,
-  cuisine:
-    formData.category === "Restaurant"
-      ? formData.cuisine
-      : null
-};
+      } else {
 
+        alert("Submission failed: " + result);
 
-const response = await fetch(
-"https://bobapp-e93h.onrender.com/NoirX/places",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(submissionData)
-}
-);
+      }
 
 
-const result = await response.text();
+    } catch(error){
 
-console.log("Backend response:", result);
+      console.error(
+        "Submission error:",
+        error
+      );
 
+      alert("Unable to submit.");
 
-if(response.ok){
+    }
 
-alert("Submission received!");
+  }
 
-setFormData(emptyForm);
 
-}
-else{
 
-alert("Submission failed: " + result);
 
-}
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
 
 
-}
 
-catch(error){
+  return (
 
+    <div className="
+      bg-yellow-600
+      flex
+      justify-center
+      p-3
+      sm:p-6
+      min-h-screen
+    ">
 
-console.error(
-"Submission error:",
-error
-);
 
+      <div className="
+        w-full
+        max-w-7xl
+        bg-amber-50
+        shadow-xl
+        overflow-hidden
+      ">
 
-alert("Unable to submit.");
 
-}
 
+        {/* HEADER */}
 
-}
+        <header className="
+          flex
+          justify-between
+          items-start
+          gap-4
+          p-4
+          sm:p-5
+        ">
 
 
+          <div className="flex flex-col">
 
 
+            <div className="
+              text-xl
+              font-bold
+            ">
+              NOIREX
+            </div>
 
-return (
 
-<>
+            <div className="text-sm">
 
+              Welcome,{" "}
+              <strong>
+                {user?.name || "Guest"}
+              </strong>
 
-<div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
+            </div>
 
 
-<div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-xl overflow-hidden">
 
+            {user && (
 
+              <button
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  window.location.href="/Home";
+                }}
 
-{/* HEADER */}
+                className="
+                  text-left
+                  text-sm
+                  text-red-700
+                  hover:underline
+                "
+              >
+                Logout
+              </button>
 
-<div className="relative z-20 p-6 flex justify-between items-start">
+            )}
 
 
-<div className="flex flex-col">
+          </div>
 
-  <div className="text-lg font-bold">
-    NOIREX
-  </div>
 
-  <div className="text-sm">
-    Welcome, <strong>{JSON.parse(localStorage.getItem("user"))?.name || "Guest"}</strong>
-  </div>
 
-  {localStorage.getItem("user") && (
-    <button
-      onClick={() => {
-        localStorage.removeItem("user");
-        window.location.href = "/Home";
-      }}
-      className="
-      text-left
-      text-sm
-      text-red-700
-      hover:underline
-      "
-    >
-      Logout
-    </button>
-  )}
 
-</div>
 
+          <nav className="
+            flex
+            gap-4
+            text-sm
+            whitespace-nowrap
+            overflow-x-auto
+          ">
 
+            <Link to="/Home">
+              Home
+            </Link>
 
-<div className="flex gap-6 text-sm">
+            <Link to="/Eats">
+              Eats
+            </Link>
 
-<Link to="/Home">Home</Link>
+            <Link to="/Drinks">
+              Drinks
+            </Link>
 
-<Link to="/Eats">Eats</Link>
+            <Link to="/Arts">
+              Art
+            </Link>
 
-<Link to="/Drinks">Drinks</Link>
+            <Link to="/Law">
+              Law
+            </Link>
 
-<Link to="/Arts">Art</Link>
+            <Link to="/Therapy">
+              Therapy
+            </Link>
 
-<Link to="/Law">Law</Link>
+            <Link to="/About">
+              About
+            </Link>
 
-<Link to="/Therapy">Therapy</Link>
+          </nav>
 
-<Link to="/About">About</Link>
 
-</div>
+        </header>
 
 
-</div>
 
 
 
+        {/* FORM */}
 
+        <main className="
+          flex
+          justify-center
+          pt-4
+          pb-8
+          sm:pt-8
+        ">
 
-<div className="flex justify-center mt-8">
 
+          <form
 
-<form
+            onSubmit={handleSubmit}
 
-onSubmit={handleSubmit}
+            className="
+              w-full
+              max-w-md
+              px-5
+              sm:px-0
+              space-y-4
+            "
 
-className="w-[400px] space-y-5 pb-10"
+          >
 
->
 
 
+            <h1 className="
+              text-4xl
+              sm:text-6xl
+              font-bold
+              text-center
+              mb-6
+            ">
 
-<h1 className="text-5xl font-bold text-center mb-8">
+              SUBMIT
 
-SUBMIT
+            </h1>
 
-</h1>
 
 
 
 
+            {[
+              ["name","Business Name"],
+              ["address","Address"],
+              ["image_Url","Image URL"],
+              ["website","Website"],
+              ["instagram","Instagram"],
+              ["submittedBy","Your Name"]
+            ].map(([name,placeholder]) => (
 
+              <input
 
-<input
+                key={name}
 
-name="name"
+                name={name}
 
-value={formData.name}
+                value={formData[name]}
 
-onChange={handleChange}
+                onChange={handleChange}
 
-placeholder="Business Name"
+                placeholder={placeholder}
 
-required
+                className="
+                  w-full
+                  p-3
+                  border-2
+                  border-black
+                  bg-white
+                "
 
-className="w-full p-3 border-4 border-black bg-amber-50"
+              />
 
-/>
+            ))}
 
 
 
 
+            <textarea
 
-<input
+              name="description"
 
-name="address"
+              value={formData.description}
 
-value={formData.address}
+              onChange={handleChange}
 
-onChange={handleChange}
+              placeholder="Description"
 
-placeholder="Address"
+              className="
+                w-full
+                h-32
+                p-3
+                border-2
+                border-black
+                bg-white
+              "
 
-required
+            />
 
-className="w-full p-3 border-4 border-black bg-amber-50"
 
-/>
 
 
 
+            <select
 
+              name="category"
 
+              value={formData.category}
 
-<input
+              onChange={handleChange}
 
-name="image_Url"
+              required
 
-value={formData.image_Url}
+              className="
+                w-full
+                p-3
+                border-2
+                border-black
+                bg-white
+              "
 
-onChange={handleChange}
+            >
 
-placeholder="Image URL"
+              <option value="">
+                Select Category
+              </option>
 
-className="w-full p-3 border-4 border-black bg-amber-50"
 
-/>
+              {categories.map((category)=>(
 
+                <option
+                  key={category}
+                  value={category}
+                >
+                  {category.replace("_"," ")}
+                </option>
 
+              ))}
 
 
+            </select>
 
 
 
-<textarea
 
-name="description"
 
-value={formData.description}
+            {formData.category === "Restaurant" && (
 
-onChange={handleChange}
+              <select
 
-placeholder="Description"
+                name="cuisine"
 
-className="w-full h-32 p-3 border-4 border-black bg-amber-50"
+                value={formData.cuisine}
 
-/>
+                onChange={handleChange}
 
+                required
 
+                className="
+                  w-full
+                  p-3
+                  border-2
+                  border-black
+                  bg-white
+                "
 
+              >
 
+                <option value="">
+                  Select Cuisine
+                </option>
 
 
+                {cuisines.map((cuisine)=>(
 
+                  <option
+                    key={cuisine}
+                    value={cuisine}
+                  >
+                    {cuisine.replace("_"," ")}
+                  </option>
 
-<input
+                ))}
 
-name="website"
 
-value={formData.website}
+              </select>
 
-onChange={handleChange}
+            )}
 
-placeholder="Website"
 
-className="w-full p-3 border-4 border-black bg-amber-50"
 
-/>
 
 
+            <select
 
+              name="location"
 
+              value={formData.location}
 
+              onChange={handleChange}
 
+              required
 
+              className="
+                w-full
+                p-3
+                border-2
+                border-black
+                bg-white
+              "
 
-<input
+            >
 
-name="instagram"
+              <option value="">
+                Select Location
+              </option>
 
-value={formData.instagram}
 
-onChange={handleChange}
+              {locations.map((location)=>(
 
-placeholder="Instagram"
+                <option
+                  key={location}
+                  value={location}
+                >
+                  {location}
+                </option>
 
-className="w-full p-3 border-4 border-black bg-amber-50"
+              ))}
 
-/>
 
+            </select>
 
 
 
 
 
 
+            <button
 
-<input
+              type="submit"
 
-name="submittedBy"
+              className="
+                w-32
+                h-10
+                border-2
+                border-black
+                bg-black
+                text-white
+                font-bold
+                hover:bg-yellow-600
+                hover:text-black
+                transition
+              "
 
-value={formData.submittedBy}
+            >
 
-onChange={handleChange}
+              SUBMIT
 
-placeholder="Your Name"
+            </button>
 
-className="w-full p-3 border-4 border-black bg-amber-50"
 
-/>
+          </form>
 
 
+        </main>
 
 
+      </div>
 
 
+    </div>
 
-<select
-
-name="category"
-
-value={formData.category}
-
-onChange={handleChange}
-
-required
-
-className="w-full p-3 border-4 border-black bg-amber-50"
-
->
-
-
-<option value="">
-
-Select Category
-
-</option>
-
-
-
-{categories.map((category)=>(
-
-
-<option
-
-key={category}
-
-value={category}
-
->
-
-{category.replace("_"," ")}
-
-</option>
-
-
-))}
-
-
-</select>
-
-
-
-
-
-
-
-
-{/* ONLY SHOW CUISINE FOR RESTAURANTS */}
-
-
-{formData.category === "Restaurant" && (
-
-
-<select
-
-name="cuisine"
-
-value={formData.cuisine}
-
-onChange={handleChange}
-
-required
-
-className="w-full p-3 border-4 border-black bg-amber-50"
-
->
-
-
-<option value="">
-
-Select Cuisine
-
-</option>
-
-
-
-{cuisines.map((cuisine)=>(
-
-
-<option
-
-key={cuisine}
-
-value={cuisine}
-
->
-
-{cuisine.replace("_"," ")}
-
-</option>
-
-
-))}
-
-
-</select>
-
-
-)}
-
-
-
-
-
-
-
-<select
-
-name="location"
-
-value={formData.location}
-
-onChange={handleChange}
-
-required
-
-className="w-full p-3 border-4 border-black bg-amber-50"
-
->
-
-
-<option value="">
-
-Select Location
-
-</option>
-
-
-
-{locations.map((location)=>(
-
-
-<option
-
-key={location}
-
-value={location}
-
->
-
-{location.replace("_"," ")}
-
-</option>
-
-
-))}
-
-
-
-</select>
-
-
-
-
-
-
-
-
-
-<button
-
-type="submit"
-
-className="
-w-32
-h-10
-border-4
-border-black
-bg-amber-50
-font-bold
-hover:bg-black
-hover:text-white
-"
-
->
-
-SUBMIT
-
-</button>
-
-
-
-
-
-</form>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-</>
-
-)
+  );
 
 }
 
