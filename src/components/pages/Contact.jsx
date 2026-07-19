@@ -1,176 +1,313 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const locations = [
-  "Brooklyn",
-  "Bronx",
-  "Manhattan",
-  "Queens",
-  "Staten Island",
-];
 
 function Contact() {
 
+
   return (
-    <>
 
-      <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
-
-        <div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-xl overflow-hidden">
-
-          {/* Main Scroll Area */}
-          <div className="absolute inset-0 overflow-y-auto max-h-[80vh]">
-
-
-            {/* Header */}
-            <div className="relative z-20 p-6 flex justify-between items-start">
-
-              <div className="text-lg font-bold">
-                NOIREX
-              </div>
+    <div className="
+      min-h-screen
+      bg-yellow-600
+      flex
+      justify-center
+      p-3
+      sm:p-6
+    ">
 
 
-              <div className="flex gap-6 text-sm">
-
-                <Link to="/Home">Home</Link>
-                <Link to="/Eats">Eats</Link>
-                <Link to="/Drinks">Drinks</Link>
-                <Link to="/Arts">Art</Link>
-                <Link to="/Law">Law</Link>
-                <Link to="/Therapy">Therapy</Link>
-                <Link to="/About">About Us</Link>
-
-              </div>
-
-            </div>
+      <div className="
+        w-full
+        max-w-7xl
+        bg-amber-50
+        shadow-xl
+        overflow-hidden
+      ">
 
 
-            {/* Contact Content */}
 
-            <div className="flex justify-center items-center mt-16">
+        {/* HEADER */}
 
-              <div className="w-[380px]">
-
-                <h1 className="text-5xl font-bold text-center mb-10">
-                  CONTACT
-                </h1>
-
-
-                <form className="space-y-6">
-
-
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="
-                    w-full
-                    h-12
-                    bg-amber-50
-                    border-4
-                    border-black
-                    p-4
-                    text-black
-                    "
-                  />
+        <header className="
+          flex
+          justify-between
+          items-start
+          gap-4
+          p-4
+          sm:p-5
+        ">
 
 
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="
-                    w-full
-                    h-12
-                    bg-amber-50
-                    border-4
-                    border-black
-                    p-4
-                    text-black
-                    "
-                  />
+          <div className="
+            text-xl
+            font-bold
+          ">
 
-
-                  <textarea
-                    placeholder="Your Message"
-                    className="
-                    w-full
-                    h-52
-                    bg-amber-50
-                    border-4
-                    border-black
-                    p-4
-                    text-black
-                    resize-none
-                    "
-                  />
-
-
-                  <div className="flex justify-center">
-
-                    <button
-                      type="submit"
-                      className="
-                      w-24
-                      h-10
-                      bg-amber-50
-                      border-4
-                      border-black
-                      text-sm
-                      font-bold
-                      hover:bg-black
-                      hover:text-white
-                      transition
-                      "
-                    >
-                      SUBMIT
-                    </button>
-
-                  </div>
-
-
-                </form>
-
-
-              </div>
-
-            </div>
-
+            NOIREX
 
           </div>
 
 
-        </div>
-
-      </div>
 
 
-      {/* Right Info Panel */}
-
-      <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
-
-        <div className="text-2xl font-semibold">
-          025
-        </div>
-
-        <div className="text-2xl font-semibold">
-          NYC EDITION
-        </div>
+          <nav className="
+            flex
+            gap-4
+            text-sm
+            whitespace-nowrap
+            overflow-x-auto
+          ">
 
 
-        <div className="space-y-1">
+            <Link to="/Home">
+              Home
+            </Link>
 
-          {locations.map((loc)=>(
-            <div key={loc}>
-              {loc}
+
+            <Link to="/Eats">
+              Eats
+            </Link>
+
+
+            <Link to="/Drinks">
+              Drinks
+            </Link>
+
+
+            <Link to="/Arts">
+              Art
+            </Link>
+
+
+            <Link to="/Law">
+              Law
+            </Link>
+
+
+            <Link to="/Therapy">
+              Therapy
+            </Link>
+
+
+            <Link to="/About">
+              About Us
+            </Link>
+
+
+          </nav>
+
+
+        </header>
+
+
+
+
+
+
+
+        {/* TITLE */}
+
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+        ">
+
+
+          <h1 className="
+            text-5xl
+            sm:text-6xl
+            lg:text-8xl
+            font-bold
+            leading-none
+          ">
+
+            CONTACT
+
+          </h1>
+
+
+
+
+          <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+
+              025
+
             </div>
-          ))}
 
-        </div>
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+
+              NYC EDITION
+
+            </div>
+
+
+          </aside>
+
+
+        </section>
+
+
+
+
+
+
+
+        {/* CONTACT FORM */}
+
+
+        <main className="
+          flex
+          justify-center
+          px-5
+          pb-10
+        ">
+
+
+
+          <form className="
+            w-full
+            max-w-md
+            space-y-6
+          ">
+
+
+
+            <input
+
+              type="text"
+
+              placeholder="Your Name"
+
+              className="
+                w-full
+                h-12
+                border-4
+                border-black
+                bg-amber-50
+                p-4
+              "
+
+            />
+
+
+
+
+
+            <input
+
+              type="email"
+
+              placeholder="Your Email"
+
+              className="
+                w-full
+                h-12
+                border-4
+                border-black
+                bg-amber-50
+                p-4
+              "
+
+            />
+
+
+
+
+
+
+
+            <textarea
+
+              placeholder="Your Message"
+
+              className="
+                w-full
+                h-52
+                border-4
+                border-black
+                bg-amber-50
+                p-4
+                resize-none
+              "
+
+            />
+
+
+
+
+
+
+
+            <div className="
+              flex
+              justify-center
+            ">
+
+
+              <button
+
+                type="submit"
+
+                className="
+                  px-6
+                  py-2
+                  border-4
+                  border-black
+                  text-sm
+                  font-bold
+                  hover:bg-black
+                  hover:text-white
+                "
+
+              >
+
+                SUBMIT
+
+              </button>
+
+
+            </div>
+
+
+
+          </form>
+
+
+        </main>
+
+
+
 
       </div>
 
 
-    </>
+    </div>
+
   );
+
 }
 
 
