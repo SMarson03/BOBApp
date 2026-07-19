@@ -6,340 +6,397 @@ const locations = [
   "Bronx",
   "Manhattan",
   "Queens",
-  "Staten_Island",
+  "Staten Island",
 ];
 
 function Drinks() {
-  const [mydata, setMyData] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("https://bobapp-e93h.onrender.com/NoirX/places");
-        const data = await response.json();
 
-        // Drinks = Bars + Cafes + Juice Bars
-        const drinks = data.filter(
+  useEffect(() => {
+    fetch("https://bobapp-e93h.onrender.com/NoirX/places")
+      .then((res) => res.json())
+      .then((data) => {
+
+        const filtered = data.filter(
           (item) =>
             item.category === "Bar" ||
             item.category === "Cafe" ||
             item.category === "Juice_Bar"
         );
 
-        setMyData(drinks);
+        setDrinks(filtered);
 
-      } catch (error) {
-        console.error("Error fetching drinks:", error);
-      }
-    }
+      })
+      .catch((err) =>
+        console.error("Error fetching drinks:", err)
+      );
 
-    fetchData();
   }, []);
 
 
+
   const filteredData = selectedLocation
-    ? mydata.filter((item) => item.location === selectedLocation)
-    : mydata;
+    ? drinks.filter(
+        (item) => item.location === selectedLocation
+      )
+    : drinks;
 
 
-  // Google Maps
-  function buildMapsUrl(dest, origin) {
 
-    const base = "https://www.google.com/maps/dir/?api=1";
+  function buildMapsUrl(item) {
 
     const destination =
-      dest.lat && dest.lng
-        ? `${dest.lat},${dest.lng}`
-        : dest.address || dest.name || "";
-
-    const params = new URLSearchParams({
-      destination,
-      travelmode: "driving",
-    });
+      item.lat && item.lng
+        ? `${item.lat},${item.lng}`
+        : item.address || item.name;
 
 
-    if (origin?.lat && origin?.lng) {
-      params.set(
-        "origin",
-        `${origin.lat},${origin.lng}`
-      );
-    } else {
-      params.set(
-        "origin",
-        "Current Location"
-      );
-    }
+    return `https://www.google.com/maps/dir/?api=1&${new URLSearchParams(
+      {
+        destination,
+        origin: "Current Location",
+        travelmode: "driving",
+      }
+    )}`;
 
-
-    return `${base}&${params.toString()}`;
   }
 
 
-  function openDirections(dest) {
 
-    if (navigator.geolocation) {
+  function openDirections(item) {
 
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
+    window.open(
+      buildMapsUrl(item),
+      "_blank"
+    );
 
-          window.open(
-            buildMapsUrl(dest, {
-              lat: pos.coords.latitude,
-              lng: pos.coords.longitude,
-            }),
-            "_blank"
-          );
-
-        },
-        () => {
-          window.open(
-            buildMapsUrl(dest),
-            "_blank"
-          );
-        }
-      );
-
-    } else {
-
-      window.open(
-        buildMapsUrl(dest),
-        "_blank"
-      );
-
-    }
   }
+
 
 
   return (
-    <>
 
-      <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
-
-        <div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-red-50 overflow-hidden">
-
-
-          <div className="absolute inset-0 overflow-y-auto max-h-[80vh]">
-
-
-            <div className="relative z-20 p-6 flex justify-between items-start">
-
-              <div className="text-lg font-bold">
-                NOIREX
-              </div>
+    <div className="
+      bg-yellow-600
+      flex
+      justify-center
+      p-3
+      sm:p-6
+      min-h-screen
+    ">
 
 
-              <div className="flex gap-6 text-sm">
-                <Link to="/Home">Home</Link>
-                <Link to="/Eats">Eats</Link>
-                <Link to="/Arts">Arts</Link>
-                <Link to="/Law">Law</Link>
-                <Link to="/Therapy">Therapy</Link>
-                <Link to="/Contact">Contact</Link>
-                <Link to="/About">About Us</Link>
+      <div className="
+        w-full
+        max-w-7xl
+        bg-amber-50
+        shadow-xl
+        overflow-hidden
+      ">
 
-              </div>
 
+
+        {/* Header */}
+
+        <header className="
+          flex
+          justify-between
+          items-start
+          gap-4
+          p-4
+          sm:p-5
+        ">
+
+
+          <div className="text-xl font-bold">
+            NOIREX
+          </div>
+
+
+
+          <nav className="
+            flex
+            gap-4
+            text-sm
+            whitespace-nowrap
+            overflow-x-auto
+          ">
+
+            <Link to="/Home">
+              Home
+            </Link>
+
+            <Link to="/Eats">
+              Eats
+            </Link>
+
+            <Link to="/Arts">
+              Art
+            </Link>
+
+            <Link to="/Law">
+              Law
+            </Link>
+
+            <Link to="/Therapy">
+              Therapy
+            </Link>
+
+            <Link to="/Contact">
+              Contact
+            </Link>
+
+            <Link to="/About">
+              About Us
+            </Link>
+
+          </nav>
+
+        </header>
+
+
+
+
+        {/* Title + Filter */}
+
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+        ">
+
+
+          <h1 className="
+            text-5xl
+            sm:text-6xl
+            lg:text-8xl
+            font-bold
+            leading-none
+          ">
+
+            DRINKS
+
+          </h1>
+
+
+
+
+          <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              025
+            </div>
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              NYC EDITION
             </div>
 
 
 
-            <div className="container-events">
+            <button
+              onClick={() => setSelectedLocation(null)}
+              className={
+                selectedLocation === null
+                  ? "font-bold"
+                  : ""
+              }
+            >
+              All
+            </button>
 
-              <div className="grid grid-cols-3 gap-5 p-5">
 
 
-                {filteredData.map((item) => (
+            {locations.map((location) => (
 
-                  <div
-                    key={item.id}
-                    onClick={() => openDirections(item)}
+              <div
+                key={location}
+                onClick={() =>
+                  setSelectedLocation(location)
+                }
+                className={`
+                  cursor-pointer
+                  hover:underline
+                  ${
+                    selectedLocation === location
+                      ? "font-bold"
+                      : ""
+                  }
+                `}
+              >
+
+                {location}
+
+              </div>
+
+            ))}
+
+
+          </aside>
+
+
+        </section>
+
+
+
+
+
+        {/* Cards */}
+
+        <main className="
+          px-5
+          pb-8
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-6
+        ">
+
+
+          {filteredData.length > 0 ? (
+
+            filteredData.map((item) => (
+
+              <article
+                key={item.id}
+                className="cursor-pointer"
+                onClick={() => openDirections(item)}
+              >
+
+
+                <div className="
+                  h-48
+                  border-2
+                  border-black
+                  bg-white
+                  p-3
+                  flex
+                  justify-center
+                  items-center
+                ">
+
+
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="
+                      w-full
+                      h-full
+                      object-contain
+                    "
+                  />
+
+
+                </div>
+
+
+
+
+                <div className="mt-3">
+
+
+                  <h2 className="
+                    text-lg
+                    font-bold
+                  ">
+
+                    {item.name}
+
+                  </h2>
+
+
+
+                  <p className="text-sm">
+                    {item.address}
+                  </p>
+
+
+                  <p className="text-sm">
+                    {item.location}
+                  </p>
+
+
+                  <p className="text-sm">
+                    {item.category}
+                  </p>
+
+
+
+
+                  <button
+                    onClick={(e) =>
+                      e.stopPropagation()
+                    }
+                    className="
+                      mt-3
+                      px-4
+                      py-1
+                      border-2
+                      border-black
+                      text-sm
+                      hover:bg-black
+                      hover:text-white
+                    "
                   >
 
-
-                    <div className="flex flex-col items-center m-5 p-2.5 border-2 border-black h-[160px]">
-
-
-                      <img
-                        src={item.imageUrl}
-                        alt={item.name}
-                        className="w-full h-full object-contain"
-                      />
-
-
-                    </div>
-
-
-
-                    <div className="px-8">
-
-                      <div className="text-md font-bold">
-
-                        <p>
-                          {item.name}
-                        </p>
-
-                        <p>
-                          {item.address}
-                        </p>
-
-                        <p>
-                          {item.location}
-                        </p>
-
-                        <p className="text-sm">
-                          {item.category}
-                        </p>
-
-                      </div>
-
-                    </div>
-
-
-
-                    <button
-                      className="m-8 w-16 h-8 bg-amber-50 border-2 border-black flex justify-center items-center text-sm"
-                      onClick={(e) => e.stopPropagation()}
+                    <a
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
+                      Visit
+                    </a>
 
-                      <a
-                        href={item.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Visit
-                      </a>
-
-                    </button>
+                  </button>
 
 
-                  </div>
-
-                ))}
+                </div>
 
 
-              </div>
+              </article>
 
-            </div>
-
-
-          </div>
+            ))
 
 
-        </div>
+          ) : (
 
-      </div>
+            <p>
+              No drinks found.
+            </p>
 
-
-
-
-      {/* Location Filter */}
-
-      <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
+          )}
 
 
-        <div className="text-2xl font-semibold">
-          025
-        </div>
-
-
-        <div className="text-2xl font-semibold">
-          NYC EDITION
-        </div>
-
-
-
-        <div className="space-y-1">
-
-
-          <div
-            className={`cursor-pointer ${
-              selectedLocation === null
-              ? "font-bold text-white"
-              : ""
-            }`}
-            onClick={() => setSelectedLocation(null)}
-          >
-
-            All
-
-          </div>
-
-
-
-          {locations.map((loc) => (
-
-            <div
-              key={loc}
-              onClick={() => setSelectedLocation(loc)}
-              className={`cursor-pointer hover:underline ${
-                selectedLocation === loc
-                ? "font-bold text-white"
-                : ""
-              }`}
-            >
-
-              {loc.replace("_", " ")}
-
-            </div>
-
-          ))}
-
-
-        </div>
+        </main>
 
 
       </div>
 
 
+    </div>
 
-
-
-      {/* Results */}
-
-      <div className="overflow-y-auto p-4 rounded-lg custom-scrollbar absolute bottom-64 right-4 text-sm text-right bg-black bg-opacity-90 space-y-2 z-30 w-36 max-h-[22vh]">
-
-
-        {filteredData.length > 0 ? (
-
-          filteredData.map((item) => (
-
-            <div
-              key={item.id}
-              className="mb-4 border-b pb-2 cursor-pointer"
-              onClick={() => openDirections(item)}
-            >
-
-              <h2 className="text-lg font-semibold text-white">
-                {item.name}
-              </h2>
-
-
-              <p className="text-sm text-yellow-500">
-                {item.location}
-              </p>
-
-
-            </div>
-
-
-          ))
-
-
-        ) : (
-
-          <p className="text-white">
-            No drinks found.
-          </p>
-
-        )}
-
-
-      </div>
-
-
-    </>
   );
+
 }
 
 
