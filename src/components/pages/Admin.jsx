@@ -30,462 +30,509 @@ const categories = [
 ];
 
 
-function Admin() {
+function Admin(){
 
+const user = JSON.parse(localStorage.getItem("user"));
 
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
+const [places,setPlaces] = useState([]);
+const [searchTerm,setSearchTerm] = useState("");
+const [selectedCategory,setSelectedCategory] = useState("");
+const [selectedLocation,setSelectedLocation] = useState("");
+const [editingPlace,setEditingPlace] = useState(null);
+const [deletePlace,setDeletePlace] = useState(null);
 
 
-  const [places,setPlaces] = useState([]);
 
-  const [searchTerm,setSearchTerm] = useState("");
+useEffect(()=>{
+  loadPlaces();
+},[]);
 
-  const [selectedCategory,setSelectedCategory] = useState("");
 
-  const [selectedLocation,setSelectedLocation] = useState("");
 
-  const [editingPlace,setEditingPlace] = useState(null);
+async function loadPlaces(){
 
-  const [deletePlace,setDeletePlace] = useState(null);
+try{
 
+const res = await fetch(
+"https://bobapp-e93h.onrender.com/NoirX/places"
+);
 
+const data = await res.json();
 
-  useEffect(()=>{
+setPlaces(data);
 
-    loadPlaces();
 
-  },[]);
+}catch(err){
 
+console.error(err);
 
+}
 
-  async function loadPlaces(){
+}
 
-    try{
 
-      const res = await fetch(
-        "https://bobapp-e93h.onrender.com/NoirX/places"
-      );
 
-      const data = await res.json();
 
-      setPlaces(data);
 
-    }catch(err){
+const filteredPlaces = places.filter(place=>{
 
-      console.error(
-        "Admin fetch error:",
-        err
-      );
+const search = searchTerm.toLowerCase();
 
-    }
 
-  }
+return (
 
+(
+!search ||
+place.name?.toLowerCase().includes(search) ||
+place.address?.toLowerCase().includes(search)
+)
 
+&&
 
+(
+!selectedCategory ||
+place.category === selectedCategory
+)
 
-  const filteredPlaces = places.filter(place=>{
+&&
 
+(
+!selectedLocation ||
+place.location === selectedLocation
+)
 
-    const search =
-      searchTerm.toLowerCase();
+);
 
 
-    const matchesSearch =
-      place.name?.toLowerCase().includes(search) ||
-      place.address?.toLowerCase().includes(search) ||
-      place.description?.toLowerCase().includes(search);
+});
 
 
-    const matchesCategory =
-      selectedCategory
-      ? place.category === selectedCategory
-      : true;
 
 
-    const matchesLocation =
-      selectedLocation
-      ? place.location === selectedLocation
-      : true;
 
 
-    return (
-      matchesSearch &&
-      matchesCategory &&
-      matchesLocation
-    );
+async function handleDelete(id){
 
+await fetch(
+`https://bobapp-e93h.onrender.com/NoirX/places/${id}`,
+{
+method:"DELETE"
+}
+);
 
-  });
 
+setDeletePlace(null);
 
+loadPlaces();
 
+}
 
 
-  async function handleDelete(id){
 
-    try{
 
-      await fetch(
-        `https://bobapp-e93h.onrender.com/NoirX/places/${id}`,
-        {
-          method:"DELETE"
-        }
-      );
 
 
-      setDeletePlace(null);
 
-      loadPlaces();
+return (
 
+<div className="
+min-h-screen
+bg-yellow-600
+flex
+justify-center
+p-3
+sm:p-6
+">
 
-    }catch(err){
 
-      console.error(err);
+<div className="
+w-full
+max-w-7xl
+bg-amber-50
+shadow-xl
+">
 
-    }
 
-  }
 
 
 
+{/* HEADER */}
 
+<header className="
+flex
+flex-col
+sm:flex-row
+justify-between
+gap-5
+p-5
+">
 
 
-  return (
+<div>
 
-    <div className="
-      min-h-screen
-      bg-yellow-600
-      flex
-      justify-center
-      p-3
-      sm:p-6
-    ">
+<h1 className="
+text-5xl
+sm:text-7xl
+font-bold
+">
 
+ADMIN
 
-      <div className="
-        w-full
-        max-w-7xl
-        bg-amber-50
-        shadow-xl
-        overflow-hidden
-      ">
+</h1>
 
 
+<p className="text-sm mt-3">
+Welcome,
+{" "}
+<strong>
+{user?.name}
+</strong>
+</p>
 
-        {/* HEADER */}
 
-        <header className="
-          flex
-          justify-between
-          items-start
-          p-5
-          gap-5
-        ">
+<p className="text-sm">
+{places.length} Businesses
+</p>
 
 
-          <div>
+</div>
 
 
-            <h1 className="
-              text-5xl
-              sm:text-6xl
-              lg:text-7xl
-              font-bold
-            ">
 
-              ADMIN
 
-            </h1>
+<nav className="
+flex
+flex-wrap
+gap-4
+text-sm
+">
 
 
-            <p className="text-sm mt-3">
-              Welcome,
-              {" "}
-              <strong>
-                {user?.name}
-              </strong>
-            </p>
+<Link to="/Home">
+Home
+</Link>
 
 
-            <p className="text-sm">
-              {places.length} Businesses
-            </p>
+<Link to="/Submit">
+Submit
+</Link>
 
 
-          </div>
+<Logout />
 
 
+</nav>
 
 
 
-          <nav className="
-            flex
-            gap-4
-            text-sm
-            whitespace-nowrap
-          ">
+</header>
 
 
-            <Link to="/Home">
-              Home
-            </Link>
 
 
-            <Link to="/Submit">
-              Submit
-            </Link>
 
 
-            <Logout />
 
 
-          </nav>
+{/* STATS */}
 
+<section className="
+px-5
+pb-5
+">
 
 
-        </header>
+<div className="
+w-full
+overflow-hidden
+">
 
 
+<DashboardStats
 
+places={places}
 
+categories={categories}
 
+locations={locations}
 
+/>
 
-        {/* DASHBOARD TITLE */}
 
+</div>
 
-        <section className="
-          flex
-          justify-between
-          px-5
-          pb-5
-          gap-5
-        ">
 
+</section>
 
-          <div className="flex-1">
 
-            <DashboardStats
-              places={places}
-              categories={categories}
-              locations={locations}
-            />
 
-          </div>
 
 
-        </section>
 
 
 
+{/* MOBILE FILTERS */}
 
+<section className="
+block
+lg:hidden
+px-5
+pb-5
+">
 
 
+<div className="
+border-2
+border-black
+p-4
+">
 
-        {/* MAIN AREA */}
 
+<h2 className="
+font-bold
+mb-3
+">
 
-        <section className="
-          px-5
-          pb-10
-          grid
-          grid-cols-1
-          lg:grid-cols-[1fr_220px]
-          gap-6
-        ">
+FILTERS
 
+</h2>
 
 
 
+<Filters
 
-          {/* BUSINESS AREA */}
+locations={locations}
 
+categories={categories}
 
-          <div>
+selectedLocation={selectedLocation}
 
+setSelectedLocation={setSelectedLocation}
 
-            <input
+selectedCategory={selectedCategory}
 
-              value={searchTerm}
+setSelectedCategory={setSelectedCategory}
 
-              onChange={(e)=>
-                setSearchTerm(e.target.value)
-              }
+/>
 
-              placeholder="Search businesses..."
 
-              className="
-                w-full
-                border-2
-                border-black
-                bg-amber-50
-                p-3
-                mb-6
-              "
+</div>
 
-            />
 
+</section>
 
 
 
 
-            <div className="
-              grid
-              grid-cols-1
-              sm:grid-cols-2
-              gap-6
-            ">
 
 
-              {filteredPlaces.map(place=>(
 
 
-                <BusinessCard
+{/* SEARCH */}
 
-                  key={place.id}
+<section className="
+px-5
+">
 
-                  place={place}
 
-                  onEdit={()=>
-                    setEditingPlace(place)
-                  }
+<input
 
-                  onDelete={()=>
-                    setDeletePlace(place)
-                  }
+value={searchTerm}
 
-                  refresh={loadPlaces}
+onChange={(e)=>
+setSearchTerm(e.target.value)
+}
 
-                />
+placeholder="Search businesses..."
 
+className="
+w-full
+border-2
+border-black
+bg-amber-50
+p-3
+"
 
-              ))}
 
+/>
 
-            </div>
 
+</section>
 
-          </div>
 
 
 
 
 
 
+{/* CONTENT */}
 
-          {/* FILTER SIDE */}
+<section className="
+grid
+grid-cols-1
+lg:grid-cols-[1fr_220px]
+gap-6
+p-5
+">
 
 
-          <aside className="
-            border-l-2
-            border-black
-            pl-5
-          ">
 
 
-            <h2 className="
-              text-xl
-              font-bold
-              mb-4
-            ">
 
-              FILTERS
+{/* CARDS */}
 
-            </h2>
+<div className="
+grid
+grid-cols-1
+sm:grid-cols-2
+xl:grid-cols-3
+gap-6
+">
 
 
+{
+filteredPlaces.map(place=>(
 
-            <Filters
 
-              locations={locations}
+<BusinessCard
 
-              categories={categories}
+key={place.id}
 
-              selectedLocation={selectedLocation}
+place={place}
 
-              setSelectedLocation={setSelectedLocation}
+onEdit={()=>
+setEditingPlace(place)
+}
 
-              selectedCategory={selectedCategory}
+onDelete={()=>
+setDeletePlace(place)
+}
 
-              setSelectedCategory={setSelectedCategory}
+refresh={loadPlaces}
 
-            />
+/>
 
 
-          </aside>
+))
+}
 
 
+</div>
 
 
-        </section>
 
 
 
 
 
-      </div>
+{/* DESKTOP FILTER */}
 
+<aside className="
+hidden
+lg:block
+border-l-2
+border-black
+pl-5
+">
 
 
+<h2 className="
+font-bold
+mb-4
+">
 
+FILTERS
 
+</h2>
 
-      {editingPlace && (
 
-        <EditPlaceModal
 
-          isOpen={true}
+<Filters
 
-          place={editingPlace}
+locations={locations}
 
-          onClose={()=>
-            setEditingPlace(null)
-          }
+categories={categories}
 
-          onSave={()=>{
+selectedLocation={selectedLocation}
 
-            setEditingPlace(null);
+setSelectedLocation={setSelectedLocation}
 
-            loadPlaces();
+selectedCategory={selectedCategory}
 
-          }}
+setSelectedCategory={setSelectedCategory}
 
-        />
+/>
 
-      )}
 
+</aside>
 
 
 
 
 
-      {deletePlace && (
+</section>
 
-        <ConfirmDelete
 
-          place={deletePlace}
 
-          onCancel={()=>
-            setDeletePlace(null)
-          }
 
-          onConfirm={()=>
-            handleDelete(deletePlace.id)
-          }
 
-        />
+</div>
 
-      )}
 
 
 
-    </div>
 
-  );
+
+{editingPlace && (
+
+<EditPlaceModal
+
+isOpen={true}
+
+place={editingPlace}
+
+onClose={()=>
+setEditingPlace(null)
+}
+
+onSave={()=>{
+
+setEditingPlace(null);
+
+loadPlaces();
+
+}}
+
+/>
+
+)}
+
+
+
+
+{deletePlace && (
+
+<ConfirmDelete
+
+place={deletePlace}
+
+onCancel={()=>
+setDeletePlace(null)
+}
+
+onConfirm={()=>
+handleDelete(deletePlace.id)
+}
+
+/>
+
+)}
+
+
+
+</div>
+
+);
 
 }
 
