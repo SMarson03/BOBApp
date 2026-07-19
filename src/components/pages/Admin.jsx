@@ -40,15 +40,10 @@ function Admin() {
 
 
   const [places,setPlaces] = useState([]);
-
   const [searchTerm,setSearchTerm] = useState("");
-
   const [selectedCategory,setSelectedCategory] = useState("");
-
   const [selectedLocation,setSelectedLocation] = useState("");
-
   const [editingPlace,setEditingPlace] = useState(null);
-
   const [deletePlace,setDeletePlace] = useState(null);
 
 
@@ -61,29 +56,28 @@ function Admin() {
 
 
 
-
   async function loadPlaces(){
 
     try{
 
-      const response = await fetch(
+      const res = await fetch(
         "https://bobapp-e93h.onrender.com/NoirX/places"
       );
 
-
-      const data = await response.json();
+      const data = await res.json();
 
       setPlaces(data);
 
-
     }catch(error){
 
-      console.error(error);
+      console.error(
+        "Error loading places:",
+        error
+      );
 
     }
 
   }
-
 
 
 
@@ -136,8 +130,7 @@ function Admin() {
 
     try{
 
-
-      const response = await fetch(
+      const res = await fetch(
 
         `https://bobapp-e93h.onrender.com/NoirX/places/${id}`,
 
@@ -148,7 +141,7 @@ function Admin() {
       );
 
 
-      if(response.ok){
+      if(res.ok){
 
         setDeletePlace(null);
 
@@ -159,7 +152,10 @@ function Admin() {
 
     }catch(error){
 
-      console.error(error);
+      console.error(
+        "Delete error:",
+        error
+      );
 
     }
 
@@ -173,7 +169,6 @@ function Admin() {
 
 
   return (
-
 
     <div className="
       min-h-screen
@@ -196,16 +191,13 @@ function Admin() {
 
 
 
-
-
         {/* HEADER */}
-
 
         <header className="
           flex
           justify-between
           items-start
-          gap-4
+          gap-5
           p-4
           sm:p-5
         ">
@@ -232,12 +224,12 @@ function Admin() {
             <p className="text-sm mt-3">
 
               Welcome,{" "}
+
               <strong>
                 {user?.name}
               </strong>
 
             </p>
-
 
 
             <p className="text-sm">
@@ -253,7 +245,6 @@ function Admin() {
 
 
 
-
           <nav className="
             flex
             gap-4
@@ -263,17 +254,14 @@ function Admin() {
           ">
 
 
-
             <Link to="/Home">
               Home
             </Link>
 
 
-
             <Link to="/Submit">
               Submit
             </Link>
-
 
 
             <Logout />
@@ -291,13 +279,12 @@ function Admin() {
 
 
 
-
-        {/* STATS */}
+        {/* DASHBOARD */}
 
 
         <section className="
           px-5
-          pb-5
+          pb-6
         ">
 
 
@@ -320,8 +307,7 @@ function Admin() {
 
 
 
-
-        {/* CONTENT AREA */}
+        {/* ADMIN CONTENT */}
 
 
         <section className="
@@ -333,26 +319,21 @@ function Admin() {
 
 
 
+          {/* BUSINESS AREA */}
 
 
-          {/* BUSINESS LIST */}
-
-
-          <main className="
-            flex-1
-          ">
-
+          <main className="flex-1">
 
 
             <input
-
-              placeholder="Search businesses..."
 
               value={searchTerm}
 
               onChange={(e)=>
                 setSearchTerm(e.target.value)
               }
+
+              placeholder="Search businesses..."
 
               className="
                 w-full
@@ -369,40 +350,47 @@ function Admin() {
 
 
 
-
             <div className="
               grid
               grid-cols-1
               sm:grid-cols-2
-              gap-5
+              gap-6
               max-h-[60vh]
               overflow-y-auto
             ">
 
 
-              {filteredPlaces.map(place=>(
+              {filteredPlaces.length ? (
 
+                filteredPlaces.map(place=>(
 
-                <BusinessCard
+                  <BusinessCard
 
-                  key={place.id}
+                    key={place.id}
 
-                  place={place}
+                    place={place}
 
-                  onEdit={()=>
-                    setEditingPlace(place)
-                  }
+                    onEdit={()=>
+                      setEditingPlace(place)
+                    }
 
-                  onDelete={()=>
-                    setDeletePlace(place)
-                  }
+                    onDelete={()=>
+                      setDeletePlace(place)
+                    }
 
-                  refresh={loadPlaces}
+                    refresh={loadPlaces}
 
-                />
+                  />
 
+                ))
 
-              ))}
+              ) : (
+
+                <p>
+                  No businesses found.
+                </p>
+
+              )}
 
 
             </div>
@@ -416,8 +404,7 @@ function Admin() {
 
 
 
-
-          {/* FILTER PANEL */}
+          {/* FILTERS */}
 
 
           <aside className="
@@ -428,8 +415,7 @@ function Admin() {
           ">
 
 
-
-            <div className="
+            <h2 className="
               text-xl
               font-bold
               mb-4
@@ -437,7 +423,7 @@ function Admin() {
 
               FILTERS
 
-            </div>
+            </h2>
 
 
 
@@ -462,15 +448,11 @@ function Admin() {
 
 
 
-
-
         </section>
 
 
 
-
       </div>
-
 
 
 
