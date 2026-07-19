@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 
-function Signup() {
+function SignUp() {
 
 
   const navigate = useNavigate();
@@ -507,4 +507,4 @@ function Signup() {
 }
 
 
-export default Signup;
+export default SignUp;
