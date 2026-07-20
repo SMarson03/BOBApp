@@ -20,7 +20,7 @@ function Home() {
       <div className="relative min-h-screen w-full max-w-7xl bg-amber-50 overflow-hidden shadow-xl">
 
         {/* Header */}
-        <header className="relative z-20 flex justify-between items-start gap-6 p-5">
+        <header className="relative z-20 flex justify-between items-start gap-6 p-5 border-b border-black">
           
           <div className="flex flex-col shrink-0">
             <h1 className="text-xl font-bold">NOIREX</h1>
@@ -65,42 +65,20 @@ function Home() {
             <Link to="/Contact">Contact</Link>
             <Link to="/About">About Us</Link>
           </nav>
-
-        </header>
-
-
-        {/* Cover */}
-        <main className="flex justify-center items-start pt-14 sm:pt-20">
-          <div className="flex items-start gap-5 sm:gap-8 px-6">
-
+ <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
             <div className="
-              text-center
-              text-5xl
-              sm:text-6xl
-              lg:text-8xl
-              font-bold
-              leading-[0.85]
-              tracking-tight
+              font-semibold
+              text-sm
+              sm:text-xl
             ">
-              <div>NOIR</div>
-              <div>INDEX</div>
-              <div>A BLACK</div>
-              <div>OWNED GUIDE</div>
+              026
             </div>
-
-
-            <aside className="
-              text-right
-              text-xs
-              sm:text-sm
-              space-y-1
-              pt-2
-            ">
-              <div className="text-base sm:text-xl font-semibold">
-                025
-              </div>
-
-              <div className="text-base sm:text-xl font-semibold">
+               <div className="text-base sm:text-xl font-semibold">
                 NYC EDITION
               </div>
 
@@ -111,7 +89,28 @@ function Home() {
               <div>Staten Island</div>
             </aside>
 
-          </div>
+
+        </header>
+
+
+        {/* Cover */}
+        <main className="flex justify-center items-start pt-14 sm:pt-2 ">
+          <div className="flex items-start gap-5 sm:gap-14 px-6 ">
+
+            <div className="
+              text-center
+              text-5xl
+              sm:text-6xl
+              lg:text-8xl
+              font-bold
+              leading-[0.85]
+              tracking-tight
+            ">
+              <div>NOIR INDEX</div>
+              <div>A BLACK</div>
+              <div>OWNED GUIDE</div>
+            </div>
+                    </div>
         </main>
 
       </div>

@@ -9,9 +9,17 @@ const locations = [
   "Staten Island",
 ];
 
+const categories = [
+  "Bar",
+  "Cafe",
+  "Juice Bar",
+  "Wine Bar"
+];
+
 function Drinks() {
   const [drinks, setDrinks] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
 
   useEffect(() => {
@@ -37,11 +45,24 @@ function Drinks() {
 
 
 
-  const filteredData = selectedLocation & selectedCategory
-    ? drinks.filter(
-        (item) => item.location === selectedLocation && selectedCategory
-      )
-    : drinks;
+  const filteredData = drinks.filter((item) => {
+  const matchesLocation =
+    selectedLocation
+      ? item.location === selectedLocation
+      : true;
+
+  const matchesCategory =
+    selectedCategory
+      ? item.category === selectedCategory
+      : true;
+
+  return matchesLocation && matchesCategory;
+});
+
+<div className="mt-4 font-semibold">
+  CATEGORIES
+</div>
+
 
 
 
@@ -106,13 +127,30 @@ function Drinks() {
           items-start
           gap-4
           p-4
-          sm:p-5
+          sm:p-5 border-b border-black
         ">
 
 
-          <div className="text-xl font-bold">
-            NOIREX
-          </div>
+          <div>
+
+    <div className="text-xl font-bold">
+      NOIREX
+    </div>
+
+    <h1 className="
+      text-5xl
+      sm:text-6xl
+      lg:text-8xl
+      font-bold
+      leading-none
+      mt-4
+    ">
+      DRINKS
+    </h1>
+
+  </div>
+
+
 
 
 
@@ -151,33 +189,7 @@ function Drinks() {
 
           </nav>
 
-        </header>
-
-
-
-
-        {/* Title + Filter */}
-
-        <section className="
-          flex
-          justify-between
-          items-start
-          px-5
-          pt-4
-          pb-6
-        ">
-
-
-          <h1 className="
-            text-5xl
-            sm:text-6xl
-            lg:text-8xl
-            font-bold
-            leading-none
-          ">
-            DRINKS
-          </h1>
-          <aside className="
+ <aside className="
             text-right
             text-xs
             sm:text-sm
@@ -188,7 +200,7 @@ function Drinks() {
               text-sm
               sm:text-xl
             ">
-              025
+              026
             </div>
             <div className="
               font-semibold
@@ -206,16 +218,16 @@ function Drinks() {
                   : ""
               }
             >
-              All
+              
             </button>
             <button
-              onClick={() => setSelectedCategory("Bar", "Cafe", "Juice_Bar")}
+              onClick={() => setSelectedCategory(null)}
                className={
-                selectedCategory === "Bar" || selectedCategory === "Cafe" || selectedCategory === "Juice_Bar"
+                selectedCategory === null
                   ? "font-bold"
                   : ""
               }
-            >
+        >
               All
             </button>
 
@@ -246,9 +258,48 @@ function Drinks() {
 
             ))}
 
+{categories.map((category) => (
+
+  <div
+    key={category}
+    onClick={() => setSelectedCategory(category)}
+    className={`
+      cursor-pointer
+      hover:underline
+      ${
+        selectedCategory === category
+          ? "font-bold"
+          : ""
+      }
+    `}
+  >
+
+    {category}
+
+  </div>
+
+))}
 
           </aside>
 
+        </header>
+
+
+
+
+        {/* Title + Filter */}
+
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+        ">
+
+
+         
 
         </section>
 

@@ -73,12 +73,29 @@ function Restaurants() {
           items-start
           gap-4
           p-4
-          sm:p-5
+          sm:p-5 border-b border-black
         ">
 
-          <div className="text-xl font-bold">
-            NOIREX
-          </div>
+          <div>
+
+    <div className="text-xl font-bold">
+      NOIREX
+    </div>
+
+    <h1 className="
+      text-5xl
+      sm:text-6xl
+      lg:text-8xl
+      font-bold
+      leading-none
+      mt-4
+    ">
+      EATS
+    </h1>
+
+  </div>
+
+
 
 
           <nav className="
@@ -99,38 +116,14 @@ function Restaurants() {
 
           </nav>
 
-        </header>
-
-
-        {/* Title */}
-        <section className="
-          flex
-          justify-between
-          items-start
-          px-5
-          pt-4
-          pb-6
-        ">
-
-          <h1 className="
-            text-5xl
-            sm:text-6xl
-            lg:text-8xl
-            font-bold
-            leading-none
-          ">
-            EATS
-          </h1>
-
-
-          {/* Location Filter */}
+          
+{/* Location Filter */}
           <aside className="
             text-right
             text-xs
             sm:text-sm
             space-y-1
           ">
-
             <div className="font-semibold text-sm sm:text-xl">
               025
             </div>
@@ -169,6 +162,21 @@ function Restaurants() {
             ))}
 
           </aside>
+
+          
+        </header>
+
+
+        {/* Title */}
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6 
+        ">
+          
 
         </section>
 
