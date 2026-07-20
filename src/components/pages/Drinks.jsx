@@ -6,14 +6,14 @@ const locations = [
   "Bronx",
   "Manhattan",
   "Queens",
-  "Staten Island",
+  "Staten_Island",
 ];
 
 const categories = [
   "Bar",
   "Cafe",
-  "Juice Bar",
-  "Wine Bar"
+  "Juice_Bar",
+  "Wine_Bar"
 ];
 
 function Drinks() {
@@ -242,8 +242,11 @@ function Drinks() {
   <button
     onClick={() => setShowCategories(!showCategories)}
     className="
+       flex
+      gap-3
       text-xs
       sm:text-sm
+      whitespace-nowrap
       font-semibold
       hover:underline
     "
@@ -261,14 +264,37 @@ function Drinks() {
       font-semibold
       whitespace-nowrap
     ">
-      <Link to="/Restaurants">Restaurants</Link>
-      <Link to="/Bars">Bars</Link>
-      <Link to="/Cafes">Cafés</Link>
-      <Link to="/Lounges">Lounges</Link>
-      <Link to="/Food">Food</Link>
+      
+    <div
+        onClick={() => setSelectedCategory(null)}
+        className="cursor-pointer hover:underline"
+      >
+        All
+      </div>
+
+      {categories.map((category) => (
+        <div
+          key={category}
+          onClick={() => setSelectedCategory(category)}
+          className={`
+            cursor-pointer
+            hover:underline
+            ${
+              selectedCategory === category
+              ? "font-bold"
+              : ""
+            }
+          `}
+        >
+          {category}
+        </div>
+      ))}
+
     </div>
   )}
 </div>
+
+
     </div>
     </div>
  
