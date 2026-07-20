@@ -13,6 +13,7 @@ function Restaurants() {
   const [restaurants, setRestaurants] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showLocations, setShowLocations] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     fetch("https://bobapp-e93h.onrender.com/NoirX/places")
@@ -101,17 +102,32 @@ function Restaurants() {
             max-w-full
           ">
 
+            <button
+    onClick={() => setShowMenu(!showMenu)}
+    className="
+      font-semibold
+      hover:underline
+    "
+  >
+    MENU +
+  </button>
+
+  {showMenu && (
+    <div className="
+      mt-2
+      space-x-2
+    ">
             <Link to="/Home">Home</Link>
-            <Link to="/Drinks">Drinks</Link>
+            <Link to="/Drinks">Drinks</Link>         
             <Link to="/Arts">Art</Link>
             <Link to="/Law">Law</Link>
             <Link to="/Therapy">Therapy</Link>
             <Link to="/Contact">Contact</Link>
-            <Link to="/About">About Us</Link>
-
-          </nav>
+            <Link to="/About">About Us</Link>       
 </div>  
-
+  )}
+          </nav>
+    </div>
  
         
           
@@ -147,7 +163,7 @@ function Restaurants() {
 
   {showLocations && (
 
-    <div className="space-y-1">
+    <div className="flex flex-row gap-4 mt-2">
 
       <div
         onClick={() => setSelectedLocation(null)}
