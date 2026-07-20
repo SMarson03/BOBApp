@@ -92,7 +92,7 @@ function Restaurants() {
       EATS
       </h2>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 min-w-0">
       <nav className="
             flex
             gap-3

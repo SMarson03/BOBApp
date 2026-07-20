@@ -146,7 +146,7 @@ function Drinks() {
       DRINKS
       </h2>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 min-w-0">
       <nav className="
             flex
             gap-3
@@ -173,8 +173,8 @@ function Drinks() {
       mt-2
       space-x-2
     ">
-            <Link to="/Home">Home</Link>
-            <Link to="/Drinks">Drinks</Link>         
+            <Link to="/Home">Home</Link>  
+            <Link to="/Eats">Eats</Link>
             <Link to="/Arts">Art</Link>
             <Link to="/Law">Law</Link>
             <Link to="/Therapy">Therapy</Link>

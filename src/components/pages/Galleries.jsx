@@ -124,7 +124,7 @@ function Galleries() {
       GALLERIES
       </h2>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 min-w-0">
       <nav className="
             flex
             gap-3
@@ -152,8 +152,8 @@ function Galleries() {
       space-x-2
     ">
             <Link to="/Home">Home</Link>
+            <Link to="/Eats">Eats</Link>
             <Link to="/Drinks">Drinks</Link>         
-            <Link to="/Arts">Art</Link>
             <Link to="/Law">Law</Link>
             <Link to="/Therapy">Therapy</Link>
             <Link to="/Contact">Contact</Link>

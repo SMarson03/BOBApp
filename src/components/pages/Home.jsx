@@ -64,6 +64,7 @@ function Home() {
             font-semibold
             overflow-x-auto
             max-w-full
+            min-w-0
           ">
 
             <button
