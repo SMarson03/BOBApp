@@ -39,7 +39,7 @@ function Drinks() {
 
   const filteredData = selectedLocation & selectedCategory
     ? drinks.filter(
-        (item) => item.location === selectedLocation && item.category === selectedCategory
+        (item) => item.location === selectedLocation && selectedCategory
       )
     : drinks;
 
