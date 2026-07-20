@@ -68,47 +68,39 @@ function Restaurants() {
 
 
         {/* Header */}
-    <header className="
-  flex
-  flex-wrap
-  justify-between
-  items-start
-  gap-4
-  p-4
-  sm:p-5
-  border-b
-  border-black
-">
-  <div>
-<h1 className="text-xl font-bold">
-      NOIREX <span className="text-xs">BETA</span>
-    </h1>
+        <header className="
+          flex
+          justify-between
+          items-start
+          gap-4
+          p-4
+          sm:p-5 border-b border-black
+        ">
 
-
+          <div className="min-w-0">
+ 
+     <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
+ 
     <h2 className="
       text-5xl
       sm:text-6xl
       lg:text-8xl
       font-bold
-      leading-none
-      mt-2
+      
     ">
       EATS
-    </h2>
-
-  </div>
+      </h2>
       <nav className="
             flex
-            flex-wrap
-            gap-4
-            font-semibold
-            text-sm
+            gap-3
+            text-xs
+            sm:text-sm
             whitespace-nowrap
-            w-full
-            sm:w-auto
+            font-semibold
             overflow-x-auto
+            max-w-full
           ">
-       
+
             <Link to="/Home">Home</Link>
             <Link to="/Drinks">Drinks</Link>
             <Link to="/Arts">Art</Link>
@@ -118,13 +110,13 @@ function Restaurants() {
             <Link to="/About">About Us</Link>
 
           </nav>
-    
+</div>  
 
-       
+ 
+        
           
 {/* Location Filter */}
           <aside className="
-            ml-auto
             text-right
             text-xs
             sm:text-sm
