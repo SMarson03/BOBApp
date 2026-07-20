@@ -99,12 +99,16 @@ function Restaurants() {
   </div>
       <nav className="
             flex
+            flex-wrap
             gap-4
+            font-semibold
             text-sm
             whitespace-nowrap
+            w-full
+            sm:w-auto
             overflow-x-auto
           ">
-
+       
             <Link to="/Home">Home</Link>
             <Link to="/Drinks">Drinks</Link>
             <Link to="/Arts">Art</Link>
@@ -120,6 +124,7 @@ function Restaurants() {
           
 {/* Location Filter */}
           <aside className="
+            ml-auto
             text-right
             text-xs
             sm:text-sm
