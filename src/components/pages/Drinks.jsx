@@ -209,9 +209,9 @@ function Drinks() {
               All
             </button>
             <button
-              onClick={() => setSelectedCategory(null)}
-              className={
-                selectedCategory === null
+              onClick={() => setSelectedCategory("Bar", "Cafe", "Juice_Bar")}
+               className={
+                selectedCategory === "Bar" || selectedCategory === "Cafe" || selectedCategory === "Juice_Bar"
                   ? "font-bold"
                   : ""
               }
