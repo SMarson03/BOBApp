@@ -68,30 +68,24 @@ function Restaurants() {
 
 
         {/* Header */}
-        <header className="
-          flex
-          justify-between
-          items-start
-          gap-4
-          p-4
-          sm:p-5 border-b border-black
-        ">
+<h1 className="text-xl font-bold">
+      NOIREX <span className="text-xs">BETA</span>
+    </h1>
 
-          <div>
 
-    <div className="text-xl font-bold">
-      <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
-
-    </div>
-
-    <h1 className="
+    <h2 className="
       text-5xl
       sm:text-6xl
       lg:text-8xl
       font-bold
-      
+      leading-none
+      mt-2
     ">
       EATS
+    </h2>
+
+
+  </div>
       <nav className="
             flex
             gap-4
@@ -109,7 +103,7 @@ function Restaurants() {
             <Link to="/About">About Us</Link>
 
           </nav>
-    </h1>
+    
 
   </div>
 
