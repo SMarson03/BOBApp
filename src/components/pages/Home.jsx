@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 function Home() {
   const [myData, setMyData] = useState([]);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     fetch("https://bobapp-e93h.onrender.com/NoirX/places")
@@ -56,38 +57,39 @@ function Home() {
             )}
               <nav className="
             flex
-            gap-4
-            text-sm
-            font-bold
+            gap-3
+            text-xs
+            sm:text-sm
             whitespace-nowrap
+            font-semibold
             overflow-x-auto
+            max-w-full
           ">
 
-            <Link to="/Drinks">
-            Drinks
-            </Link>
-           <Link to="/Eats">
-             Eats
-           </Link>
-          <Link to="/Arts">
-             Art
-          </Link>
-            <Link to="/Law">
-              Law
-            </Link>
+            <button
+    onClick={() => setShowMenu(!showMenu)}
+    className="
+      font-semibold
+      hover:underline
+    "
+  >
+    MENU +
+  </button>
 
-            <Link to="/Therapy">
-              Therapy
-            </Link>
-
-            <Link to="/Contact">
-              Contact
-            </Link>
-
-            <Link to="/About">
-              About Us
-            </Link>
-
+  {showMenu && (
+    <div className="
+      mt-2
+      space-x-2
+    ">
+            <Link to="/Home">Home</Link>
+            <Link to="/Drinks">Drinks</Link>         
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <Link to="/Contact">Contact</Link>
+            <Link to="/About">About Us</Link>       
+</div>  
+  )}
           </nav>
 
           </div>

@@ -15,7 +15,7 @@ function Law() {
   const [lawyers, setLawyers] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showLocations, setShowLocations] = useState(false);
-
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
 
@@ -111,73 +111,66 @@ function Law() {
           sm:p-5 border-b border-black
         ">
 
-
-          <div>
-
-    <div className="text-xl font-bold">
-       <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
-
-    </div>
-
-    <h1 className="
+          <div className="min-w-0">
+ 
+     <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
+ 
+    <h2 className="
       text-5xl
       sm:text-6xl
       lg:text-8xl
       font-bold
-          ">
-      Law Services
+      
+    ">
+      LAW SERVICES
+      </h2>
+
+      <div className="flex flex-col gap-2">
       <nav className="
             flex
-            gap-4
-            text-sm
+            gap-3
+            text-xs
+            sm:text-sm
             whitespace-nowrap
+            font-semibold
             overflow-x-auto
+            max-w-full
           ">
 
+            <button
+    onClick={() => setShowMenu(!showMenu)}
+    className="
+      font-semibold
+      hover:underline
+    "
+  >
+    MENU +
+  </button>
+
+  {showMenu && (
+    <div className="
+      mt-2
+      space-x-2
+    ">
             <Link to="/Home">Home</Link>
-            <Link to="/Drinks">Drinks</Link>
+            <Link to="/Drinks">Drinks</Link>         
             <Link to="/Arts">Art</Link>
             <Link to="/Law">Law</Link>
             <Link to="/Therapy">Therapy</Link>
             <Link to="/Contact">Contact</Link>
-            <Link to="/About">About Us</Link>
-
+            <Link to="/About">About Us</Link>       
+</div>  
+  )}
           </nav>
-    </h1>
-  </div>
-
-<aside className="
-            text-right
-            text-xs
-            sm:text-sm
-            space-y-1
-          ">
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              026
-            </div>
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              NYC EDITION
-            </div>
-
- <button
-    onClick={() =>
-      setShowLocations(!showLocations)
-    }
+<div>
+  <button
+    onClick={() => setShowLocations(!showLocations)}
     className="
-      w-full
-      text-right
+      flex
+      gap-3
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
       font-semibold
       hover:underline
     "
@@ -185,10 +178,16 @@ function Law() {
     LOCATION +
   </button>
 
-
   {showLocations && (
-
-    <div className="space-y-1">
+    <div className="
+      flex
+      gap-3
+      mt-2
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
+      font-semibold
+    ">
 
       <div
         onClick={() => setSelectedLocation(null)}
@@ -197,14 +196,10 @@ function Law() {
         All
       </div>
 
-
       {locations.map((location) => (
-
         <div
           key={location}
-          onClick={() =>
-            setSelectedLocation(location)
-          }
+          onClick={() => setSelectedLocation(location)}
           className={`
             cursor-pointer
             hover:underline
@@ -217,25 +212,36 @@ function Law() {
         >
           {location}
         </div>
-
       ))}
 
     </div>
-
   )}
+</div>
+    </div>
+    </div>
+ 
+        
+          
+{/* Location Filter */}
+          <div className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+            <div className="font-semibold text-sm sm:text-xl">
+              026
+            </div>
 
+            <div className="font-semibold text-sm sm:text-xl">
+              NYC EDITION
+            </div>
 
-          </aside>
-
+           
+          </div>
 
           
         </header>
-
-
-
-
-
-
         {/* TITLE + FILTER */}
 
 

@@ -91,6 +91,8 @@ function Restaurants() {
     ">
       EATS
       </h2>
+
+      <div className="flex flex-col gap-2">
       <nav className="
             flex
             gap-3
@@ -127,12 +129,68 @@ function Restaurants() {
 </div>  
   )}
           </nav>
+<div>
+  <button
+    onClick={() => setShowLocations(!showLocations)}
+    className="
+      flex
+      gap-3
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
+      font-semibold
+      hover:underline
+    "
+  >
+    LOCATION +
+  </button>
+
+  {showLocations && (
+    <div className="
+      flex
+      gap-3
+      mt-2
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
+      font-semibold
+    ">
+
+      <div
+        onClick={() => setSelectedLocation(null)}
+        className="cursor-pointer hover:underline"
+      >
+        All
+      </div>
+
+      {locations.map((location) => (
+        <div
+          key={location}
+          onClick={() => setSelectedLocation(location)}
+          className={`
+            cursor-pointer
+            hover:underline
+            ${
+              selectedLocation === location
+              ? "font-bold"
+              : ""
+            }
+          `}
+        >
+          {location}
+        </div>
+      ))}
+
+    </div>
+  )}
+</div>
+    </div>
     </div>
  
         
           
 {/* Location Filter */}
-          <aside className="
+          <div className="
             text-right
             text-xs
             sm:text-sm
@@ -146,60 +204,8 @@ function Restaurants() {
               NYC EDITION
             </div>
 
-            <button
-    onClick={() =>
-      setShowLocations(!showLocations)
-    }
-    className="
-      w-full
-      text-right
-      font-semibold
-      hover:underline
-    "
-  >
-    LOCATION +
-  </button>
-
-
-  {showLocations && (
-
-    <div className="flex flex-row gap-4 mt-2">
-
-      <div
-        onClick={() => setSelectedLocation(null)}
-        className="cursor-pointer hover:underline"
-      >
-        All
-      </div>
-
-
-      {locations.map((location) => (
-
-        <div
-          key={location}
-          onClick={() =>
-            setSelectedLocation(location)
-          }
-          className={`
-            cursor-pointer
-            hover:underline
-            ${
-              selectedLocation === location
-              ? "font-bold"
-              : ""
-            }
-          `}
-        >
-          {location}
-        </div>
-
-      ))}
-
-    </div>
-
-  )}
-
-          </aside>
+           
+          </div>
 
           
         </header>

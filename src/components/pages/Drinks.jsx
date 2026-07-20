@@ -22,6 +22,7 @@ function Drinks() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showLocations, setShowLocations] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
 
   useEffect(() => {
@@ -122,8 +123,7 @@ function Drinks() {
 
 
         {/* Header */}
-
-        <header className="
+<header className="
           flex
           justify-between
           items-start
@@ -132,89 +132,66 @@ function Drinks() {
           sm:p-5 border-b border-black
         ">
 
-
-          <div>
-
-    <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
-
-    <h1 className="
+          <div className="min-w-0">
+ 
+     <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
+ 
+    <h2 className="
       text-5xl
       sm:text-6xl
       lg:text-8xl
       font-bold
-          ">
+      
+    ">
       DRINKS
-  <nav className="
+      </h2>
+
+      <div className="flex flex-col gap-2">
+      <nav className="
             flex
-            gap-4
-            text-sm
-            whitespace-nowrap
-            overflow-x-auto
-          ">
-
-            <Link to="/Home">
-              Home
-            </Link>
-           <Link to="/Eats">
-             Eats
-           </Link>
-          <Link to="/Arts">
-             Art
-          </Link>
-            <Link to="/Law">
-              Law
-            </Link>
-
-            <Link to="/Therapy">
-              Therapy
-            </Link>
-
-            <Link to="/Contact">
-              Contact
-            </Link>
-
-            <Link to="/About">
-              About Us
-            </Link>
-
-          </nav>
-
-    </h1>
-  </div>
-
-        
- <aside className="
-            text-right
+            gap-3
             text-xs
             sm:text-sm
-            space-y-1
+            whitespace-nowrap
+            font-semibold
+            overflow-x-auto
+            max-w-full
           ">
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              026
-            </div>
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              NYC EDITION
-            </div>
 
-            <div className="space-y-2 mt-3">
-
-  {/* LOCATION FILTER */}
-
-  <button
-    onClick={() =>
-      setShowLocations(!showLocations)
-    }
+            <button
+    onClick={() => setShowMenu(!showMenu)}
     className="
-      w-full
-      text-right
+      font-semibold
+      hover:underline
+    "
+  >
+    MENU +
+  </button>
+
+  {showMenu && (
+    <div className="
+      mt-2
+      space-x-2
+    ">
+            <Link to="/Home">Home</Link>
+            <Link to="/Drinks">Drinks</Link>         
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <Link to="/Contact">Contact</Link>
+            <Link to="/About">About Us</Link>       
+</div>  
+  )}
+          </nav>
+<div>
+  <button
+    onClick={() => setShowLocations(!showLocations)}
+    className="
+      flex
+      gap-3
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
       font-semibold
       hover:underline
     "
@@ -222,10 +199,16 @@ function Drinks() {
     LOCATION +
   </button>
 
-
   {showLocations && (
-
-    <div className="space-y-1">
+    <div className="
+      flex
+      gap-3
+      mt-2
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
+      font-semibold
+    ">
 
       <div
         onClick={() => setSelectedLocation(null)}
@@ -234,14 +217,10 @@ function Drinks() {
         All
       </div>
 
-
       {locations.map((location) => (
-
         <div
           key={location}
-          onClick={() =>
-            setSelectedLocation(location)
-          }
+          onClick={() => setSelectedLocation(location)}
           className={`
             cursor-pointer
             hover:underline
@@ -254,24 +233,17 @@ function Drinks() {
         >
           {location}
         </div>
-
       ))}
 
     </div>
-
   )}
-
-
-
-  {/* CATEGORY FILTER */}
-
+</div>
+<div>
   <button
-    onClick={() =>
-      setShowCategories(!showCategories)
-    }
+    onClick={() => setShowCategories(!showCategories)}
     className="
-      w-full
-      text-right
+      text-xs
+      sm:text-sm
       font-semibold
       hover:underline
     "
@@ -279,55 +251,49 @@ function Drinks() {
     CATEGORY +
   </button>
 
-
-
   {showCategories && (
-
-    <div className="space-y-1">
-
-      <div
-        onClick={() => setSelectedCategory(null)}
-        className="cursor-pointer hover:underline"
-      >
-        All
-      </div>
-
-
-      {categories.map((category) => (
-
-        <div
-          key={category}
-          onClick={() =>
-            setSelectedCategory(category)
-          }
-          className={`
-            cursor-pointer
-            hover:underline
-            ${
-              selectedCategory === category
-              ? "font-bold"
-              : ""
-            }
-          `}
-        >
-
-          {category.replace("_"," ")}
-
-        </div>
-
-      ))}
-
-
+    <div className="
+      flex
+      gap-3
+      mt-2
+      text-xs
+      sm:text-sm
+      font-semibold
+      whitespace-nowrap
+    ">
+      <Link to="/Restaurants">Restaurants</Link>
+      <Link to="/Bars">Bars</Link>
+      <Link to="/Cafes">Cafés</Link>
+      <Link to="/Lounges">Lounges</Link>
+      <Link to="/Food">Food</Link>
     </div>
-
   )}
-
 </div>
+    </div>
+    </div>
+ 
+        
+          
+{/* Location Filter */}
+          <div className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+            <div className="font-semibold text-sm sm:text-xl">
+              026
+            </div>
 
-          </aside>
+            <div className="font-semibold text-sm sm:text-xl">
+              NYC EDITION
+            </div>
 
+           
+          </div>
+
+          
         </header>
-
 
 
 

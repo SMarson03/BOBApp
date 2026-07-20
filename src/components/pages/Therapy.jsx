@@ -13,7 +13,7 @@ function Therapy() {
   const [therapists, setTherapists] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showLocations, setShowLocations] = useState(false);
-
+  const [showMenu, setShowMenu] = useState(false);
   useEffect(() => {
     fetch("https://bobapp-e93h.onrender.com/NoirX/places")
       .then((res) => res.json())
@@ -102,96 +102,66 @@ function Therapy() {
           sm:p-5 border-b border-black
         ">
 
-
-          <div>
-
-    <div className="text-xl font-bold">
-       <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
-
-    </div>
-
-    <h1 className="
+          <div className="min-w-0">
+ 
+     <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
+ 
+    <h2 className="
       text-5xl
       sm:text-6xl
       lg:text-8xl
       font-bold
-    
+      
     ">
-     Mental Health
-    <nav className="
+      WELLNESS
+      </h2>
+
+      <div className="flex flex-col gap-2">
+      <nav className="
             flex
-            gap-4
-            text-sm
-            whitespace-nowrap
-            overflow-x-auto
-          ">
-
-            <Link to="/Home">
-              Home
-            </Link>
-
-            <Link to="/Eats">
-              Eats
-            </Link>
-
-            <Link to="/Drinks">
-              Drinks
-            </Link>
-
-            <Link to="/Arts">
-              Art
-            </Link>
-
-            <Link to="/Law">
-              Law
-            </Link>
-
-            <Link to="/Contact">
-              Contact
-            </Link>
-
-            <Link to="/About">
-              About Us
-            </Link>
-
-          </nav>
-    </h1>
-    
-  </div>
-
-
-
-        
-          <aside className="
-            text-right
+            gap-3
             text-xs
             sm:text-sm
-            space-y-1
+            whitespace-nowrap
+            font-semibold
+            overflow-x-auto
+            max-w-full
           ">
 
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              026
-            </div>
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              NYC EDITION
-            </div>
-
             <button
-    onClick={() =>
-      setShowLocations(!showLocations)
-    }
+    onClick={() => setShowMenu(!showMenu)}
     className="
-      w-full
-      text-right
+      font-semibold
+      hover:underline
+    "
+  >
+    MENU +
+  </button>
+
+  {showMenu && (
+    <div className="
+      mt-2
+      space-x-2
+    ">
+            <Link to="/Home">Home</Link>
+            <Link to="/Drinks">Drinks</Link>         
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <Link to="/Contact">Contact</Link>
+            <Link to="/About">About Us</Link>       
+</div>  
+  )}
+          </nav>
+<div>
+  <button
+    onClick={() => setShowLocations(!showLocations)}
+    className="
+      flex
+      gap-3
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
       font-semibold
       hover:underline
     "
@@ -199,10 +169,16 @@ function Therapy() {
     LOCATION +
   </button>
 
-
   {showLocations && (
-
-    <div className="space-y-1">
+    <div className="
+      flex
+      gap-3
+      mt-2
+      text-xs
+      sm:text-sm
+      whitespace-nowrap
+      font-semibold
+    ">
 
       <div
         onClick={() => setSelectedLocation(null)}
@@ -211,14 +187,10 @@ function Therapy() {
         All
       </div>
 
-
       {locations.map((location) => (
-
         <div
           key={location}
-          onClick={() =>
-            setSelectedLocation(location)
-          }
+          onClick={() => setSelectedLocation(location)}
           className={`
             cursor-pointer
             hover:underline
@@ -231,22 +203,36 @@ function Therapy() {
         >
           {location}
         </div>
-
       ))}
 
     </div>
-
   )}
+</div>
+    </div>
+    </div>
+ 
+        
+          
+{/* Location Filter */}
+          <div className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+            <div className="font-semibold text-sm sm:text-xl">
+              026
+            </div>
 
+            <div className="font-semibold text-sm sm:text-xl">
+              NYC EDITION
+            </div>
 
-          </aside>
+           
+          </div>
 
-
+          
         </header>
-
-
-
-
 
         {/* Title + Location */}
 

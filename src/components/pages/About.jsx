@@ -52,52 +52,42 @@ function About() {
                       ">
 
             ABOUT 
-<nav className="
+              <nav className="
             flex
-            gap-4
-            text-sm
+            gap-3
+            text-xs
+            sm:text-sm
             whitespace-nowrap
+            font-semibold
             overflow-x-auto
+            max-w-full
           ">
 
+            <button
+    onClick={() => setShowMenu(!showMenu)}
+    className="
+      font-semibold
+      hover:underline
+    "
+  >
+    MENU +
+  </button>
 
-            <Link to="/Home">
-              Home
-            </Link>
-
-
-            <Link to="/Eats">
-              Eats
-            </Link>
-
-
-            <Link to="/Drinks">
-              Drinks
-            </Link>
-
-
-            <Link to="/Arts">
-              Art
-            </Link>
-
-
-            <Link to="/Law">
-              Law
-            </Link>
-
-
-            <Link to="/Therapy">
-              Therapy
-            </Link>
-
-
-            <Link to="/Contact">
-              Contact
-            </Link>
-
-
+  {showMenu && (
+    <div className="
+      mt-2
+      space-x-2
+    ">
+            <Link to="/Home">Home</Link>
+            <Link to="/Drinks">Drinks</Link>         
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <Link to="/Contact">Contact</Link>
+            <Link to="/About">About Us</Link>       
+</div>  
+  )}
           </nav>
-
           </h1>
 
 
