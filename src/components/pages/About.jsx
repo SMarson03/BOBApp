@@ -128,12 +128,9 @@ function About() {
             leading-none
           ">
 
-            ABOUT US
+            ABOUT 
 
           </h1>
-
-
-
 
 
           <aside className="

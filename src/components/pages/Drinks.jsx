@@ -127,15 +127,12 @@ function Drinks() {
             <Link to="/Home">
               Home
             </Link>
-
-            <Link to="/Eats">
-              Eats
-            </Link>
-
-            <Link to="/Arts">
-              Art
-            </Link>
-
+           <Link to="/Eats">
+             Eats
+           </Link>
+          <Link to="/Arts">
+             Art
+          </Link>
             <Link to="/Law">
               Law
             </Link>
@@ -178,22 +175,14 @@ function Drinks() {
             font-bold
             leading-none
           ">
-
             DRINKS
-
           </h1>
-
-
-
-
           <aside className="
             text-right
             text-xs
             sm:text-sm
             space-y-1
           ">
-
-
             <div className="
               font-semibold
               text-sm
@@ -201,8 +190,6 @@ function Drinks() {
             ">
               025
             </div>
-
-
             <div className="
               font-semibold
               text-sm
@@ -210,8 +197,6 @@ function Drinks() {
             ">
               NYC EDITION
             </div>
-
-
 
             <button
               onClick={() => setSelectedLocation(null)}
@@ -223,6 +208,17 @@ function Drinks() {
             >
               All
             </button>
+            <button
+              onClick={() => setSelectedCategory(null)}
+              className={
+                selectedCategory === null
+                  ? "font-bold"
+                  : ""
+              }
+            >
+              All
+            </button>
+
 
 
 
