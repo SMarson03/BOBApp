@@ -81,7 +81,6 @@ function Home() {
       mt-2
       space-x-2
     ">
-            <Link to="/Home">Home</Link>
             <Link to="/Drinks">Drinks</Link>         
             <Link to="/Arts">Art</Link>
             <Link to="/Law">Law</Link>
