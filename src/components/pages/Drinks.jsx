@@ -62,12 +62,6 @@ function Drinks() {
   return matchesLocation && matchesCategory;
 });
 
-<div className="mt-4 font-semibold">
-  CATEGORIES
-</div>
-
-
-
 
   function buildMapsUrl(item) {
 
