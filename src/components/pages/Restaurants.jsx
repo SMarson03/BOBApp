@@ -68,6 +68,18 @@ function Restaurants() {
 
 
         {/* Header */}
+    <header className="
+  flex
+  flex-wrap
+  justify-between
+  items-start
+  gap-4
+  p-4
+  sm:p-5
+  border-b
+  border-black
+">
+  <div>
 <h1 className="text-xl font-bold">
       NOIREX <span className="text-xs">BETA</span>
     </h1>
@@ -83,7 +95,6 @@ function Restaurants() {
     ">
       EATS
     </h2>
-
 
   </div>
       <nav className="
@@ -105,12 +116,7 @@ function Restaurants() {
           </nav>
     
 
-  </div>
-
-
-
-
-          
+       
           
 {/* Location Filter */}
           <aside className="
