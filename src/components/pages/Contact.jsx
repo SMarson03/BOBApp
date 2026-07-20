@@ -1,313 +1,178 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const locations = [
+  "Brooklyn",
+  "Bronx",
+  "Manhattan",
+  "Queens",
+  "Staten Island",
+];
 
 function Contact() {
 
-
   return (
+    <>
 
-    <div className="
-      min-h-screen
-      bg-yellow-600
-      flex
-      justify-center
-      p-3
-      sm:p-6
-    ">
+      <div className="min-h-screen bg-yellow-600 flex items-center justify-center p-4">
 
+        <div className="relative min-h-screen w-[90vw] max-w-5xl bg-amber-50 shadow-xl overflow-hidden">
 
-      <div className="
-        w-full
-        max-w-7xl
-        bg-amber-50
-        shadow-xl
-        overflow-hidden
-      ">
+          {/* Main Scroll Area */}
+          <div className="absolute inset-0 overflow-y-auto max-h-[80vh]">
 
 
+            {/* Header */}
+            <div className="relative z-20 p-6 flex justify-between items-start border-b border-black  ">
 
-        {/* HEADER */}
+              <div className="text-lg font-bold">
+                 <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
 
-        <header className="
-          flex
-          justify-between
-          items-start
-          gap-4
-          p-4
-          sm:p-5
-        ">
+                 <div className="flex gap-6 text-sm">
 
+                <Link to="/Home">Home</Link>
+                <Link to="/Eats">Eats</Link>
+                <Link to="/Drinks">Drinks</Link>
+                <Link to="/Arts">Art</Link>
+                <Link to="/Law">Law</Link>
+                <Link to="/Therapy">Therapy</Link>
+                <Link to="/About">About Us</Link>
 
-          <div className="
-            text-xl
-            font-bold
-          ">
-
-            NOIREX
-
-          </div>
-
-
-
-
-          <nav className="
-            flex
-            gap-4
-            text-sm
-            whitespace-nowrap
-            overflow-x-auto
-          ">
-
-
-            <Link to="/Home">
-              Home
-            </Link>
-
-
-            <Link to="/Eats">
-              Eats
-            </Link>
-
-
-            <Link to="/Drinks">
-              Drinks
-            </Link>
-
-
-            <Link to="/Arts">
-              Art
-            </Link>
-
-
-            <Link to="/Law">
-              Law
-            </Link>
-
-
-            <Link to="/Therapy">
-              Therapy
-            </Link>
-
-
-            <Link to="/About">
-              About Us
-            </Link>
-
-
-          </nav>
-
-
-        </header>
-
-
-
-
-
-
-
-        {/* TITLE */}
-
-        <section className="
-          flex
-          justify-between
-          items-start
-          px-5
-          pt-4
-          pb-6
-        ">
-
-
-          <h1 className="
-            text-5xl
-            sm:text-6xl
-            lg:text-8xl
-            font-bold
-            leading-none
-          ">
-
-            CONTACT
-
-          </h1>
-
-
-
-
-          <aside className="
+              </div>
+            
+              </div>
+ <aside className="
             text-right
             text-xs
             sm:text-sm
             space-y-1
           ">
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-
-              025
-
+            <div className="font-semibold text-sm sm:text-xl">
+              026
             </div>
 
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-
+            <div className="font-semibold text-sm sm:text-xl">
               NYC EDITION
+            </div>
+            </aside>
+
+             
 
             </div>
 
 
-          </aside>
+            {/* Contact Content */}
+
+            <div className="flex justify-center items-center mt-16">
+
+              <div className="w-[380px]">
+
+                <h1 className="text-5xl font-bold text-center mb-10">
+                  CONTACT
+                </h1>
 
 
-        </section>
+                <form className="space-y-6">
 
 
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="
+                    w-full
+                    h-12
+                    bg-amber-50
+                    border-4
+                    border-black
+                    p-4
+                    text-black
+                    "
+                  />
 
 
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="
+                    w-full
+                    h-12
+                    bg-amber-50
+                    border-4
+                    border-black
+                    p-4
+                    text-black
+                    "
+                  />
 
 
-
-        {/* CONTACT FORM */}
-
-
-        <main className="
-          flex
-          justify-center
-          px-5
-          pb-10
-        ">
-
-
-
-          <form className="
-            w-full
-            max-w-md
-            space-y-6
-          ">
+                  <textarea
+                    placeholder="Your Message"
+                    className="
+                    w-full
+                    h-52
+                    bg-amber-50
+                    border-4
+                    border-black
+                    p-4
+                    text-black
+                    resize-none
+                    "
+                  />
 
 
+                  <div className="flex justify-center">
 
-            <input
+                    <button
+                      type="submit"
+                      className="
+                      w-24
+                      h-10
+                      bg-amber-50
+                      border-4
+                      border-black
+                      text-sm
+                      font-bold
+                      hover:bg-black
+                      hover:text-white
+                      transition
+                      "
+                    >
+                      SUBMIT
+                    </button>
 
-              type="text"
-
-              placeholder="Your Name"
-
-              className="
-                w-full
-                h-12
-                border-4
-                border-black
-                bg-amber-50
-                p-4
-              "
-
-            />
-
-
-
-
-
-            <input
-
-              type="email"
-
-              placeholder="Your Email"
-
-              className="
-                w-full
-                h-12
-                border-4
-                border-black
-                bg-amber-50
-                p-4
-              "
-
-            />
+                  </div>
 
 
+                </form>
 
 
-
-
-
-            <textarea
-
-              placeholder="Your Message"
-
-              className="
-                w-full
-                h-52
-                border-4
-                border-black
-                bg-amber-50
-                p-4
-                resize-none
-              "
-
-            />
-
-
-
-
-
-
-
-            <div className="
-              flex
-              justify-center
-            ">
-
-
-              <button
-
-                type="submit"
-
-                className="
-                  px-6
-                  py-2
-                  border-4
-                  border-black
-                  text-sm
-                  font-bold
-                  hover:bg-black
-                  hover:text-white
-                "
-
-              >
-
-                SUBMIT
-
-              </button>
-
+              </div>
 
             </div>
 
 
-
-          </form>
-
-
-        </main>
+          </div>
 
 
-
+        </div>
 
       </div>
 
 
-    </div>
+      {/* Right Info Panel */}
 
+      <div className="absolute top-24 right-4 text-sm text-right space-y-2 z-20">
+
+        
+
+
+       
+
+      </div>
+
+
+    </>
   );
-
 }
 
 

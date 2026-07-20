@@ -12,6 +12,7 @@ const locations = [
 function Restaurants() {
   const [restaurants, setRestaurants] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [showLocations, setShowLocations] = useState(false);
 
   useEffect(() => {
     fetch("https://bobapp-e93h.onrender.com/NoirX/places")
@@ -79,7 +80,8 @@ function Restaurants() {
           <div>
 
     <div className="text-xl font-bold">
-      NOIREX
+      <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
+
     </div>
 
     <h1 className="
@@ -87,18 +89,10 @@ function Restaurants() {
       sm:text-6xl
       lg:text-8xl
       font-bold
-      leading-none
-      mt-4
+      
     ">
       EATS
-    </h1>
-
-  </div>
-
-
-
-
-          <nav className="
+      <nav className="
             flex
             gap-4
             text-sm
@@ -115,7 +109,14 @@ function Restaurants() {
             <Link to="/About">About Us</Link>
 
           </nav>
+    </h1>
 
+  </div>
+
+
+
+
+          
           
 {/* Location Filter */}
           <aside className="
@@ -125,7 +126,7 @@ function Restaurants() {
             space-y-1
           ">
             <div className="font-semibold text-sm sm:text-xl">
-              025
+              026
             </div>
 
             <div className="font-semibold text-sm sm:text-xl">
@@ -133,33 +134,57 @@ function Restaurants() {
             </div>
 
             <button
-              onClick={() => setSelectedLocation(null)}
-              className={
-                selectedLocation === null
-                  ? "font-bold"
-                  : ""
-              }
-            >
-              All
-            </button>
+    onClick={() =>
+      setShowLocations(!showLocations)
+    }
+    className="
+      w-full
+      text-right
+      font-semibold
+      hover:underline
+    "
+  >
+    LOCATION +
+  </button>
 
-            {locations.map((loc) => (
-              <div
-                key={loc}
-                onClick={() => setSelectedLocation(loc)}
-                className={`
-                  cursor-pointer
-                  hover:underline
-                  ${
-                    selectedLocation === loc
-                      ? "font-bold"
-                      : ""
-                  }
-                `}
-              >
-                {loc}
-              </div>
-            ))}
+
+  {showLocations && (
+
+    <div className="space-y-1">
+
+      <div
+        onClick={() => setSelectedLocation(null)}
+        className="cursor-pointer hover:underline"
+      >
+        All
+      </div>
+
+
+      {locations.map((location) => (
+
+        <div
+          key={location}
+          onClick={() =>
+            setSelectedLocation(location)
+          }
+          className={`
+            cursor-pointer
+            hover:underline
+            ${
+              selectedLocation === location
+              ? "font-bold"
+              : ""
+            }
+          `}
+        >
+          {location}
+        </div>
+
+      ))}
+
+    </div>
+
+  )}
 
           </aside>
 

@@ -23,7 +23,7 @@ function Home() {
         <header className="relative z-20 flex justify-between items-start gap-6 p-5 border-b border-black">
           
           <div className="flex flex-col shrink-0">
-            <h1 className="text-xl font-bold">NOIREX</h1>
+            <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
 
             <p className="text-sm">
               Welcome, <strong>{user?.name || "Guest"}</strong>
@@ -54,18 +54,45 @@ function Home() {
                 </button>
               </>
             )}
+              <nav className="
+            flex
+            gap-4
+            text-sm
+            font-bold
+            whitespace-nowrap
+            overflow-x-auto
+          ">
+
+            <Link to="/Drinks">
+            Drinks
+            </Link>
+           <Link to="/Eats">
+             Eats
+           </Link>
+          <Link to="/Arts">
+             Art
+          </Link>
+            <Link to="/Law">
+              Law
+            </Link>
+
+            <Link to="/Therapy">
+              Therapy
+            </Link>
+
+            <Link to="/Contact">
+              Contact
+            </Link>
+
+            <Link to="/About">
+              About Us
+            </Link>
+
+          </nav>
+
           </div>
 
-          <nav className="flex gap-5 text-sm whitespace-nowrap overflow-x-auto pt-2">
-            <Link to="/Eats">Eats</Link>
-            <Link to="/Drinks">Drinks</Link>
-            <Link to="/Arts">Art</Link>
-            <Link to="/Law">Law</Link>
-            <Link to="/Therapy">Therapy</Link>
-            <Link to="/Contact">Contact</Link>
-            <Link to="/About">About Us</Link>
-          </nav>
- <aside className="
+           <aside className="
             text-right
             text-xs
             sm:text-sm
@@ -81,12 +108,6 @@ function Home() {
                <div className="text-base sm:text-xl font-semibold">
                 NYC EDITION
               </div>
-
-              <div>Brooklyn</div>
-              <div>Bronx</div>
-              <div>Manhattan</div>
-              <div>Queens</div>
-              <div>Staten Island</div>
             </aside>
 
 

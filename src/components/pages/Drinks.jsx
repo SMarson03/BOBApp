@@ -20,6 +20,8 @@ function Drinks() {
   const [drinks, setDrinks] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showLocations, setShowLocations] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
 
 
   useEffect(() => {
@@ -133,28 +135,16 @@ function Drinks() {
 
           <div>
 
-    <div className="text-xl font-bold">
-      NOIREX
-    </div>
+    <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
 
     <h1 className="
       text-5xl
       sm:text-6xl
       lg:text-8xl
       font-bold
-      leading-none
-      mt-4
-    ">
+          ">
       DRINKS
-    </h1>
-
-  </div>
-
-
-
-
-
-          <nav className="
+  <nav className="
             flex
             gap-4
             text-sm
@@ -189,6 +179,10 @@ function Drinks() {
 
           </nav>
 
+    </h1>
+  </div>
+
+        
  <aside className="
             text-right
             text-xs
@@ -210,75 +204,125 @@ function Drinks() {
               NYC EDITION
             </div>
 
-            <button
-              onClick={() => setSelectedLocation(null)}
-              className={
-                selectedLocation === null
-                  ? "font-bold"
-                  : ""
-              }
-            >
-              
-            </button>
-            <button
-              onClick={() => setSelectedCategory(null)}
-               className={
-                selectedCategory === null
-                  ? "font-bold"
-                  : ""
-              }
-        >
-              All
-            </button>
+            <div className="space-y-2 mt-3">
 
+  {/* LOCATION FILTER */}
 
-
-
-            {locations.map((location) => (
-
-              <div
-                key={location}
-                onClick={() =>
-                  setSelectedLocation(location)
-                }
-                className={`
-                  cursor-pointer
-                  hover:underline
-                  ${
-                    selectedLocation === location
-                      ? "font-bold"
-                      : ""
-                  }
-                `}
-              >
-
-                {location}
-
-              </div>
-
-            ))}
-
-{categories.map((category) => (
-
-  <div
-    key={category}
-    onClick={() => setSelectedCategory(category)}
-    className={`
-      cursor-pointer
+  <button
+    onClick={() =>
+      setShowLocations(!showLocations)
+    }
+    className="
+      w-full
+      text-right
+      font-semibold
       hover:underline
-      ${
-        selectedCategory === category
-          ? "font-bold"
-          : ""
-      }
-    `}
+    "
   >
+    LOCATION +
+  </button>
 
-    {category}
 
-  </div>
+  {showLocations && (
 
-))}
+    <div className="space-y-1">
+
+      <div
+        onClick={() => setSelectedLocation(null)}
+        className="cursor-pointer hover:underline"
+      >
+        All
+      </div>
+
+
+      {locations.map((location) => (
+
+        <div
+          key={location}
+          onClick={() =>
+            setSelectedLocation(location)
+          }
+          className={`
+            cursor-pointer
+            hover:underline
+            ${
+              selectedLocation === location
+              ? "font-bold"
+              : ""
+            }
+          `}
+        >
+          {location}
+        </div>
+
+      ))}
+
+    </div>
+
+  )}
+
+
+
+  {/* CATEGORY FILTER */}
+
+  <button
+    onClick={() =>
+      setShowCategories(!showCategories)
+    }
+    className="
+      w-full
+      text-right
+      font-semibold
+      hover:underline
+    "
+  >
+    CATEGORY +
+  </button>
+
+
+
+  {showCategories && (
+
+    <div className="space-y-1">
+
+      <div
+        onClick={() => setSelectedCategory(null)}
+        className="cursor-pointer hover:underline"
+      >
+        All
+      </div>
+
+
+      {categories.map((category) => (
+
+        <div
+          key={category}
+          onClick={() =>
+            setSelectedCategory(category)
+          }
+          className={`
+            cursor-pointer
+            hover:underline
+            ${
+              selectedCategory === category
+              ? "font-bold"
+              : ""
+            }
+          `}
+        >
+
+          {category.replace("_"," ")}
+
+        </div>
+
+      ))}
+
+
+    </div>
+
+  )}
+
+</div>
 
           </aside>
 

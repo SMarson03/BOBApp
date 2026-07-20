@@ -14,6 +14,7 @@ function Galleries() {
 
   const [galleries, setGalleries] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [showLocations, setShowLocations] = useState(false);
 
 
   useEffect(() => {
@@ -107,16 +108,22 @@ function Galleries() {
           gap-4
           p-4
           sm:p-5
+          border-b
+          border-black
         ">
 
 
           <div className="text-xl font-bold">
-            NOIREX
-          </div>
+      <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
 
-
-
-          <nav className="
+    <h1 className="
+      text-5xl
+      sm:text-6xl
+      lg:text-8xl
+      font-bold
+          ">
+      Galleries
+      <nav className="
             flex
             gap-4
             text-sm
@@ -124,70 +131,19 @@ function Galleries() {
             overflow-x-auto
           ">
 
-            <Link to="/Home">
-              Home
-            </Link>
-
-            <Link to="/Eats">
-              Eats
-            </Link>
-
-            <Link to="/Drinks">
-              Drinks
-            </Link>
-
-            <Link to="/Law">
-              Law
-            </Link>
-
-            <Link to="/Therapy">
-              Therapy
-            </Link>
-
-            <Link to="/Contact">
-              Contact
-            </Link>
-
-            <Link to="/About">
-              About Us
-            </Link>
+            <Link to="/Home">Home</Link>
+            <Link to="/Drinks">Drinks</Link>
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <Link to="/Contact">Contact</Link>
+            <Link to="/About">About Us</Link>
 
           </nav>
+    </h1>
+    </div>
 
-        </header>
-
-
-
-
-
-        {/* Title + Filter */}
-
-        <section className="
-          flex
-          justify-between
-          items-start
-          px-5
-          pt-4
-          pb-6
-        ">
-
-
-
-          <h1 className="
-            text-5xl
-            sm:text-6xl
-            lg:text-8xl
-            font-bold
-            leading-none
-          ">
-            ART
-          </h1>
-
-
-
-
-
-          <aside className="
+ <aside className="
             text-right
             text-xs
             sm:text-sm
@@ -200,7 +156,7 @@ function Galleries() {
               text-sm
               sm:text-xl
             ">
-              025
+              026
             </div>
 
 
@@ -216,50 +172,76 @@ function Galleries() {
 
 
             <button
-              onClick={() => setSelectedLocation(null)}
-              className={
-                selectedLocation === null
-                ? "font-bold"
-                : ""
-              }
-            >
-              All
-            </button>
+    onClick={() =>
+      setShowLocations(!showLocations)
+    }
+    className="
+      w-full
+      text-right
+      font-semibold
+      hover:underline
+    "
+  >
+    LOCATION +
+  </button>
 
 
+  {showLocations && (
 
-            {locations.map((location)=>(
+    <div className="space-y-1">
 
-              <div
+      <div
+        onClick={() => setSelectedLocation(null)}
+        className="cursor-pointer hover:underline"
+      >
+        All
+      </div>
 
-                key={location}
 
-                onClick={() =>
-                  setSelectedLocation(location)
-                }
+      {locations.map((location) => (
 
-                className={`
-                  cursor-pointer
-                  hover:underline
-                  ${
-                    selectedLocation === location
-                    ? "font-bold"
-                    : ""
-                  }
-                `}
-              >
+        <div
+          key={location}
+          onClick={() =>
+            setSelectedLocation(location)
+          }
+          className={`
+            cursor-pointer
+            hover:underline
+            ${
+              selectedLocation === location
+              ? "font-bold"
+              : ""
+            }
+          `}
+        >
+          {location}
+        </div>
 
-                {location}
+      ))}
 
-              </div>
+    </div>
 
-            ))}
-
+  )}
 
 
           </aside>
 
 
+        </header>
+
+        {/* Title + Filter */}
+
+        <section className="
+          flex
+          justify-between
+          items-start
+          px-5
+          pt-4
+          pb-6
+        ">
+
+  
         </section>
 
 

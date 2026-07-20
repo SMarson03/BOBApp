@@ -35,7 +35,7 @@ function About() {
           items-start
           gap-4
           p-4
-          sm:p-5
+          sm:p-5 border-b border-black
         ">
 
 
@@ -43,16 +43,16 @@ function About() {
             text-xl
             font-bold
           ">
+            <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
+<h1 className="
+            text-5xl
+            sm:text-6xl
+            lg:text-8xl
+            font-bold
+                      ">
 
-            NOIREX
-
-          </div>
-
-
-
-
-
-          <nav className="
+            ABOUT 
+<nav className="
             flex
             gap-4
             text-sm
@@ -98,6 +98,44 @@ function About() {
 
           </nav>
 
+          </h1>
+
+
+
+          </div>
+
+       <aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+
+              026
+
+            </div>
+
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+
+              NYC EDITION
+
+            </div>
+
+
+          </aside>
 
         </header>
 
@@ -118,54 +156,7 @@ function About() {
           pb-6
         ">
 
-
-
-          <h1 className="
-            text-5xl
-            sm:text-6xl
-            lg:text-8xl
-            font-bold
-            leading-none
-          ">
-
-            ABOUT 
-
-          </h1>
-
-
-          <aside className="
-            text-right
-            text-xs
-            sm:text-sm
-            space-y-1
-          ">
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-
-              025
-
-            </div>
-
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-
-              NYC EDITION
-
-            </div>
-
-
-          </aside>
-
+         
 
         </section>
 

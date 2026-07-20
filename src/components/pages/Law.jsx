@@ -14,7 +14,7 @@ function Law() {
 
   const [lawyers, setLawyers] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
-
+  const [showLocations, setShowLocations] = useState(false);
 
 
   useEffect(() => {
@@ -108,17 +108,25 @@ function Law() {
           items-start
           gap-4
           p-4
-          sm:p-5
+          sm:p-5 border-b border-black
         ">
 
 
-          <div className="text-xl font-bold">
-            NOIREX
-          </div>
+          <div>
 
+    <div className="text-xl font-bold">
+       <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
 
+    </div>
 
-          <nav className="
+    <h1 className="
+      text-5xl
+      sm:text-6xl
+      lg:text-8xl
+      font-bold
+          ">
+      Law Services
+      <nav className="
             flex
             gap-4
             text-sm
@@ -126,38 +134,101 @@ function Law() {
             overflow-x-auto
           ">
 
-            <Link to="/Home">
-              Home
-            </Link>
-
-            <Link to="/Eats">
-              Eats
-            </Link>
-
-            <Link to="/Drinks">
-              Drinks
-            </Link>
-
-            <Link to="/Arts">
-              Art
-            </Link>
-
-            <Link to="/Therapy">
-              Therapy
-            </Link>
-
-            <Link to="/Contact">
-              Contact
-            </Link>
-
-            <Link to="/About">
-              About Us
-            </Link>
-
+            <Link to="/Home">Home</Link>
+            <Link to="/Drinks">Drinks</Link>
+            <Link to="/Arts">Art</Link>
+            <Link to="/Law">Law</Link>
+            <Link to="/Therapy">Therapy</Link>
+            <Link to="/Contact">Contact</Link>
+            <Link to="/About">About Us</Link>
 
           </nav>
+    </h1>
+  </div>
+
+<aside className="
+            text-right
+            text-xs
+            sm:text-sm
+            space-y-1
+          ">
 
 
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              026
+            </div>
+
+
+            <div className="
+              font-semibold
+              text-sm
+              sm:text-xl
+            ">
+              NYC EDITION
+            </div>
+
+ <button
+    onClick={() =>
+      setShowLocations(!showLocations)
+    }
+    className="
+      w-full
+      text-right
+      font-semibold
+      hover:underline
+    "
+  >
+    LOCATION +
+  </button>
+
+
+  {showLocations && (
+
+    <div className="space-y-1">
+
+      <div
+        onClick={() => setSelectedLocation(null)}
+        className="cursor-pointer hover:underline"
+      >
+        All
+      </div>
+
+
+      {locations.map((location) => (
+
+        <div
+          key={location}
+          onClick={() =>
+            setSelectedLocation(location)
+          }
+          className={`
+            cursor-pointer
+            hover:underline
+            ${
+              selectedLocation === location
+              ? "font-bold"
+              : ""
+            }
+          `}
+        >
+          {location}
+        </div>
+
+      ))}
+
+    </div>
+
+  )}
+
+
+          </aside>
+
+
+          
         </header>
 
 
@@ -177,111 +248,8 @@ function Law() {
           pb-6
         ">
 
-
-          <h1 className="
-            text-5xl
-            sm:text-6xl
-            lg:text-8xl
-            font-bold
-            leading-none
-          ">
-
-            LAW
-
-          </h1>
-
-
-
-
-          <aside className="
-            text-right
-            text-xs
-            sm:text-sm
-            space-y-1
-          ">
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              025
-            </div>
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-              NYC EDITION
-            </div>
-
-
-
-            <button
-
-              onClick={() =>
-                setSelectedLocation(null)
-              }
-
-              className={
-                selectedLocation === null
-                  ? "font-bold"
-                  : ""
-              }
-
-            >
-
-              All
-
-            </button>
-
-
-
-
-            {locations.map((location)=>(
-
-
-              <div
-
-                key={location}
-
-                onClick={() =>
-                  setSelectedLocation(location)
-                }
-
-                className={`
-                  cursor-pointer
-                  hover:underline
-                  ${
-                    selectedLocation === location
-                    ? "font-bold"
-                    : ""
-                  }
-                `}
-
-              >
-
-                {location}
-
-              </div>
-
-
-            ))}
-
-
-          </aside>
-
-
+       
         </section>
-
-
-
-
-
-
 
         {/* CARDS */}
 
