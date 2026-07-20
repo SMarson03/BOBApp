@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 function About() {
-
+const[showMenu, setShowMenu] = React.useState(false);
 
   return (
 
@@ -28,8 +27,7 @@ function About() {
 
 
         {/* HEADER */}
-
-        <header className="
+<header className="
           flex
           justify-between
           items-start
@@ -38,21 +36,22 @@ function About() {
           sm:p-5 border-b border-black
         ">
 
+          <div className="min-w-0">
+ 
+     <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
+ 
+    <h2 className="
+      text-5xl
+      sm:text-6xl
+      lg:text-8xl
+      font-bold
+      
+    ">
+      ABOUT
+      </h2>
 
-          <div className="
-            text-xl
-            font-bold
-          ">
-            <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
-<h1 className="
-            text-5xl
-            sm:text-6xl
-            lg:text-8xl
-            font-bold
-                      ">
-
-            ABOUT 
-              <nav className="
+      <div className="flex flex-col gap-2 min-w-0">
+      <nav className="
             flex
             gap-3
             text-xs
@@ -61,7 +60,6 @@ function About() {
             font-semibold
             overflow-x-auto
             max-w-full
-            min-w-0
           ">
 
             <button
@@ -80,55 +78,41 @@ function About() {
       space-x-2
     ">
             <Link to="/Home">Home</Link>
+            <Link to="/Eats">Eats</Link>
             <Link to="/Drinks">Drinks</Link>         
             <Link to="/Arts">Art</Link>
-            <Link to="/Law">Law</Link>
             <Link to="/Therapy">Therapy</Link>
             <Link to="/Contact">Contact</Link>
-            <Link to="/About">About Us</Link>       
+               
 </div>  
   )}
           </nav>
-          </h1>
-
-
-
-          </div>
-
-       <aside className="
+    </div>
+    </div>
+ 
+        
+          
+{/* Location Filter */}
+          <div className="
             text-right
             text-xs
             sm:text-sm
             space-y-1
           ">
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-
+            <div className="font-semibold text-sm sm:text-xl">
               026
-
             </div>
 
-
-
-            <div className="
-              font-semibold
-              text-sm
-              sm:text-xl
-            ">
-
+            <div className="font-semibold text-sm sm:text-xl">
               NYC EDITION
-
             </div>
 
+           
+          </div>
 
-          </aside>
-
+          
         </header>
+   
 
 
 

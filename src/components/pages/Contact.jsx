@@ -9,7 +9,9 @@ const locations = [
   "Staten Island",
 ];
 
+
 function Contact() {
+const [showMenu, setShowMenu] = React.useState(false);
 
   return (
     <>
@@ -28,20 +30,48 @@ function Contact() {
               <div className="text-lg font-bold">
                  <h1 className="text-xl font-bold">NOIREX <span className="text-xs">BETA</span></h1>
 
-                 <div className="flex gap-6 text-sm">
-
-                <Link to="/Home">Home</Link>
-                <Link to="/Eats">Eats</Link>
-                <Link to="/Drinks">Drinks</Link>
-                <Link to="/Arts">Art</Link>
-                <Link to="/Law">Law</Link>
-                <Link to="/Therapy">Therapy</Link>
-                <Link to="/About">About Us</Link>
-
-              </div>
-            
-              </div>
- <aside className="
+                <div className="flex flex-col gap-2 min-w-0">
+                      <nav className="
+                            flex
+                            gap-3
+                            text-xs
+                            sm:text-sm
+                            whitespace-nowrap
+                            font-semibold
+                            overflow-x-auto
+                            max-w-full
+                          ">
+                
+                            <button
+                    onClick={() => setShowMenu(!showMenu)}
+                    className="
+                      font-semibold
+                      hover:underline
+                    "
+                  >
+                    MENU +
+                  </button>
+                
+                  {showMenu && (
+                    <div className="
+                      mt-2
+                      space-x-2
+                    ">
+                            <Link to="/Home">Home</Link>
+                            <Link to="/Eats">Eats</Link>
+                            <Link to="/Drinks">Drinks</Link>         
+                            <Link to="/Arts">Art</Link>
+                            <Link to="/Therapy">Therapy</Link>
+                            <Link to="/About">About</Link>
+                               
+                </div>  
+                  )}
+                          </nav>
+                    </div>
+                    </div>
+                 
+                        
+                       <aside className="
             text-right
             text-xs
             sm:text-sm
