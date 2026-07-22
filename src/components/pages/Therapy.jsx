@@ -315,21 +315,19 @@ function Therapy() {
                     {item.name}
                   </h2>
 
+                 <p className="text-sm">
+                    {item.description}
+                  </p> 
 
-
-                  <p className="text-sm">
+                  <p className="text-sm font-semibold">
                     {item.address}
                   </p>
 
-
-
-                  <p className="text-sm">
+                  <p className="text-sm font-semibold">
                     {item.location}
                   </p>
 
-
-
-                  <p className="text-sm">
+                  <p className="text-sm font-semibold ">
                     {item.category}
                   </p>
 
