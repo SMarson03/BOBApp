@@ -48,11 +48,15 @@ public class PlaceController {
     @PostMapping("/places")
     public ResponseEntity<?> createPlace(@RequestBody Place place) {
 
+        System.out.println("SUBMITTING: " + place.getName());
+
         boolean exists = placeRepo.existsByNameAndAddressAndLocation(
                 place.getName(),
                 place.getAddress(),
                 place.getLocation()
         );
+
+        System.out.println("DUPLICATE FOUND: " + exists);
 
         if (exists) {
             return ResponseEntity
@@ -64,7 +68,6 @@ public class PlaceController {
 
         return ResponseEntity.ok(savedPlace);
     }
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/places/{id}")
     public void deletePlace(@PathVariable Integer id) {
