@@ -281,11 +281,11 @@ function Restaurants() {
                     {item.description}
                   </p>
 
-                  <p className="text-sm font-bold">
+                  <p className="text-sm font-semibold">
                     {item.address}
                   </p>
 
-                  <p className="text-sm">
+                  <p className="text-sm font-semibold">
                     {item.location}
                   </p>
 
