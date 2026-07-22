@@ -106,7 +106,7 @@ function Home() {
               text-sm
               sm:text-xl
             ">
-              026
+              2026
             </div>
                <div className="text-base sm:text-xl font-semibold">
                 NYC EDITION

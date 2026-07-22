@@ -221,7 +221,7 @@ function Therapy() {
             space-y-1
           ">
             <div className="font-semibold text-sm sm:text-xl">
-              026
+              2026
             </div>
 
             <div className="font-semibold text-sm sm:text-xl">
