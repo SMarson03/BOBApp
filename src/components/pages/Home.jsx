@@ -129,6 +129,7 @@ function Home() {
               font-bold
               leading-[0.85]
               tracking-tight
+              pt-10
             ">
               <div>NOIR INDEX</div>
               <div>A BLACK</div>

@@ -278,6 +278,10 @@ function Restaurants() {
                   </h2>
 
                   <p className="text-sm">
+                    {item.description}
+                  </p>
+
+                  <p className="text-sm">
                     {item.address}
                   </p>
 

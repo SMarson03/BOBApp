@@ -155,7 +155,7 @@ function Admin() {
           <div className="flex gap-6 px-6 pt-4">
 
   {/* LEFT COLUMN */}
-  <div className="flex-1 flex flex-col">
+  <div className="flex-1 flex flex-col min-w-0">
 
     <DashboardStats
       places={places}
