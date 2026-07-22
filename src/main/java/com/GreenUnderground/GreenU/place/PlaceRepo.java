@@ -13,15 +13,10 @@ public interface PlaceRepo extends JpaRepository<Place, Integer> {
 
     List<Place> findByCategory(Category category);
 
-    List<Place> findByCuisine(Cuisine cuisine);
+    List<Place>findByCuisine(Cuisine cuisine);
 
     List<Place> findByCategoryAndLocation(Category category, Location location);
 
     List<Place> findByNameContainingIgnoreCase(String name);
 
-    boolean existsByNameAndAddressAndLocation(
-            String name,
-            String address,
-            Location location
-    );
 }

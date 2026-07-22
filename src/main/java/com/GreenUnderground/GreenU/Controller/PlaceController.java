@@ -3,7 +3,6 @@ package com.GreenUnderground.GreenU.Controller;
 import com.GreenUnderground.GreenU.place.Place;
 import com.GreenUnderground.GreenU.place.PlaceRepo;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,28 +45,13 @@ public class PlaceController {
     }
 
     @PostMapping("/places")
-    public ResponseEntity<?> createPlace(@RequestBody Place place) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Place createPlace(@RequestBody Place place) {
 
-        System.out.println("SUBMITTING: " + place.getName());
+        return placeRepo.save(place);
 
-        boolean exists = placeRepo.existsByNameAndAddressAndLocation(
-                place.getName(),
-                place.getAddress(),
-                place.getLocation()
-        );
-
-        System.out.println("DUPLICATE FOUND: " + exists);
-
-        if (exists) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("This business has already been submitted.");
-        }
-
-        Place savedPlace = placeRepo.save(place);
-
-        return ResponseEntity.ok(savedPlace);
     }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/places/{id}")
     public void deletePlace(@PathVariable Integer id) {
